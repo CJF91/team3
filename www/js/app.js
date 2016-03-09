@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+var app = angular.module('app', ['ionic'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -36,7 +36,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'tab-moods': {
         templateUrl: 'templates/tab-moods.html',
-        controller: 'DashCtrl'
+        controller: 'moodsController'
       }
     }
   })
@@ -46,17 +46,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'tab-patterns': {
         templateUrl: 'templates/tab-patterns.html',
-        controller: 'DashCtrl'
+        controller: 'patternsController'
       }
     }
   })
 
   .state('tab.help', {
-    url: '/patterns',
+    url: '/help',
     views: {
       'tab-help': {
         templateUrl: 'templates/tab-help.html',
-        controller: 'DashCtrl'
+        controller: 'helpController'
       }
     }
   })
@@ -66,7 +66,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'tab-progress': {
         templateUrl: 'templates/tab-progress.html',
-        controller: 'DashCtrl'
+        controller: 'progressController'
       }
     }
   })
@@ -76,11 +76,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'tab-preferences': {
         templateUrl: 'templates/tab-preferences.html',
-        controller: 'DashCtrl'
+        controller: 'preferencesController'
       }
     }
   })
   
 
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tab/moods');
 });
