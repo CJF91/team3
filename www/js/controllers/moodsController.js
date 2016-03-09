@@ -1,3 +1,3 @@
-app.controller('moodsController', function($scope) {
-
+app.controller('moodsController', function($scope, datastore) {
+	
 });
