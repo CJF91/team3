@@ -25,7 +25,7 @@ Simply provide `addContainer` with a container name and a model. The model is si
 Now that you've got a container, use the following to save, get and search the container.
 
 #####Model field types:
-```javascript
+```
 types.String
 types.Number
 types.Boolean
@@ -35,23 +35,54 @@ types.Date
 #####Add a new container:
 `addContainer(containerName, containerModel)`
 
+Returns `true` if the container was created. Returns `false` if the container already existed.
+
 #####Remove an existing container:
 `removeContainer(containerName)`
+
+Returns `true` if the container was able to be removed.
 
 #####Save a document:
 `save(containerName, document, [documentId])`
 
+Returns the saved document containing its new id in the `id` field.
+
 #####Remove an existing document:
 `removeDocument(containerName, documentId)`
+
+Returns `true` if the document was removed. Returns `false` if document could not be removed. 
 
 #####Remove all documents in a given container:
 `removeAllDocuments(containerName)`
 
+Returns `true` if all documents could be removed.
+
 #####Get a single document from a given container:
 `get(containerName, documentId)`
+
+Returns the document if it could be found. Returns `undefined` if the document could nto be found.
 
 #####Get all documents from a given container:
 `getAll(containerName)`
 
+Returns an array of all documents in the given container.
+
 #####Search a container for documents with the given key and matching value:
 `find(containerName, key, value)`
+
+Returns an array of all documents matching the filter (a key with with a given value).
+
+#####Search a container for documents with the given key and matching value and return the first
+`findOne(containerName, key, value)`
+
+Returns a single document, the first of all documents matching the filter (a key with with a given value).
+
+#####Return the entire data store
+`store()`
+
+Returns an object representing the entire datastore. Each key represents a container, and each key maps to an array of documents found in said container.
+
+#####Return all datastore models
+`models()`
+
+Returns an object with model names as keys and models as their values.
