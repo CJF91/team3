@@ -43,7 +43,10 @@ app.service('datastore', function($window) {
 
 		if (!getObject(name)) {
 			setObject(name, []);
+			return true;
 		}
+
+		return false;
 	}
 
 	//Remove an entire container
@@ -53,6 +56,7 @@ app.service('datastore', function($window) {
 		}
 
 		delete $window.localStorage[container];
+		return true;
 	};
 
 	//Save a document to a container. If the container does not exist, make a new one.
@@ -149,6 +153,7 @@ app.service('datastore', function($window) {
 		}
 
 		setObject(container, []);
+		return true;
 	};
 
 	//Fetch a single entity from a container
@@ -219,6 +224,17 @@ app.service('datastore', function($window) {
 		return result;
 	};
 
+	//Find and return the first matching instance
+	this.findOne = function(container, key, value) {
+		var res = this.find(container, key, value);
+
+		if (res.length > 0) {
+			return this.find(container, key, value)[0];
+		} else {
+			return undefined;
+		}
+	}
+
 	//Return the entire data store
 	this.store = function() {
 		var models = getObject("models");
@@ -232,4 +248,9 @@ app.service('datastore', function($window) {
 
 		return result;
 	};
+
+	//Return all models
+	this.models = function() {
+		return getObject("models");
+	}
 });
