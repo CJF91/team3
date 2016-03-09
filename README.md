@@ -24,6 +24,14 @@ Simply provide `addContainer` with a container name and a model. The model is si
 
 Now that you've got a container, use the following to save, get and search the container.
 
+#####Model field types:
+```javascript
+types.String
+types.Number
+types.Boolean
+types.Date
+```
+
 #####Add a new container:
 `addContainer(containerName, containerModel)`
 

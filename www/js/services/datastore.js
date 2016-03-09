@@ -2,7 +2,9 @@ app.service('datastore', function($window) {
 	//Model Types
 	this.types = {
 		String: 'string',
-		Number: 'number'
+		Number: 'number',
+		Boolean: 'boolean',
+		Date: 'object'
 	}
 
 	//Set an object in local storage
@@ -85,6 +87,10 @@ app.service('datastore', function($window) {
 
 			if (typeof document[docKeys[i]] != model[docKeys[i]]) {
 				throw new Error("Key mismatch, typeof '" + docKeys[i] + "' is not equal to type '" + model[docKeys[i]] + "'");
+			}
+
+			if (typeof document[docKeys[i]] == 'object' && model[docKeys[i]] == 'date' && !document[docKeys[i]].getDate) {
+				throw new Error("Key mismatch, generic object is not the same as a date");
 			}
 		}
 
