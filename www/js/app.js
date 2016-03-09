@@ -71,6 +71,15 @@ var app = angular.module('app', ['ionic'])
     }
   })
   
+  .state('tab.splash', {
+    url: '/splash',
+    views: {
+      'tab-splash': {
+        templateUrl : 'templates/splash.html',
+        controller: 'splashController'
+      }
+    }
+  })
 
-  $urlRouterProvider.otherwise('/tab/moods');
+  $urlRouterProvider.otherwise('/tab/splash');
 });
