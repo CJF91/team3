@@ -45,7 +45,7 @@ app.service('datastore', function($window) {
 	}
 
 	//Remove an entire container
-	this.removeContainer = function(container, document) {
+	this.removeContainer = function(container) {
 		if (!container || container == "" || !$window.localStorage[container]) {
 			throw new Error("Must have a valid container name to save to");
 		}
@@ -88,8 +88,8 @@ app.service('datastore', function($window) {
 			}
 		}
 
-		if (id) {
-			if (!getObject(container)[id]) {
+		if (id != undefined) {
+			if (id >= containerObjs.length) {
 				throw new Error("The id " + id + " does not exist in the container '" + container + "'");
 			} else {
 				containerObjs[id] = document;
@@ -99,7 +99,6 @@ app.service('datastore', function($window) {
 				return document;
 			}
 		} else {
-			console.log("looks liek", containerObjs);
 			containerObjs.push(document);
 			setObject(container, containerObjs);
 			document.id = containerObjs.length-1;
@@ -110,11 +109,13 @@ app.service('datastore', function($window) {
 
 	//Remove a single document from a given container
 	this.removeDocument = function(container, id) {
-		if (!container || container == "" || !$window.localStorage[container]) {
+		var containerObjs = getObject(container);
+
+		if (!container || container == "" || !containerObjs) {
 			throw new Error("Must have a valid container name to remove from");
 		}
 
-		if (!id || id == "" || !$window.localStorage[container][id]) {
+		if (id == undefined || !containerObjs[id]) {
 			throw new Error("Must have a valid document id to remove");
 		}
 
@@ -122,42 +123,60 @@ app.service('datastore', function($window) {
 
 		if (id < containerObjs.length) {
 			containerObjs[id] = undefined;
+			setObject(container, containerObjs);
 			return true;
 		} else {
 			return false;
 		}
 	};
 
+	//Remove all documents from a given container
+	this.removeAllDocuments = function(container) {
+		var containerObjs = getObject(container);
+
+		if (!container || container == "" || !containerObjs) {
+			throw new Error("Must have a valid container name to remove from");
+		}
+
+		if (id == undefined || !containerObjs[id]) {
+			throw new Error("Must have a valid document id to remove");
+		}
+
+		setObject(container, []);
+	};
+
 	//Fetch a single entity from a container
 	this.get = function(container, id) {
-		if (!container || container == "" || !$window.localStorage[container]) {
+		var containerObjs = getObject(container);
+
+		if (!container || container == "" || !containerObjs) {
 			throw new Error("Must have a valid container name to fetch from");
 		}
 
-		if (!id || id == "" || !$window.localStorage[container][id]) {
+		if (id == undefined || id >= containerObjs.length) {
 			throw new Error("Must have a valid document id to fetch");
 		}
 
-		var containerObjs = getObject(container);
-
-		if (id < containerObjs.length) {
+		if (containerObjs[id] != null) {
 			return containerObjs[id];
 		} else {
-			
-		}		
+			return undefined;
+		}
 	};	
 
 	//Fetch all entities from a container
 	this.getAll = function(container) {
-		if (!container || container == "" || !$window.localStorage[container]) {
+		var containerObjs = getObject(container);
+
+		if (!container || container == "" || !containerObjs) {
 			throw new Error("Must have a valid container name to fetch from");
 		}
 
 		var result = [];
 
-		for (var i = 0; i < $window.localStorage[container].length; i++) {
-			if ($window.localStorage[container][i]) {
-				var doc = $window.localStorage[container][i];
+		for (var i = 0; i < containerObjs.length; i++) {
+			if (containerObjs[i]) {
+				var doc = containerObjs[i];
 				doc.id = i;
 
 				result.push(doc);
@@ -169,15 +188,17 @@ app.service('datastore', function($window) {
 
 	//Find a specific entity from a container given a key and a value to match
 	this.find = function(container, key, value) {
-		if (!container || container == "" || !$window.localStorage[container]) {
+		var containerObjs = getObject(container);
+
+		if (!container || container == "" || !containerObjs) {
 			throw new Error("Must have a valid container name to fetch from");
 		}
 
 		var result = [];
 
-		for (var i = 0; i < $window.localStorage[container].length; i++) {
-			if ($window.localStorage[container][i]) {
-				var doc = $window.localStorage[container][i];
+		for (var i = 0; i < containerObjs.length; i++) {
+			if (containerObjs[i]) {
+				var doc = containerObjs[i];
 				var objKeys = Object.keys(doc);
 
 				for (var j = 0; j < objKeys.length; j++) {
