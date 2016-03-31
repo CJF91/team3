@@ -5,9 +5,11 @@
 1. Run `git clone https://github.com/changity/team3.git`
 2. Run `cd team3`
 3. Install Node from [here](https://nodejs.org/en/)
-4. Run `npm install -g cordova ionic`
-5. Run `ionic serve -l`
-6. Open up [localhost:8100](http://localhost:8100) to preview, test and debug
+4. Run `npm install -g cordova ionic bower`
+5. Run `npm install`
+6. Run `bower install`
+7. Run `ionic serve -l`
+8. Open up [localhost:8100](http://localhost:8100) to preview, test and debug
 
 ####To Use the Datastore
 Make sure you include 'datastore' as a service in your controller. The datastore works by utilizing a system of containers and documents. To save data, you'll first need a container to do so. Create a new container by doing something like:
@@ -46,6 +48,11 @@ Returns `true` if the container was able to be removed.
 `save(containerName, document, [documentId])`
 
 Returns the saved document containing its new id in the `id` field.
+
+#####Upsert a document:
+`upsert(containerName, document, matchKey)`
+
+Returns the saved document containing its new (or old) id in the `id` field. An upsert will either update the document if a matching one exists or will insert a new one. The `matchKey` matched against documents until one is found to have the specified value in the given `document`.
 
 #####Remove an existing document:
 `removeDocument(containerName, documentId)`
