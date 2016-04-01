@@ -1,5 +1,11 @@
-<ion-view view-title="SPLASH">
-  <ion-content class="padding">
-   <h>SPLASH</h>
+<ion-view class="splash" ng-click="hideStuff()" ng-class="{fade: startFade}" hide-nav-bar="true">
+  <ion-content class="padding" scroll="false">
+   
+   	<div id="splashPin">
+  		<input type=number class="pinInput" ng-model="loginData.pincode" name="pin"></input>
+  	</div>
+
+
+
   </ion-content>
 </ion-view>

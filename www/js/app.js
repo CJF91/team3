@@ -18,7 +18,8 @@ var app = angular.module('app', ['ionic'])
   $stateProvider.state('tab', {
     url: '/tab',
     abstract: true,
-    templateUrl: 'templates/tabs.html'
+    templateUrl: 'templates/tabs.html',
+    controller: 'tabsController'
   })
 
   .state('tab.moods', {
