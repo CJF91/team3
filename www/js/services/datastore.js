@@ -1,4 +1,7 @@
 app.service('datastore', function($window) {
+	//Key for aes
+	var enc_key;
+
 	//Model Types
 	this.types = {
 		String: 'string',
@@ -10,16 +13,83 @@ app.service('datastore', function($window) {
 
 	//Set an object in local storage
 	function setObject(key, obj) {
-		$window.localStorage[key] = JSON.stringify(obj);
+		if (enc_key) {
+			var bytes = aesjs.util.convertStringToBytes(JSON.stringify(obj));
+			var aesCtr = new aesjs.ModeOfOperation.ctr(enc_key);
+
+			$window.localStorage[key] = aesjs.util.convertBytesToString(aesCtr.encrypt(bytes));
+		} else {
+			$window.localStorage[key] = JSON.stringify(obj);
+		}
 	}
 
 	//Fetch an object
 	function getObject(key) {
 		if ($window.localStorage[key]) {
-			return JSON.parse($window.localStorage[key]);
+			if (enc_key) {
+				var bytes = aesjs.util.convertStringToBytes($window.localStorage[key]);
+				var aesCtr = new aesjs.ModeOfOperation.ctr(enc_key);
+
+				var decBytes = aesCtr.decrypt(bytes);
+				return JSON.parse(aesjs.util.convertBytesToString(decBytes));
+			} else {
+				if ($window.localStorage[key]) {
+				return JSON.parse($window.localStorage[key]);
+			}
 		} else {
 			return undefined;
 		}
+	}
+
+	//Pad out a key to make it 256 bits
+	function pad256(key) {
+		for (var i = 0; key.length < 32; i++) {
+			key[i] += "0";
+		}
+
+		return key;
+	}
+
+	//Generate a 256 bit key from the given string
+	function gen256Key(key) {
+		return aesjs.util.convertStringToBytes(pad256(key));
+	}
+
+	//Initalize the datastore with the sepcified access key
+	this.initalizeAccess = function(givenKey) {
+		givenKey = gen256Key(givenKey);
+		var phase1 = sha256(givenKey);
+		givenKey = sha256(phase1);
+
+		var foundKey = $window.localStorage['accessKey'];
+
+		if (foundKey && givenKey == foundKey) {
+			enc_key = phase1;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+
+	//Set the new access key
+	this.setAccessKey = function(newKey) {
+		newKey = gen256Key(newKey);
+		var phase1 = sha256(newKey);
+		newKey = sha256(phase1);
+
+		var prevKey = enc_key;
+
+		var dsKeys = Object.keys($window.localStorage);
+		for (var i = 0; i < dsKeys.length; i++) {
+			enc_key = prevKey;
+			var data = getObject(dsKeys[i]);
+
+			enc_key = newKey;
+			setObject(dsKeys[i], data);
+		}
+
+		$window.localStorage['accessKey'] = newKey;
 	}
 
 	//Add a new container with the given model
