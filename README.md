@@ -34,6 +34,16 @@ types.Boolean
 types.Date
 ```
 
+#####Initalize Access to the Datastore:
+initalizeAccess(accessKey)
+
+Returns `true` if the given access key was valid and is able to decrypt data. Returns `false` otherwise.
+
+#####Update/Change the acccess key
+setAccessKey(newAccessKey)
+
+Sets a new access key and updates all existing containers with said key.
+
 #####Add a new container:
 `addContainer(containerName, containerModel)`
 
