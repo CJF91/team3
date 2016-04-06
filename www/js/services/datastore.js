@@ -4,7 +4,8 @@ app.service('datastore', function($window) {
 		String: 'string',
 		Number: 'number',
 		Boolean: 'boolean',
-		Date: 'object'
+		Date: 'object',
+		Any: 'any'
 	}
 
 	//Set an object in local storage
@@ -89,18 +90,20 @@ app.service('datastore', function($window) {
 				throw new Error("Document has unknown key '" + docKeys[i] + "'");
 			}
 
-			if (typeof document[docKeys[i]] != model[docKeys[i]]) {
+			if (typeof document[docKeys[i]] != model[docKeys[i]] && model[docKeys[i]] != 'any') {
 				throw new Error("Key mismatch, typeof '" + docKeys[i] + "' is not equal to type '" + model[docKeys[i]] + "'");
 			}
 
 			if (typeof document[docKeys[i]] == 'object' && model[docKeys[i]] == 'date' && !document[docKeys[i]].getDate) {
-				throw new Error("Key mismatch, generic object is not the same as a date");
+				throw new Error("Key mismatch, generic object is not the same as a date!");
 			}
 		}
 
 		if (id != undefined) {
 			if (id >= containerObjs.length) {
-				throw new Error("The id " + id + " does not exist in the container '" + container + "'");
+				console.warn("The id " + id + " does not exist in the container '" + container + "'. Hopefully you had a good reason for this. I'm going to add it with a new id anyways.");
+				
+				this.save(container, document);
 			} else {
 				containerObjs[id] = document;
 				setObject(container, containerObjs);
@@ -116,6 +119,26 @@ app.service('datastore', function($window) {
 			return document;
 		}
 	};
+
+	//Updates a document with the matching key or inserts if we couldn't find an ID
+	this.upsert = function(container, document, key) {
+		if (!container || container == "") {
+			throw new Error("Must have a valid container name to update in");
+		}
+
+		if (document[key] == undefined) {
+			throw new Error("Key must be defined in given document");
+		}
+
+		var matching = this.find(container, key, document[key]);
+
+		if (matching.length == 0) {
+			this.save(container, document);
+		} else {
+			this.save(container, document, matching[0].id);
+		}
+		
+	}
 
 	//Remove a single document from a given container
 	this.removeDocument = function(container, id) {

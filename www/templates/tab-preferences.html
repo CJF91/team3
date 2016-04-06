@@ -1,5 +1,24 @@
 <ion-view view-title="Preferences">
   <ion-content class="padding">
-    <h2>Preferences View</h2>
+    <ul class="list">
+        <li class="item item-rounded-top">
+          <span class="switch-text">Pin</span>
+
+          <label class="toggle right" on-tap="changePref('pinEnabled')">
+             <input type="checkbox" ng-model="formData.pinEnabled">
+             <div class="track">
+               <div class="handle"></div>
+             </div>
+          </label>
+        </li>
+
+        <li class="item item-input" ng-show="formData.pinEnabled">
+          <input type="password" placeholder="Pin" ng-model="formData.pin" class="pin-input">
+        </li>
+
+        <li class="item item-rounded-bottom" on-tap="changePref('splash')">
+        	Splash Image <i class="ion-chevron-right right"></i>
+        </li>
+    </ul>
   </ion-content>
 </ion-view>
