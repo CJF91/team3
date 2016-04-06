@@ -33,7 +33,6 @@ app.service('datastore', function($window) {
 				var decBytes = aesCtr.decrypt(bytes);
 				return JSON.parse(aesjs.util.convertBytesToString(decBytes));
 			} else {
-				if ($window.localStorage[key]) {
 				return JSON.parse($window.localStorage[key]);
 			}
 		} else {
