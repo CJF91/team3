@@ -5,7 +5,7 @@
 1. Run `git clone https://github.com/changity/team3.git`
 2. Run `cd team3`
 3. Install Node from [here](https://nodejs.org/en/)
-4. Run `npm install -g cordova ionic bower`
+4. Run `npm install -g cordova ionic bower gulp`
 5. Run `npm install`
 6. Run `bower install`
 7. Run `ionic serve -l`

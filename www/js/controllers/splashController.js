@@ -1,3 +1,3 @@
-app.controller('splashController', function($scope) {
+app.controller('splashController', function($scope, datastore) {
 	
 });
