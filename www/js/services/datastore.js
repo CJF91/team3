@@ -14,10 +14,7 @@ app.service('datastore', function($window) {
 	//Set an object in local storage
 	function setObject(key, obj) {
 		if (enc_key) {
-			var dataBytes = aesjs.util.convertStringToBytes(JSON.stringify(obj));
-			var aesCtr = new aesjs.ModeOfOperation.ctr(enc_key, new aesjs.Counter(5));
-
-			$window.localStorage[key] = aesjs.util.convertBytesToString(aesCtr.encrypt(dataBytes));
+			$window.localStorage[key] = encrypt(JSON.stringify(obj), enc_key);
 		} else {
 			$window.localStorage[key] = JSON.stringify(obj);
 		}
@@ -27,11 +24,7 @@ app.service('datastore', function($window) {
 	function getObject(key) {
 		if ($window.localStorage[key]) {
 			if (enc_key) {
-				var dataBytes = aesjs.util.convertStringToBytes($window.localStorage[key]);
-				var aesCtr = new aesjs.ModeOfOperation.ctr(enc_key, new aesjs.Counter(5));
-
-				var decBytes = aesCtr.decrypt(dataBytes);
-				return JSON.parse(aesjs.util.convertBytesToString(decBytes));
+				return JSON.parse(decrypt($window.localStorage[key], enc_key));
 			} else {
 				return JSON.parse($window.localStorage[key]);
 			}
@@ -49,34 +42,51 @@ app.service('datastore', function($window) {
 		return key;
 	}
 
+	//Cut a 512 bits key to 256 bits
 	function cut256(key) {
 		return key.substring(0,32);
 	}
 
-	function encode(data) {
-		return btoa(unescape(encodeURIComponent(data)))
+	function encrypt(data, key) {
+		var dataBytes = aesjs.util.convertStringToBytes(data);
+		var _key = aesjs.util.convertStringToBytes(key);
+
+		var aesCtr = new aesjs.ModeOfOperation.ctr(_key, new aesjs.Counter(5));
+		var encryptedBytes = aesCtr.encrypt(dataBytes);
+
+		return btos(encryptedBytes);
 	}
 
-	function decode(string) {
-		return decodeURIComponent(escape(atob(string)))
+	function decrypt(data, key) {
+		var _key = aesjs.util.convertStringToBytes(key);
+		var dataBytes = stob(data);
+
+		var aesCtr = new aesjs.ModeOfOperation.ctr(_key, new aesjs.Counter(5));
+		var decryptedBytes = aesCtr.decrypt(dataBytes);
+
+		return aesjs.util.convertBytesToString(decryptedBytes);
 	}
 
-	//Generate a 256 bit key from the given string
-	function gen256Key(key) {
-		return aesjs.util.convertStringToBytes(pad256(key));
+	function btos(bytes) {
+		return btoa(JSON.stringify(bytes));
+	}
+
+	function stob(str) {
+		return JSON.parse(atob(str));
 	}
 
 	//Initalize the datastore with the sepcified access key
 	this.initalizeAccess = function(givenKey) {
 		if (givenKey && givenKey != "") {
-			givenKey = gen256Key(givenKey);
+			givenKey = pad256(givenKey);
+
 			var phase1 = cut256(sha256(givenKey));
-			givenKey = cut256(sha256(phase1));
+			var phase2 = sha256(phase1);
 
 			var foundKey = $window.localStorage['accessKey'];
 
-			if (foundKey && givenKey == foundKey) {
-				enc_key = aesjs.util.convertStringToBytes(phase1);
+			if (foundKey && phase2 == foundKey) {
+				enc_key = phase1;
 				return true;
 			} else {
 				return false;
@@ -84,14 +94,13 @@ app.service('datastore', function($window) {
 		}
 	}
 
-
 	//Set the new access key
 	this.setAccessKey = function(newKey) {
 		if (newKey && newKey != "") {
+			newKey = pad256(newKey);
 
-			newKey = gen256Key(newKey);
 			var phase1 = cut256(sha256(newKey));
-			newKey = cut256(sha256(phase1));
+			$window.localStorage['accessKey'] = sha256(phase1);
 
 			var prevKey = enc_key;
 
@@ -101,13 +110,11 @@ app.service('datastore', function($window) {
 					enc_key = prevKey;
 					var data = getObject(dsKeys[i]);
 
-					enc_key = aesjs.util.convertStringToBytes(newKey);
+					enc_key = phase1;
 					setObject(dsKeys[i], data);
 				}
 			}
 		}
-
-		$window.localStorage['accessKey'] = newKey;
 
 		return this.initalizeAccess(newKey);
 	}

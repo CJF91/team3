@@ -13,35 +13,18 @@ app.controller('preferencesController', function($scope, $cordovaImagePicker, da
 	}*/
 
 	$scope.changePref = function(pref) {
-		var key = aesjs.util.convertStringToBytes("Example128BitKey");
-
-		// Convert text to bytes
-		var text = 'Text may be any length you wish, no padding is required.';
-		var textBytes = aesjs.util.convertStringToBytes(text);
-
-		// The counter is optional, and if omitted will begin at 0
-		var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
-		var encryptedBytes = aesCtr.encrypt(textBytes);
-
-		// The counter mode of operation maintains internal state, so to
-		// decrypt a new instance must be instantiated.
-		var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
-		var decryptedBytes = aesCtr.decrypt(encryptedBytes);
-
-		// Convert our bytes back into text
-		var decryptedText = aesjs.util.convertBytesToString(decryptedBytes);
-		console.log(decryptedText);
+		//var encrypted = datastore.encrypt("hello world!", "99999999999999999999999999999999");
+		//var dec = datastore.decrypt(encrypted, "99999999999999999999999999999999");
 		
-					
-		datastore.setAccessKey("hello world");
-		//datastore.initalizeAccess("hello world");
+		datastore.setAccessKey("yoloswag");
+		//datastore.initalizeAccess("");
 
 		datastore.addContainer("Fruit", {name : datastore.types.String, weight : datastore.types.Number});
 		var savedDoc = datastore.save("Fruit", {name: "Orange", weight: 3.2});
 
 		console.log(savedDoc);
-
-	//	console.log(datastore.getAll("Fruit"));*/
+		console.log(datastore.getAll("Fruit"));
+		console.log(window.localStorage);
 
 		if (pref == 'splash') {
 			var options = {
