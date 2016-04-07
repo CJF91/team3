@@ -47,6 +47,7 @@ app.service('datastore', function($window) {
 		return key.substring(0,32);
 	}
 
+	//Encrypt a string given a key
 	function encrypt(data, key) {
 		var dataBytes = aesjs.util.convertStringToBytes(data);
 		var _key = aesjs.util.convertStringToBytes(key);
@@ -57,6 +58,7 @@ app.service('datastore', function($window) {
 		return btos(encryptedBytes);
 	}
 
+	//Decrypt a string with the given key
 	function decrypt(data, key) {
 		var _key = aesjs.util.convertStringToBytes(key);
 		var dataBytes = stob(data);
@@ -67,10 +69,12 @@ app.service('datastore', function($window) {
 		return aesjs.util.convertBytesToString(decryptedBytes);
 	}
 
+	//Bytes to string
 	function btos(bytes) {
 		return btoa(JSON.stringify(bytes));
 	}
 
+	//String to bytes
 	function stob(str) {
 		return JSON.parse(atob(str));
 	}
@@ -102,21 +106,27 @@ app.service('datastore', function($window) {
 			var phase1 = cut256(sha256(newKey));
 			$window.localStorage['accessKey'] = sha256(phase1);
 
-			var prevKey = enc_key;
-
 			var dsKeys = Object.keys($window.localStorage);
+			var prevKey = dsKeys.length > 1 ? enc_key.slice(0) : undefined;
+
 			for (var i = 0; i < dsKeys.length; i++) {
 				if (dsKeys[i] != 'accessKey') {
 					enc_key = prevKey;
+					console.log("Changing key to ", enc_key);
 					var data = getObject(dsKeys[i]);
 
 					enc_key = phase1;
+					console.log("Changing key to ", enc_key);
 					setObject(dsKeys[i], data);
 				}
 			}
 		}
 
 		return this.initalizeAccess(newKey);
+	}
+
+	this.isEncrypted = function() {
+		return $window.localStorage['accessKey'];
 	}
 
 	//Add a new container with the given model
