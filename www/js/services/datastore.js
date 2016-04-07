@@ -126,7 +126,7 @@ app.service('datastore', function($window) {
 	}
 
 	this.isEncrypted = function() {
-		return $window.localStorage['accessKey'];
+		return $window.localStorage['accessKey'] ? true : false;
 	}
 
 	//Add a new container with the given model

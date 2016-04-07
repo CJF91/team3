@@ -39,10 +39,15 @@ initalizeAccess(accessKey)
 
 Returns `true` if the given access key was valid and is able to decrypt data. Returns `false` otherwise.
 
-#####Update/Change the acccess key
+#####Update/Change the acccess key:
 setAccessKey(newAccessKey)
 
 Sets a new access key and updates all existing containers with said key.
+
+#####Check if the datastore is encrypted:
+isEncrypted()
+
+Returns `true` if the datastore is encrypted, `false` otherwise
 
 #####Add a new container:
 `addContainer(containerName, containerModel)`
