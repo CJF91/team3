@@ -88,10 +88,9 @@ app.service('datastore', function($window) {
 	//Set the new access key
 	this.setAccessKey = function(newKey) {
 		if (newKey && newKey != "") {
-
-			newKey = gen256Key(newKey);
-			var phase1 = cut256(sha256(newKey));
-			newKey = cut256(sha256(phase1));
+			var key = gen256Key(key);
+			var phase1 = cut256(sha256(key));
+			key = cut256(sha256(phase1));
 
 			var prevKey = enc_key;
 
@@ -101,13 +100,13 @@ app.service('datastore', function($window) {
 					enc_key = prevKey;
 					var data = getObject(dsKeys[i]);
 
-					enc_key = aesjs.util.convertStringToBytes(newKey);
+					enc_key = aesjs.util.convertStringToBytes(key);
 					setObject(dsKeys[i], data);
 				}
 			}
 		}
 
-		$window.localStorage['accessKey'] = newKey;
+		$window.localStorage['accessKey'] = key;
 
 		return this.initalizeAccess(newKey);
 	}
