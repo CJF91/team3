@@ -112,11 +112,9 @@ app.service('datastore', function($window) {
 			for (var i = 0; i < dsKeys.length; i++) {
 				if (dsKeys[i] != 'accessKey') {
 					enc_key = prevKey;
-					console.log("Changing key to ", enc_key);
 					var data = getObject(dsKeys[i]);
 
 					enc_key = phase1;
-					console.log("Changing key to ", enc_key);
 					setObject(dsKeys[i], data);
 				}
 			}
@@ -368,15 +366,18 @@ app.service('datastore', function($window) {
 	//Return the entire data store
 	this.store = function() {
 		var models = getObject("models");
-		var modKeys = Object.keys(models);
+		if(models == undefined){
+			return undefined;
+		} else {
+			var modKeys = Object.keys(models);
+			var result = {};
 
-		var result = {};
+			for (var i = 0; i < modKeys.length; i++) {
+				result[modKeys[i]] = this.getAll(modKeys[i]);
+			}
 
-		for (var i = 0; i < modKeys.length; i++) {
-			result[modKeys[i]] = this.getAll(modKeys[i]);
+			return result;
 		}
-
-		return result;
 	};
 
 	//Return all models
