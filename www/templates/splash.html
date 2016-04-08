@@ -1,23 +1,30 @@
 <ion-view class="splash" ng-class="{fade: startFade}" hide-nav-bar="true" hide-tabs='true'>
   <ion-content class="padding" scroll="false">
+  <div  ng-show="pinNeeded">
+	  <div id="splashTitle">MOODALYZER</div>
 
-  <div id="splashTitle">MOODALYZER</div>
+	  	<div id="inputPin">
+	  		<span id="currPin" ng-repeat="n in input track by $index">* </span>
+	  	</div>
+	   
+	    <ul id="splashPin">
+	   		<li class="pinNumber" ng-repeat="n in numbers">
+	   			<div class="number" ng-click="add(n)">{{n}}</div>
+	   		</li>
+	   	</ul>	
 
-  	<div id="inputPin">
-  		<span id="currPin" ng-repeat="n in input track by $index">* </span>
-  	</div>
-   
-    <ul id="splashPin">
-   		<li class="pinNumber" ng-repeat="n in numbers">
-   			<div class="number" ng-click="add(n)">{{n}}</div>
-   		</li>
-   	</ul>	
+	  	<div class="pinNumber" id="zero">
+	   			<div class="number" ng-click="add(0)">0</div>
+	   	</div>
 
-  	<div class="pinNumber" id="zero">
-   			<div class="number" ng-click="add(0)">0</div>
-   	</div>
+	   	<div id="delete" ng-click="delete()">Delete</div>
+	</div>
 
-   	<div id="delete" ng-click="delete()">Delete</div>
-
+	<div id="afterPin" ng-show="!pinNeeded" ng-click="go()">
+		<div id="latestMoodTitle">Latest Mood: </div>
+		<div class="latestMoodInfo" id="firstInfo">{{latestMood[0]}}</div>
+		<div class="latestMoodInfo">Intensity of {{latestMood[1]}}</div>
+		<div class="latestMoodInfo">At {{latestMood[5]}}</div>
+	</div>
   </ion-content>
 </ion-view>

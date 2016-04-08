@@ -9848,3 +9848,18 @@ $dark:                            #444 !default;
     -webkit-filter: brightness(0.75);
     filter: brightness(0.75); }
 
+#afterPin {
+  text-align: center;
+  margin-top: 15%;
+  background-color: transparent;
+  padding-bottom: 200%; }
+
+#latestMoodTitle {
+  font-size: 50px; }
+
+.latestMoodInfo {
+  font-size: 25px;
+  margin-top: 7.5%; }
+
+#firstInfo {
+  margin-top: 20%; }

@@ -1,6 +1,8 @@
-app.controller('splashController', function($scope, datastore, $rootScope, $state) {
+app.controller('splashController', function($scope, datastore, $rootScope, $state, $timeout) {
 	//TODO: Fix this up and make it actually use the users pin
 	//1234 is the dummy pin for now
+
+	$scope.latestMood = ["Angry", "5", "trigger", "behavior", "belief", "4/9/2016 9:15am"];
 
 	if (datastore.isEncrypted()) {
 		datastore.initalizeAccess("1234");
@@ -46,6 +48,8 @@ app.controller('splashController', function($scope, datastore, $rootScope, $stat
 
 	$scope.pin = [1, 2, 3, 4];
 
+	$scope.pinNeeded = true;
+
 	$scope.numbers = [1,2,3,4,5,6,7,8,9];
 	$scope.input = [];
 
@@ -60,7 +64,8 @@ app.controller('splashController', function($scope, datastore, $rootScope, $stat
     			}
     		}
     		if($scope.correct){
-    			$state.go('tab.patterns');
+    			// $state.go('tab.moods');
+    			$scope.pinNeeded = false;
     		}
     		else{
     			$scope.input = [];
@@ -74,6 +79,12 @@ app.controller('splashController', function($scope, datastore, $rootScope, $stat
     	console.log($scope.input);
     }
 
+
+    $scope.go = function(){
+    	if(!$scope.pinNeeded){
+    		$state.go("tab.moods");
+    	}
+    }
 });
 
 app.directive('hideTabs', function($rootScope) {
@@ -88,4 +99,5 @@ app.directive('hideTabs', function($rootScope) {
                 $rootScope.hideTabs = false;
             });
         }
-};
+	};
+});

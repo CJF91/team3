@@ -61,7 +61,6 @@ $g2: #67E08B;
 	margin-top: 6px;
 }
 
-<<<<<<< HEAD
 .pinNumber{
     border-radius: 50%;
     
@@ -176,4 +175,24 @@ $g2: #67E08B;
 		-webkit-filter: brightness(0.75);
 		filter: brightness(0.75);
 	}
+}
+
+#afterPin{
+	text-align: center;
+	margin-top: 15%;
+	background-color: transparent;
+	padding-bottom: 200%;
+}
+
+#latestMoodTitle{
+	font-size: 50px;
+}
+
+.latestMoodInfo{
+	font-size: 25px;
+	margin-top: 7.5%;
+}
+
+#firstInfo{
+	margin-top: 20%;
 }

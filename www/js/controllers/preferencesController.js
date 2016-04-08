@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-app.controller('preferencesController', function($scope) {
-	
-=======
 app.controller('preferencesController', function($scope, $cordovaImagePicker, datastore) {
 	$scope.formData = {pinEnabled: false, pin: ""};
 	
@@ -37,5 +33,4 @@ app.controller('preferencesController', function($scope, $cordovaImagePicker, da
 			datastore.upsert('Preferences', {prefName: 'pinEnabled', prefValue: $scope.formData.pinEnabled}, 'prefName');
 		}
 	}
->>>>>>> 1cfb5d88f176b98d1e235559a852bc010498e117
 });
