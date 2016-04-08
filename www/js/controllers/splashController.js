@@ -1,13 +1,8 @@
 app.controller('splashController', function($scope, datastore, $rootScope, $state, $timeout) {
-	//TODO: Fix this up and make it actually use the users pin
-	//1234 is the dummy pin for now
-
 	$scope.latestMood = ["Angry", "5", "trigger", "behavior", "belief", "4/9/2016 9:15am"];
 
-	if (datastore.isEncrypted()) {
-		datastore.initalizeAccess("1234");
-	} else {
-		datastore.setAccessKey("1234");
+	if (!datastore.isEncrypted()) {
+		datastore.setAccessKey("default_password");
 		 // The General Model for Moods, Beliefs Triggers and Behaviors. Can be changed and is only here for consistentcy.
 
 	    // The user logging the Mood.
@@ -45,9 +40,6 @@ app.controller('splashController', function($scope, datastore, $rootScope, $stat
 	    $rootScope.MoodTypeList = ["Happy","Excited","Tender","Scared","Angry","Sad"];
 	}
 
-
-	$scope.pin = [1, 2, 3, 4];
-
 	$scope.pinNeeded = true;
 
 	$scope.numbers = [1,2,3,4,5,6,7,8,9];
@@ -55,28 +47,24 @@ app.controller('splashController', function($scope, datastore, $rootScope, $stat
 
     $scope.add = function(n){
     	$scope.input.push(n);
-    	if($scope.input.length == 4){
-    		$scope.correct = true;
-    		//check input[] against pin of user
-    		for(var i = 0; i < 4; i++){
-    			if($scope.pin[i] != $scope.input[i]){
-    				$scope.correct = false;
-    			}
+
+    	if ($scope.input.length == 4) {
+    		if (datastore.initalizeAccess("default_password")) {
+    			$scope.correct = true;
+    		} else {
+    			$scope.correct = datastore.initalizeAccess("" + $scope.input[0] + $scope.input[1] + $scope.input[2] + $scope.input[3]);
     		}
-    		if($scope.correct){
-    			// $state.go('tab.moods');
+    		
+    		if ($scope.correct){
     			$scope.pinNeeded = false;
-    		}
-    		else{
+    		} else {
     			$scope.input = [];
     		}
     	}
-    	console.log($scope.input);
     }
 
     $scope.delete = function(){
     	$scope.input.pop();
-    	console.log($scope.input);
     }
 
 
