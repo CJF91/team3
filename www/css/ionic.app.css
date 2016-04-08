@@ -9777,3 +9777,10 @@ $dark:                            #444 !default;
 
 .list-padding {
   margin-top: -2px; }
+
+.list-primary-label {
+  font-weight: 700; }
+
+.list-secondary-label {
+  font-size: 12px;
+  color: #999; }
