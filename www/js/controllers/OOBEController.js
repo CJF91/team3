@@ -1,3 +1,2 @@
-app.controller('OOBEController' function ($scope){
-	if()
+app.controller('OOBEController', function ($scope) {
 });

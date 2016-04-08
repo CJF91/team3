@@ -112,11 +112,9 @@ app.service('datastore', function($window) {
 			for (var i = 0; i < dsKeys.length; i++) {
 				if (dsKeys[i] != 'accessKey') {
 					enc_key = prevKey;
-					console.log("Changing key to ", enc_key);
 					var data = getObject(dsKeys[i]);
 
 					enc_key = phase1;
-					console.log("Changing key to ", enc_key);
 					setObject(dsKeys[i], data);
 				}
 			}
