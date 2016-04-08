@@ -9774,3 +9774,6 @@ $dark:                            #444 !default;
   .fab:active {
     -webkit-filter: brightness(0.75);
     filter: brightness(0.75); }
+
+.list-padding {
+  margin-top: -2px; }
