@@ -10,7 +10,7 @@
   </ion-header-bar>
   <ion-content class="padding">
     <ion-list show-delete="options.showDelete" can-swipe="options.canSwipe">
-      <ion-item ng-repeat="mood in moods" class="item-thumbnail-left">
+      <ion-item ng-repeat="mood in moods" on-hold="moodHoldActions(mood)" class="item-thumbnail-left">
         {{ mood.mood }} | {{ mood.time }}
         <ion-option-button class="button-assertive" ng-click="editMood(mood)">
           Edit

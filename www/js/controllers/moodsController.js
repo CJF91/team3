@@ -1,4 +1,4 @@
-app.controller('moodsController', function($scope, datastore) {
+app.controller('moodsController', function($scope, $ionicActionSheet, datastore) {
   $scope.moods = [
     {mood: 'Happy', time: 1},
     {mood:'Sad', time: 2},
@@ -12,5 +12,23 @@ app.controller('moodsController', function($scope, datastore) {
   };
   $scope.editMood = function(mood){
     mood.time += 1;
+  };
+  $scope.moodHoldActions = function(mood) {
+	  $ionicActionSheet.show({
+     buttons: [
+       { text: '<b>Share</b> This' },
+       { text: 'Move' }
+     ],
+     destructiveText: 'Delete',
+     titleText: 'Modify your album',
+     cancelText: 'Cancel',
+     cancel: function() {
+          // add cancel code..
+        },
+     buttonClicked: function(index) {
+		 console.log(index);
+       return true;
+     }
+   });
   };
 });
