@@ -1,7 +1,11 @@
 <ion-view view-title="Preferences">
   <ion-content class="padding">
     <ul class="list">
-        <li class="item item-rounded-top">
+        <li class="item item-rounded-top" on-tap="changePref('nameChange')">
+          Name <i class="ion-chevron-right right"></i>
+        </li>
+
+        <li class="item">
           <span class="switch-text">Pin</span>
 
           <label class="toggle right" on-tap="changePref('pinEnabled')">

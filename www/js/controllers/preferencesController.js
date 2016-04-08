@@ -31,6 +31,8 @@ app.controller('preferencesController', function($scope, $cordovaImagePicker, da
 			    });
 		} else if (pref == 'pinEnabled') {
 			datastore.upsert('Preferences', {prefName: 'pinEnabled', prefValue: $scope.formData.pinEnabled}, 'prefName');
+		} else if (pref == 'nameChange'){
+			//wait til we can get name from database then call it 
 		}
 	}
 });
