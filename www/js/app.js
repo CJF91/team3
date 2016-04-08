@@ -71,16 +71,30 @@ var app = angular.module('app', ['ionic', 'ngCordova'])
       }
     }
   })
-  
+
   .state('tab.splash', {
     url: '/splash',
     views: {
       'tab-splash': {
-        templateUrl : 'templates/splash.html',
+        templateUrl :'templates/splash.html',
         controller: 'splashController'
       }
     }
   })
 
+  .state('OOBE', {
+    url: '/OOBE',
+    views: {
+      'OOBE' : {
+        templateUrl : 'templates/oobe.html',
+        controller : 'OOBEController'
+      }
+    }
+  });
+
   $urlRouterProvider.otherwise('/tab/splash');
+})
+
+.config(function($ionicConfigProvider) {
+    $ionicConfigProvider.tabs.position('bottom');
 });

@@ -4,7 +4,7 @@ app.controller('preferencesController', function($scope) {
 =======
 app.controller('preferencesController', function($scope, $cordovaImagePicker, datastore) {
 	$scope.formData = {pinEnabled: false, pin: ""};
-
+	
 	datastore.addContainer('Preferences', {
 		prefName: datastore.types.String,
 		prefValue: datastore.types.Any
