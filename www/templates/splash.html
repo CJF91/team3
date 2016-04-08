@@ -1,11 +1,23 @@
-<ion-view class="splash" ng-click="hideStuff()" ng-class="{fade: startFade}" hide-nav-bar="true">
+<ion-view class="splash" ng-class="{fade: startFade}" hide-nav-bar="true" hide-tabs='true'>
   <ion-content class="padding" scroll="false">
-   
-   	<div id="splashPin">
-  		
+
+  <div id="splashTitle">MOODALYZER</div>
+
+  	<div id="inputPin">
+  		<span id="currPin" ng-repeat="n in input track by $index">* </span>
   	</div>
+   
+    <ul id="splashPin">
+   		<li class="pinNumber" ng-repeat="n in numbers">
+   			<div class="number" ng-click="add(n)">{{n}}</div>
+   		</li>
+   	</ul>	
 
+  	<div class="pinNumber" id="zero">
+   			<div class="number" ng-click="add(0)">0</div>
+   	</div>
 
+   	<div id="delete" ng-click="delete()">Delete</div>
 
   </ion-content>
 </ion-view>
