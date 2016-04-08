@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ionic'])
+var app = angular.module('app', ['ionic', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -70,7 +70,7 @@ var app = angular.module('app', ['ionic'])
       }
     }
   })
-  
+
   .state('tab.splash', {
     url: '/splash',
     views: {
@@ -92,4 +92,8 @@ var app = angular.module('app', ['ionic'])
   });
 
   $urlRouterProvider.otherwise('/tab/splash');
+})
+
+.config(function($ionicConfigProvider) {
+    $ionicConfigProvider.tabs.position('bottom');
 });

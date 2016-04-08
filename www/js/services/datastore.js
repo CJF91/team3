@@ -1,24 +1,132 @@
 app.service('datastore', function($window) {
+	//Key for aes
+	var enc_key;
+
 	//Model Types
 	this.types = {
 		String: 'string',
 		Number: 'number',
 		Boolean: 'boolean',
-		Date: 'object'
+		Date: 'object',
+		Any: 'any'
 	}
 
 	//Set an object in local storage
 	function setObject(key, obj) {
-		$window.localStorage[key] = JSON.stringify(obj);
+		if (enc_key) {
+			$window.localStorage[key] = encrypt(JSON.stringify(obj), enc_key);
+		} else {
+			$window.localStorage[key] = JSON.stringify(obj);
+		}
 	}
 
 	//Fetch an object
 	function getObject(key) {
 		if ($window.localStorage[key]) {
-			return JSON.parse($window.localStorage[key]);
+			if (enc_key) {
+				return JSON.parse(decrypt($window.localStorage[key], enc_key));
+			} else {
+				return JSON.parse($window.localStorage[key]);
+			}
 		} else {
 			return undefined;
 		}
+	}
+
+	//Pad out a key to make it 256 bits
+	function pad256(key) {
+		for (var i = 0; key.length < 32; i++) {
+			key += "0";
+		}
+
+		return key;
+	}
+
+	//Cut a 512 bits key to 256 bits
+	function cut256(key) {
+		return key.substring(0,32);
+	}
+
+	//Encrypt a string given a key
+	function encrypt(data, key) {
+		var dataBytes = aesjs.util.convertStringToBytes(data);
+		var _key = aesjs.util.convertStringToBytes(key);
+
+		var aesCtr = new aesjs.ModeOfOperation.ctr(_key, new aesjs.Counter(5));
+		var encryptedBytes = aesCtr.encrypt(dataBytes);
+
+		return btos(encryptedBytes);
+	}
+
+	//Decrypt a string with the given key
+	function decrypt(data, key) {
+		var _key = aesjs.util.convertStringToBytes(key);
+		var dataBytes = stob(data);
+
+		var aesCtr = new aesjs.ModeOfOperation.ctr(_key, new aesjs.Counter(5));
+		var decryptedBytes = aesCtr.decrypt(dataBytes);
+
+		return aesjs.util.convertBytesToString(decryptedBytes);
+	}
+
+	//Bytes to string
+	function btos(bytes) {
+		return btoa(JSON.stringify(bytes));
+	}
+
+	//String to bytes
+	function stob(str) {
+		return JSON.parse(atob(str));
+	}
+
+	//Initalize the datastore with the sepcified access key
+	this.initalizeAccess = function(givenKey) {
+		if (givenKey && givenKey != "") {
+			givenKey = pad256(givenKey);
+
+			var phase1 = cut256(sha256(givenKey));
+			var phase2 = sha256(phase1);
+
+			var foundKey = $window.localStorage['accessKey'];
+
+			if (foundKey && phase2 == foundKey) {
+				enc_key = phase1;
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	//Set the new access key
+	this.setAccessKey = function(newKey) {
+		if (newKey && newKey != "") {
+			newKey = pad256(newKey);
+
+			var phase1 = cut256(sha256(newKey));
+			$window.localStorage['accessKey'] = sha256(phase1);
+
+			var dsKeys = Object.keys($window.localStorage);
+			var prevKey = dsKeys.length > 1 ? enc_key.slice(0) : undefined;
+
+			for (var i = 0; i < dsKeys.length; i++) {
+				if (dsKeys[i] != 'accessKey') {
+					enc_key = prevKey;
+					console.log("Changing key to ", enc_key);
+					var data = getObject(dsKeys[i]);
+
+					enc_key = phase1;
+					console.log("Changing key to ", enc_key);
+					setObject(dsKeys[i], data);
+				}
+			}
+		}
+
+		return this.initalizeAccess(newKey);
+	}
+
+	this.isEncrypted = function() {
+		return $window.localStorage['accessKey'] ? true : false;
 	}
 
 	//Add a new container with the given model
@@ -89,18 +197,20 @@ app.service('datastore', function($window) {
 				throw new Error("Document has unknown key '" + docKeys[i] + "'");
 			}
 
-			if (typeof document[docKeys[i]] != model[docKeys[i]]) {
+			if (typeof document[docKeys[i]] != model[docKeys[i]] && model[docKeys[i]] != 'any') {
 				throw new Error("Key mismatch, typeof '" + docKeys[i] + "' is not equal to type '" + model[docKeys[i]] + "'");
 			}
 
 			if (typeof document[docKeys[i]] == 'object' && model[docKeys[i]] == 'date' && !document[docKeys[i]].getDate) {
-				throw new Error("Key mismatch, generic object is not the same as a date");
+				throw new Error("Key mismatch, generic object is not the same as a date!");
 			}
 		}
 
 		if (id != undefined) {
 			if (id >= containerObjs.length) {
-				throw new Error("The id " + id + " does not exist in the container '" + container + "'");
+				console.warn("The id " + id + " does not exist in the container '" + container + "'. Hopefully you had a good reason for this. I'm going to add it with a new id anyways.");
+				
+				this.save(container, document);
 			} else {
 				containerObjs[id] = document;
 				setObject(container, containerObjs);
@@ -116,6 +226,26 @@ app.service('datastore', function($window) {
 			return document;
 		}
 	};
+
+	//Updates a document with the matching key or inserts if we couldn't find an ID
+	this.upsert = function(container, document, key) {
+		if (!container || container == "") {
+			throw new Error("Must have a valid container name to update in");
+		}
+
+		if (document[key] == undefined) {
+			throw new Error("Key must be defined in given document");
+		}
+
+		var matching = this.find(container, key, document[key]);
+
+		if (matching.length == 0) {
+			this.save(container, document);
+		} else {
+			this.save(container, document, matching[0].id);
+		}
+		
+	}
 
 	//Remove a single document from a given container
 	this.removeDocument = function(container, id) {
