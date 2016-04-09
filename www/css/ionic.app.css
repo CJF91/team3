@@ -9734,6 +9734,9 @@ $dark:                            #444 !default;
 .splash {
   color: #fff; }
 
+.item-highlight {
+  background-color: darkgray; }
+
 .item-rounded-top {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px; }
