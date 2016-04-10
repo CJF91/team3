@@ -1,6 +1,4 @@
-app.controller('moodsController', function($scope, $ionicActionSheet,
-        $ionicPopup, $location, $anchorScroll, $ionicScrollDelegate,
-        $ionicPosition, datastore) {
+app.controller('moodsController', function($scope, $ionicActionSheet, $ionicPopup, $ionicScrollDelegate, $ionicPosition, datastore) {
         $scope.moods = [
             {mood: 'Happy', time: 1},
             {mood: 'Sad', time: 2},
@@ -11,10 +9,12 @@ app.controller('moodsController', function($scope, $ionicActionSheet,
         };
         $scope.addMood = function() {
             $scope.moods.push({mood: 'Test', time: 4});
+			$scope.oldLength += 1;
         };
         $scope.editMood = function(mood) {
             mood.time += 1;
         };
+		// TODO: Fix when user holds and item and scrolls when the ActionSheet shows up moves the item to unexpected place
         $scope.selectedIndex = -1;
 		$scope.keepSelected = false;
         $scope.moodHoldActions = function(mood, index) {
@@ -23,9 +23,9 @@ app.controller('moodsController', function($scope, $ionicActionSheet,
             var scrollPosition = $ionicPosition.position(angular.element(document.getElementById('id' + index)));
             var itemHeight = document.getElementById("id" + index).offsetHeight;
             var listHeight = angular.element(document.querySelector('#list'))[0].clientHeight;
-            var oldLength = $scope.moods.length;
             while ($scope.moods.length < index + listHeight / itemHeight) {
                 $scope.moods.push({mood: '', time: -1});
+				$scope.filledCount += 1;
             }
             $ionicScrollDelegate.$getByHandle('content').scrollTo(0, scrollPosition.top, true);
             var $hideActions = $ionicActionSheet.show({
@@ -34,8 +34,6 @@ app.controller('moodsController', function($scope, $ionicActionSheet,
                     // Edit (mood)
                     mood.time += 1;
                     $scope.selectedIndex = -1;
-                    $scope.moods.splice(oldLength, $scope.moods.length - oldLength);
-					$ionicScrollDelegate.resize();
                     $hideActions();
                 },
                 destructiveText: 'Delete',
@@ -65,9 +63,11 @@ app.controller('moodsController', function($scope, $ionicActionSheet,
                 cancel: function() {
                     if ($scope.keepSelected == false) {
 						$scope.selectedIndex = -1;
+						while ($scope.moods[$scope.moods.length - 1].time == -1) {
+							$scope.moods.splice($scope.moods.length - 1, 1);
+						}
+						$ionicScrollDelegate.resize();
 					}
-                    $scope.moods.splice(oldLength, $scope.moods.length - oldLength);
-					$ionicScrollDelegate.resize();
                 }
             });
         };

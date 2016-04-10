@@ -8,7 +8,7 @@
     <button class="button" ng-click="addMood()">New Mood</button>
   </div>
   </ion-header-bar>
-  <ion-content id="list" on-scroll="onScroll()" delegate-handle="content" overflow-scroll="auto">
+  <ion-content id="list" delegate-handle="content" overflow-scroll="auto">
     <ion-list>
       <ion-item ng-if="mood.time != -1" ng-repeat="mood in moods" id="id{{$index}}" ng-class="{ 'item-highlight' : $index == selectedIndex }" on-hold="moodHoldActions(mood, $index)" class="item-thumbnail-left">
         {{ mood.mood }} | {{ mood.time }}
