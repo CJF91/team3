@@ -1,16 +1,12 @@
 <ion-view view-title="Track Moods">
-  <ion-header-bar align-title="left" class="bar bar-subheader">
-    <div class="buttons">
-      <button class="button" ng-click="options.showDelete = !options.showDelete">Delete</button>
-    </div>
-    <h1 class="title">Moods</h1>
-    <div class="buttons">
-    <button class="button" ng-click="addMood()">New Mood</button>
-  </div>
+  <ion-header-bar align-title="center" class="bar bar-subheader">
+      <button class="button button-clear button-positive" ng-click="options.showDelete = !options.showDelete">Delete</button>
+      <h2 class="title">Moods</h2>
+      <button class="button button-clear button-positive">New</button>
   </ion-header-bar>
   <ion-content class="padding">
     <ion-list show-delete="options.showDelete" can-swipe="options.canSwipe">
-      <ion-item ng-repeat="mood in moods" on-hold="moodHoldActions(mood)" class="item-thumbnail-left">
+      <ion-item collection-repeat="mood in moods" on-hold="moodHoldActions(mood)" class="item-thumbnail-left">
         {{ mood.mood }} | {{ mood.time }}
         <ion-option-button class="button-assertive" ng-click="editMood(mood)">
           Edit
