@@ -1,9 +1,23 @@
 app.controller('splashController', function($scope, datastore,$rootScope,$window) {
 	//TODO: Fix this up and make it actually use the users pin
 	//1234 is the dummy pin for now
-	if (datastore.isEncrypted()) {
-			console.log("hello");
 
+
+	// The current code (April 11th) to delete everything from the datastore
+
+	/*
+	   	delete window.localStorage.models;
+	    delete window.localStorage.Behavior
+	    delete window.localStorage.MoodEvent
+	    delete window.localStorage.Mood;
+	    delete window.localStorage.Trigger
+	    delete window.localStorage.Behavior
+	    delete window.localStorage.Belief
+	    delete window.localStorage.CopingStrategy
+	    delete window.localStorage.accessKey
+	 */   
+
+	if (datastore.isEncrypted()) {
 		datastore.initalizeAccess("1234");
 	} else {
 		datastore.setAccessKey("1234");
@@ -130,6 +144,5 @@ app.controller('splashController', function($scope, datastore,$rootScope,$window
 	    	});
 	    	adjustableDate.setTime(adjustableDate.getTime() + 6*60*60*1000)
 	    }	 
-	    console.log(datastore.store())
 	}
 });
