@@ -1,19 +1,15 @@
-<ion-view view-title="Track Moods">
+<ion-view view-title="Track Moods" cache-view="false">
     <ion-header-bar align-title="center" class="bar bar-subheader">
         <button class="button button-clear button-positive" ng-click="options.showDelete = !options.showDelete">Delete</button>
         <h2 class="title">Moods</h2>
-        <button class="button button-clear button-positive">New</button>
+        <button class="button button-clear button-positive" ng-click="go('/tab/newMood')">New</button>
     </ion-header-bar>
-    <ion-content id="list" delegate-handle="content" overflow-scroll="auto">
+    <ion-content id="list">
         <ion-list show-delete="options.showDelete" can-swipe="options.canSwipe">
-            <ion-item ng-if="mood.time != -1" ng-repeat="mood in moods" id="id{{$index}}" ng-class="{ 'item-highlight' : $index == selectedIndex }" on-hold="moodHoldActions(mood, $index)" class="item-thumbnail-left">
-                {{ mood.mood }} | {{ mood.time }}
-                <ion-delete-button class="ion-minus-circled"></ion-delete-button>
-                <ion-option-button class="button-positive">Edit</ion-option-button>
-            </ion-item>
-            <ion-item ng-if="mood.time == -1" ng-repeat="mood in moods" class="item-borderless item-thumbnail-left">
-              <ion-delete-button class="ion-minus-circled"></ion-delete-button>
-              <ion-option-button class="button-positive">Edit</ion-option-button>
+            <ion-item collection-repeat="mood in moods" class="item-thumbnail-left">
+                {{ mood.mood }} | {{ mood.date | date }}
+                <ion-delete-button class="ion-minus-circled" ng-click="deleteMood(mood.id)"></ion-delete-button>
+                <ion-option-button class="button-positive" ng-click="editMood(mood)">Edit</ion-option-button>
             </ion-item>
         </ion-list>
     </ion-content>

@@ -31,8 +31,8 @@ var app = angular.module('app', ['ionic', 'ngCordova'])
     }
   })
 
-  .state('tab.moods.newMood', {
-    url: '/moods/new',
+  .state('tab.newMood', {
+    url: '/newMood',
     views: {
       'tab-moods': {
         templateUrl: 'templates/tab-moods-new.html',

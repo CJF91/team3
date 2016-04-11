@@ -1,55 +1,24 @@
-app.controller('moodsController', function($scope, $ionicActionSheet, $ionicPopup, $ionicScrollDelegate, $ionicPosition, datastore) {
-    $scope.moods = [{
-        mood: 'Happy',
-        time: 1
-    }, {
-        mood: 'Sad',
-        time: 2
-    }, {
-        mood: 'Angry',
-        time: 3
-    }, {
-        mood: 'Angry',
-        time: 4
-    }, {
-        mood: 'Angry',
-        time: 5
-    }, {
-        mood: 'Angry',
-        time: 6
-    }, {
-        mood: 'Angry',
-        time: 7
-    }, {
-        mood: 'Angry',
-        time: 8
-    }, {
-        mood: 'Angry',
-        time: 9
-    }, {
-        mood: 'Angry',
-        time: 10
-    }, {
-        mood: 'Angry',
-        time: 11
-    }, {
-        mood: 'Angry',
-        time: 12
-    }];
+app.controller('moodsController', function($scope, $location, $ionicActionSheet, $ionicPopup, $ionicScrollDelegate, $ionicPosition, datastore) {
+    $scope.go = function(path) {
+      $location.path(path);
+    }
+
+    $scope.moods = datastore.getAll("MoodEvent");
+
     $scope.options = {
         showDelete: false,
         canSwipe: true
     };
-    $scope.addMood = function() {
-        $scope.moods.push({
-            mood: 'Test',
-            time: 4
-        });
-        $scope.oldLength += 1;
-    };
+
     $scope.editMood = function(mood) {
-        mood.time += 1;
+        mood.mood += 1;
     };
+
+    $scope.deleteMood = function(index) {
+      datastore.removeDocument("MoodEvent", index);
+      $scope.moods = datastore.getAll("MoodEvent");
+    }
+
     // TODO: Fix when user holds and item and scrolls when the ActionSheet shows up moves the item to unexpected place
     $scope.selectedIndex = -1;
     $scope.keepSelected = false;
