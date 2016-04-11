@@ -2,9 +2,7 @@ app.controller('splashController', function($scope, datastore,$rootScope,$window
 	//TODO: Fix this up and make it actually use the users pin
 	//1234 is the dummy pin for now
 
-
 	// The current code (April 11th) to delete everything from the datastore
-
 	/*
 	   	delete window.localStorage.models;
 	    delete window.localStorage.Behavior
@@ -15,6 +13,7 @@ app.controller('splashController', function($scope, datastore,$rootScope,$window
 	    delete window.localStorage.Belief
 	    delete window.localStorage.CopingStrategy
 	    delete window.localStorage.accessKey
+	    delete window.localStorage.Preferences
 	 */   
 
 	if (datastore.isEncrypted()) {
@@ -34,24 +33,24 @@ app.controller('splashController', function($scope, datastore,$rootScope,$window
 	    });
 
 	    // The List of Moods (including Custom)
-	    datastore.addContainer('Mood', {
+	    datastore.addContainer('Moods', {
 	      'name' : datastore.types.String,
 	      'type' : datastore.types.Number, // Get From Mood Type List
 	    });
 
-	    datastore.addContainer('Trigger', {
+	    datastore.addContainer('Triggers', {
 	      'name' : datastore.types.String,
 	    });
 
-	    datastore.addContainer('Behavior', {
+	    datastore.addContainer('Behaviors', {
 	      'name' : datastore.types.String,
 	    });
 
-	    datastore.addContainer('Belief', {
+	    datastore.addContainer('Beliefs', {
 	      'name' : datastore.types.String,
 	    });
 
-	    datastore.addContainer('CopingStrategy', {
+	    datastore.addContainer('CopingStrategies', {
 	      'name' : datastore.types.String,
 	    });
 
@@ -59,79 +58,83 @@ app.controller('splashController', function($scope, datastore,$rootScope,$window
 
 	    // Test Data
 
-	    var happy = datastore.save('Mood', {
+	    var happy = datastore.save('Moods', {
 	    	'name' : 'Happy',
 	    	'type' : 0
 	    });
-	    var excited = datastore.save('Mood', {
+	    var excited = datastore.save('Moods', {
 	    	'name' : 'Excited',
 	    	'type' : 1
 	    });
-	    var tender = datastore.save('Mood', {
+	    var tender = datastore.save('Moods', {
 	    	'name' : 'Tender',
 	    	'type' : 2
 	    });
-	    var scared = datastore.save('Mood', {
+	    var scared = datastore.save('Moods', {
 	    	'name' : 'Scared',
 	    	'type' : 3
 	    });
-	    var angry = datastore.save('Mood', {
+	    var angry = datastore.save('Moods', {
 	    	'name' : 'Angry',
 	    	'type' : 4
 	    });
-	    var sad = datastore.save('Mood', {
+	    var sad = datastore.save('Moods', {
 	    	'name' : 'Sad',
 	    	'type' : 5
 	    });
-	    var excentric = datastore.save('Mood', {
+	    var excentric = datastore.save('Moods', {
 	    	'name' : 'excentric',
 	    	'type' : 2
 	    });
-	    var vampire = datastore.save('Mood', {
+	    var vampire = datastore.save('Moods', {
 	    	'name' : 'vampire',
 	    	'type' : 2
 	    });	
 
 	    var testMoodArray = [happy,excited,tender,scared,angry,sad,excentric,vampire];
 
-	    var test = datastore.save('Trigger',{
+	    var test = datastore.save('Triggers',{
 	    	'name' : 'I have a test'
 	    });
-	    var pain = datastore.save('Trigger',{
+	    var pain = datastore.save('Triggers',{
 	    	'name' : 'I was hurt today'
 	    });
-	    var fired = datastore.save('Trigger',{
+	    var fired = datastore.save('Triggers',{
 	    	'name' : 'Fired from Job'
 	    });
 
 	    var testTriggerArray = [test,pain,fired];
 
-	    var bandAid = datastore.save('Behavior', {
+	    var bandAid = datastore.save('Behaviors', {
 	    	'name' : 'I got over it and put a bandaid on it'
 	    });
-	    var wimpyBandAid = datastore.save('Behavior', {
+	    var wimpyBandAid = datastore.save('Behaviors', {
 	    	'name' : 'I cried in a corner over my minor injury'
-	    })
-	    var emotionalDamage = datastore.save('Behavior',{
+	    });
+	    var emotionalDamage = datastore.save('Behaviors',{
 	    	'name' : 'I was emotionally damaged and won\'t be able to live with this problem'
-	    })
+	    });
 
 	    var testBehaviorArray = [bandAid,wimpyBandAid,emotionalDamage];
 
-	    var drunk = datastore.save('Behavior',{
-	    	'name' : 'I got drunk :)'
-	    })
-	    var hurt = datastore.save('Belief',{
+	    var drunk = datastore.save('Beliefs',{
+	    	'name' : 'I will be drunk :)'
+	    });
+	    var hurt = datastore.save('Beliefs',{
 	    	'name' : 'That Hurt'
-	    })
-	    var fail = datastore.save('Belief',{
+	    });
+	    var fail = datastore.save('Beliefs',{
 	    	'name' : 'I will fail my test'
 	    });
-	    var money = datastore.save('Belief',{
+	    var money = datastore.save('Beliefs',{
 	    	'name' : 'Damn I will be broke'
 	    });
+	    var america = datastore.save('Beliefs',{
+	    	'name' : "I'll make America great again"
+	    });
 
-	    var testBeliefArray = [drunk,hurt,fail,money];
+	    var testBeliefArray = [drunk,hurt,fail,money,america];
+
 	    var adjustableDate = new Date(2000,0,0)
 	    for(var i = 0; i < 100;i++){
 	    	datastore.save('MoodEvent',{
