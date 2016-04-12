@@ -1,5 +1,5 @@
 app.controller('helpController', function($scope, $state) {
-	$scope.showStrategy = function() {
-		$state.go('tab.help.strategy')
+	$scope.showStrategy = function(mood) {
+		$state.go('tab.help-strategy', {mood: mood});
 	};	
 });
