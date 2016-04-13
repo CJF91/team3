@@ -1,18 +1,54 @@
 <ion-view view-title="Find Patterns">
   <ion-content class="padding">
-    <div class = "HeaderPattern">Pattern:<button onclick="myFunction()" class="dropbtn">Dropdown</button>
-		<div id="myDropdown" class="dropdown-content">
-			<a href="#">Link 1</a>
-			<a href="#">Link 2</a>
-			<a href="#">Link 3</a>
-		</div>
-	</div>
-	<div class = "HeaderPattern">Graph Style:</div>
-	<div class = "HeaderPattern">Key Word:</div>
 
-	<canvas id="line" class="chart chart-line" chart-data="data"
-  	 chart-labels="labels" chart-legend="true" chart-series="series"
-     chart-click="onClick" >
-	</canvas>
+	<span class="dropdown">
+	  <button ng-click="drop('1')" class="dropbtn">Graph Style&nbsp;&nbsp;<span ng-hide="open1" class="icon ion-chevron-down"></span><span ng-hide="!open1" class="icon ion-chevron-up"></span></button>
+	  <div id="myDropdown1" class="dropdown-content">
+	    <a class="dropC" ng-click="changeGraph('line')">Line Graph</a>
+	    <a class="dropC" ng-click="changeGraph('rad')">Radius Graph</a>
+	  </div>
+	</span>
+
+	<span class="dropdown">
+	  <button ng-click="drop('2')" class="dropbtn">Time Period&nbsp;&nbsp;<span ng-hide="open2" class="icon ion-chevron-down"></span><span ng-hide="!open2" class="icon ion-chevron-up"></span></button>
+	  <div id="myDropdown2" class="dropdown-content">
+	    <a class="dropC" ng-click="changeGraph('20')">Last 3 Days</a>
+	    <a class="dropC" ng-click="changeGraph('21')">Last 5 Days</a>
+	    <a class="dropC" ng-click="changeGraph('22')">Last Week</a>
+	  </div>
+	</span>
+
+	<span class="dropdown">
+	  <button ng-click="drop('3')" class="dropbtn">Filter By Mood(s)&nbsp;&nbsp;<span ng-hide="open3" class="icon ion-chevron-down"></span><span ng-hide="!open3" class="icon ion-chevron-up"></span></button>
+	  <div id="myDropdown3" class="dropdown-content">
+	    <span class="dropC" ng-repeat="mood in moods">
+	    	<label><input type="checkbox" ng-click="addMood(mood)">&nbsp;&nbsp;&nbsp;&nbsp;{{mood}}</label>
+	    </span>	
+	  </div>
+	</span>
+
+
+
+	<div ng-show = "lineGraph" class="graphDiv">
+		<br>
+		<h class="graphTitle">Moods Over Time</h>
+		<br>
+		<br>
+		<canvas id="line" class="chart chart-line" chart-data="data"
+	  	 chart-labels="labels" chart-legend="true" chart-series="series"
+	     chart-click="onClick" >
+		</canvas>
+	</div>
+
+	<div ng-show = "radiusGraph" class="graphDiv">
+		<br>
+		<h class="graphTitle">Frequency of Moods</h>
+		<br>
+		<br>
+		<canvas id="radar" class="chart chart-radar"
+	  	chart-data="data2" chart-labels="series" chart-series="labels" chart-legend="true">
+		</canvas> 
+	</div>
+
   </ion-content>
 </ion-view>
