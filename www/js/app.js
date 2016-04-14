@@ -51,6 +51,27 @@ var app = angular.module('app', ['ionic', 'ngCordova'])
     }
   })
 
+  .state('tab.help-strategy', {
+    url: '/help/strategy',
+    views: {
+      'tab-help': {
+        templateUrl: 'templates/tab-help-strategy.html',
+        controller: 'strategyController'
+      }
+    },
+    params: {mood: null}
+  })
+
+  .state('tab.help-helpfulstrategy', {
+    url: '/help/helpfulstrategy',
+    views: {
+      'tab-help': {
+        templateUrl: 'templates/tab-help-helpfulstrategy.html',
+        controller: 'helpfulstrategyController'
+      }
+    }
+  })
+
   .state('tab.progress', {
     url: '/progress',
     views: {

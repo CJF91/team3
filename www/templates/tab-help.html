@@ -1,4 +1,36 @@
 <ion-view view-title="Get Help">
-  <ion-content class="padding">
+  <ion-content class="list-padding">
+  	<ion-list can-swipe="listCanSwipe">
+  	  <ion-item on-tap="showStrategy('Happy')">
+  	  	<div class="list-primary-label">Happy</div>
+  	  	<div class="list-secondary-label">Helped 15 times</div>
+  	  </ion-item>
+
+  	  <ion-item on-tap="showStrategy('Excited')">
+  	  	<div class="list-primary-label">Excited</div>
+  	  	<div class="list-secondary-label">Helped 4 times</div>
+  	  </ion-item>
+
+  	  <ion-item on-tap="showStrategy('Tender')">
+  	  	<div class="list-primary-label">Tender</div>
+  	  	<div class="list-secondary-label">Helped 3 times</div>
+  	  </ion-item>
+
+  	  <ion-item on-tap="showStrategy('Scared')">
+  	  	<div class="list-primary-label">Scared</div>
+  	  	<div class="list-secondary-label">Helped 8 times</div>
+  	  </ion-item>
+
+  	  <ion-item on-tap="showStrategy('Sad')">
+  	  	<div class="list-primary-label">Sad</div>
+  	  	<div class="list-secondary-label">Helped 10 times</div>
+  	  </ion-item>
+
+      <ion-item on-tap="showStrategy('Angry')">
+        <div class="list-primary-label">Angry</div>
+        <div class="list-secondary-label">Helped 2 times</div>
+      </ion-item>
+  	</ion-list>
+    <button type="button" class="button button-full button-positive" name="button" ng-click="showhelpfulStrategy()">Previous Helpful Strategy</button>
   </ion-content>
 </ion-view>

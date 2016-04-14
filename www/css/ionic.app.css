@@ -9774,3 +9774,13 @@ $dark:                            #444 !default;
   .fab:active {
     -webkit-filter: brightness(0.75);
     filter: brightness(0.75); }
+
+.list-padding {
+  margin-top: -2px; }
+
+.list-primary-label {
+  font-weight: 700; }
+
+.list-secondary-label {
+  font-size: 12px;
+  color: #999; }
