@@ -9784,8 +9784,6 @@ $dark:                            #444 !default;
 .list-secondary-label {
   font-size: 12px;
   color: #999; }
-<<<<<<< HEAD
-=======
 
 .gradient-container {
   background: linear-gradient(to top right, #64CAFD, #67E08B 100%);
@@ -9852,4 +9850,3 @@ $dark:                            #444 !default;
     border-color: #d1f2f1; }
   .effectivness .circle10 {
     border-color: #ddf5f4; }
->>>>>>> get-help
