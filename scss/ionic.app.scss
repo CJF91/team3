@@ -7,7 +7,7 @@ in ionic's _variables.scss file.
 
 For example, you might change some of the default colors:
 
-$light:                           #fff !default;
+$light:                           #ffc900 !default;
 $stable:                          #f8f8f8 !default;
 $positive:                        #387ef5 !default;
 $calm:                            #11c1f3 !default;
@@ -19,10 +19,10 @@ $dark:                            #444 !default;
 */
 
 
-
 $item-round: 5px;
 $g1: #64CAFD;
 $g2: #67E08B;
+$g3: #66d3cf;
 
 .splash {
 	color: #fff;
@@ -83,5 +83,124 @@ $g2: #67E08B;
 	&:active {
 		-webkit-filter: brightness(0.75);
 		filter: brightness(0.75);
+	}
+}
+
+.list-padding {
+	margin-top: -2px;
+}
+
+.list-primary-label {
+	font-weight: 700;
+}
+
+.list-secondary-label {
+	font-size: 12px;
+	color: #999;
+}
+
+.gradient-container {
+	background: linear-gradient(to top right, $g1, $g2 100%);
+	width: 100%;
+	height: 150px;
+
+	border-bottom: 1px solid #979797;
+
+	.container-mssg {
+		color: #fff;
+		font-size: 30px;
+		font-weight: 100;
+
+		width: 100%;
+		text-align: center;
+
+		position: relative;
+		top: 45%;
+		transform: translateY(-45%);
+	}
+}
+
+.text-block {
+	color: #ADADAD;
+
+	padding: 20px;
+	font-weight: 200;
+	text-align:center;
+}
+
+.effectivness {
+	width: 100%;
+	height: 175px;
+
+	position: relative;
+	bottom: -100px;;
+
+	overflow: hidden;
+	transition: all 0.3s;
+
+	.circle {
+		transition: all .3s cubic-bezier(0, .6, .5, .8);
+		border-radius: 300px;
+		height: 275px;
+		width: 275px;
+
+		margin-top: 10%;
+		margin-left: auto;
+		margin-right: auto;
+
+		border: 10px solid $g3;
+
+		.rating {
+			text-align: center;
+			margin-top: 60px;
+
+			font-weight: 700;
+			font-size: 20px;
+			color: lighten($g3, 15);
+		}
+	}
+
+	.circle-scale {
+		transform: scale(1.15,1.15);
+	}
+
+	.circle1 {
+		border-color: lighten($g3, 3);
+	}
+
+	.circle2 {
+		border-color: lighten($g3, 6);
+	}
+
+	.circle3 {
+		border-color: lighten($g3, 9);
+	}
+
+	.circle4 {
+		border-color: lighten($g3, 12);
+	}
+
+	.circle5 {
+		border-color: lighten($g3, 15);
+	}
+
+	.circle6 {
+		border-color: lighten($g3, 18);
+	}
+
+	.circle7 {
+		border-color: lighten($g3, 21);
+	}
+
+	.circle8 {
+		border-color: lighten($g3, 24);
+	}
+
+	.circle9 {
+		border-color: lighten($g3, 27);
+	}
+
+	.circle10 {
+		border-color: lighten($g3, 30);
 	}
 }

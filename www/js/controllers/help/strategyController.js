@@ -1,38 +1,20 @@
-app.controller('strategyController', function($scope, $stateParams) {
-	$scope.mood = $stateParams.mood;
+app.controller('strategyController', function($scope, $stateParams, $timeout) {
+	var feelings = ['Worse', 'Bit Worse', 'No Better', 'Meh', 'Netural', 'Bit Better', 'Better', 'Lot Better', 'Great', 'Awesome'];
 
-	if($scope.mood ==='Happy')
-	$scope.strategys = [
-		{
-			str:'1. Be positive.',
-			rate: '5/5'
-		},
-		{
-			str:'2. Do let the sun go down on anger.',
-			rate: '4.5/5'
-		},
-		{
-			str:'3. Buy some happiness.',
-			rate: '4/5'
-		},
-		{
-			str:'4. Don’t insist on the best.',
-			rate: '4.3/5'
-		}
-	];
-	else if($scope.mood ==='Excited')
-	$scope.strategys = [
-		{str:'Excited strategy 1',rate: '4.3/5'},
-		{str:'Excited strategy 2',rate: '4.3/5'},
-		{str:'Excited strategy 3',rate: '4.3/5'},
-		{str:'Excited strategy 4',rate: '4.3/5'}
-	];
-	else{
-		$scope.strategys = [
-			{str:'mood strategy 1',rate: '4.3/5'},
-			{str:'mood strategy 2',rate: '4.3/5'},
-			{str:'mood strategy 3',rate: '4.3/5'},
-			{str:'mood strategy 4',rate: '4.3/5'}
-		];
-	}
+	$scope.mood = $stateParams.mood;
+	$scope.effectLevel = 'circle1';
+	$scope.effectFeeling = feelings[0];
+
+	$scope.changeEffect = function() {
+		var level = parseInt($scope.effectLevel.replace("circle", "")) + 1;
+		if (level > 10) level = 1;
+
+		$scope.effectFeeling = feelings[level-1];
+
+		$scope.effectLevel = "circle-scale circle" + level;
+
+		$timeout(function() {
+			$scope.effectLevel = "circle" + level;
+		}, 275);
+	};
 });
