@@ -1,10 +1,15 @@
 <ion-view view-title="Track Progress">
   <ion-content class="padding">
     <h2>Progress View</h2>
-
-	<canvas id="line" class="chart chart-line" chart-data="data"
-  		chart-labels="labels" chart-legend="true" chart-series="series"
-  		chart-click="onClick">
-	</canvas> 
+    <div class="getProgressContainer">
+    	<div class="getProgressGraphContatiner"> 
+			<canvas id="line" class="chart chart-line" chart-data="data"
+		  		chart-labels="labels" chart-legend="true" chart-series="series"
+		  		chart-click="onClick">
+			</canvas>
+		</div>
+		<div class="getProgressButtonContatiner" style="background-color: blue;">
+		</div>
+	</div>
   </ion-content>
 </ion-view>

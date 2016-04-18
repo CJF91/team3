@@ -1,0 +1,11 @@
+.getProgressContainer {
+  display: flex;
+  flex-direction: column; }
+
+.getProgressGraphContatiner {
+  order: 1;
+  flex-grow: 3; }
+
+.getProgressButtonContatiner {
+  order: 2;
+  flex-grow: 1; }
