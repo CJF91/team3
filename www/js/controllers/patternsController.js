@@ -185,7 +185,6 @@ app.controller('patternsController', function($scope) {
 	  $scope.open3 = false;
 
 	  $scope.lineGraph = true; //line graph is defaultly shown 
-	  $scope.radiusGraph = false;
 	  $scope.barGraph = false;
 	  $scope.pieChart = false
 
@@ -193,21 +192,12 @@ app.controller('patternsController', function($scope) {
 	  	switch(factor){
 	  		case 'line': //line graph selected
 	  			$scope.lineGraph = true;
-	  			$scope.radiusGraph = false;
-	  			$scope.barGraph = false;
-	  			$scope.pieChart = false;
-	  			$scope.drop('1');
-	  			break;
-	  		case 'rad': //radius graph selected
-	  			$scope.radiusGraph = true;
-	  			$scope.lineGraph = false;
 	  			$scope.barGraph = false;
 	  			$scope.pieChart = false;
 	  			$scope.drop('1');
 	  			break;
 	  		case 'bar': //bar graph selected
 	  			$scope.barGraph = true;
-	  			$scope.radiusGraph = false;
 	  			$scope.lineGraph = false;
 	  			$scope.pieChart = false;
 	  			$scope.drop('1');
@@ -216,7 +206,6 @@ app.controller('patternsController', function($scope) {
 	  		case 'pie': //pie chart selected
 	  			$scope.pieChart = true;
 	  			$scope.barGraph = false;
-	  			$scope.radiusGraph = false;
 	  			$scope.lineGraph = false;
 	  			$scope.drop('1');
 	  			break;
