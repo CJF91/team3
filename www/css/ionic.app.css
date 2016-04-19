@@ -9775,15 +9775,14 @@ $dark:                            #444 !default;
     -webkit-filter: brightness(0.75);
     filter: brightness(0.75); }
 
-/* Dropdown Button */
-.dropbtn {
+select, .dropbtn {
   background-color: rgba(212, 225, 227, 0.76);
   color: black;
-  padding: 7px;
-  font-size: 13.5px;
+  padding: 20px;
+  font-size: 15px;
   border: none;
   cursor: pointer;
-  margin-left: -2.5px;
+  margin-left: 12px;
   padding-top: 15px;
   padding-bottom: 15px; }
 
@@ -9817,6 +9816,9 @@ $dark:                            #444 !default;
 .show {
   display: block; }
 
+.dropDownMoods {
+  margin-left: 20px; }
+
 .graphTitle {
   text-align: center;
   font-size: 30px; }
@@ -9826,3 +9828,18 @@ $dark:                            #444 !default;
 
 label {
   width: 100%; }
+
+#numInput {
+  text-align: center; }
+
+#numI {
+  display: inline;
+  background-color: rgba(212, 225, 227, 0.76);
+  text-align: center;
+  width: 50px; }
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 12.5px; }

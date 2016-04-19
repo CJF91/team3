@@ -3,51 +3,87 @@
 
 	<span class="dropdown">
 	  <button ng-click="drop('1')" class="dropbtn">Graph Style&nbsp;&nbsp;<span ng-hide="open1" class="icon ion-chevron-down"></span><span ng-hide="!open1" class="icon ion-chevron-up"></span></button>
-	  <div id="myDropdown1" class="dropdown-content">
+	  <div id="dropdown1" class="dropdown-content">
 	    <a class="dropC" ng-click="changeGraph('line')">Line Graph</a>
 	    <a class="dropC" ng-click="changeGraph('rad')">Radius Graph</a>
+	    <a class="dropC" ng-click="changeGraph('bar')">Avg Mood Intensity</a>
+	    <a class="dropC" ng-click="changeGraph('pie')">Frequency of Moods</a>
 	  </div>
 	</span>
 
-	<span class="dropdown">
+	<!-- <span class="dropdown">
 	  <button ng-click="drop('2')" class="dropbtn">Time Period&nbsp;&nbsp;<span ng-hide="open2" class="icon ion-chevron-down"></span><span ng-hide="!open2" class="icon ion-chevron-up"></span></button>
-	  <div id="myDropdown2" class="dropdown-content">
+	  <div id="dropdown2" class="dropdown-content">
 	    <a class="dropC" ng-click="changeGraph('20')">Last 3 Days</a>
 	    <a class="dropC" ng-click="changeGraph('21')">Last 5 Days</a>
 	    <a class="dropC" ng-click="changeGraph('22')">Last Week</a>
 	  </div>
-	</span>
+	</span> -->
 
 	<span class="dropdown">
 	  <button ng-click="drop('3')" class="dropbtn">Filter By Mood(s)&nbsp;&nbsp;<span ng-hide="open3" class="icon ion-chevron-down"></span><span ng-hide="!open3" class="icon ion-chevron-up"></span></button>
-	  <div id="myDropdown3" class="dropdown-content">
+	  <div id="dropdown3" class="dropdown-content dropDownMoods">
 	    <span class="dropC" ng-repeat="mood in moods">
 	    	<label><input type="checkbox" ng-click="addMood(mood)">&nbsp;&nbsp;&nbsp;&nbsp;{{mood}}</label>
 	    </span>	
 	  </div>
 	</span>
 
+	<br><br>
 
+	<div id="numInput"> Show moods from the past <input id="numI" type="text" pattern="[0-9]*" ng-model="numDays.num" ng-change="changeDays()" placeholder="{{numDays.num}}"></input> days </div>
 
-	<div ng-show = "lineGraph" class="graphDiv">
-		<br>
-		<h class="graphTitle">Moods Over Time</h>
-		<br>
-		<br>
-		<canvas id="line" class="chart chart-line" chart-data="data"
-	  	 chart-labels="labels" chart-legend="true" chart-series="series"
-	     chart-click="onClick" >
-		</canvas>
-	</div>
+	<div id="patternBody" ng-click="drop()">
 
-	<div ng-show = "radiusGraph" class="graphDiv">
-		<br>
-		<h class="graphTitle">Frequency of Moods</h>
-		<br>
-		<br>
-		<canvas id="radar" class="chart chart-radar"
-	  	chart-data="data2" chart-labels="series" chart-series="labels" chart-legend="true">
-		</canvas> 
+		<div ng-show = "lineGraph" class="graphDiv">
+			<br>
+			<h class="graphTitle">Moods From the Past {{numDays.num}} Days</h>
+			<br>
+			<br>
+			<canvas id="line" class="chart chart-line" chart-data="data"
+		  	 chart-labels="labels" chart-legend="true" chart-series="series"
+		     chart-click="onClick" >
+			</canvas>
+		</div>
+
+		<!-- <div ng-show = "radiusGraph" class="graphDiv">
+			<br>
+			<h class="graphTitle">Frequency of Moods</h>
+			<br>
+			<br>
+			<canvas id="radar" class="chart chart-radar"
+		  	chart-data="data2" chart-labels="series" chart-series="labels" chart-legend="true">
+			</canvas> 
+		</div> -->
+
+		<div ng-show = "pieChart" class="graphDiv">
+			<br>
+			<h class="graphTitle">Frequency of Moods for the past {{numDays.num}} days</h>
+			<br>
+			<br>
+			<canvas id="pie" class="chart chart-pie"
+  				chart-data="pieData" chart-labels="series">
+			</canvas> 
+			<br><br>
+			<!-- <label><input type="checkbox" checked="freqEntry" ng-click="changeFreq('E');">&nbsp;&nbsp;Based on number of entries</label>
+			<label><input type="checkbox" checked="freqInt" ng-click="changeFreq('I');">&nbsp;&nbsp;Based on intensities of entries</label> -->
+
+			<select ng-model="select.which" ng-change="makePieData(select.which)">
+			  <option value="e">Based on number of entries<span class="icon ion-chevron-down"></span></option>
+			  <option value="i">Based on intensities of entries<span class="icon ion-chevron-down"></span></option>
+			</select>
+		</div>
+
+		<div ng-show = "barGraph" class="graphDiv">
+			<br>
+			<h class="graphTitle">Avgerage Intensity for the past {{numDays.num}} days</h>
+			<br>
+			<br>
+			<canvas id="bar" class="chart chart-bar"
+  				chart-data="barData" chart-labels="series" chart-series="barSeries" chart-legend="true">
+			</canvas>
+		</div>
+
 	</div>
 
   </ion-content>
