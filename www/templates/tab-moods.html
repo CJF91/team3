@@ -6,7 +6,7 @@
     </ion-header-bar>
     <ion-content id="list">
         <ion-list show-delete="options.showDelete" can-swipe="options.canSwipe">
-            <ion-item collection-repeat="mood in moods" id="id{{$index}}" on-hold="moodHoldActions(mood, $index)" ng-class="{ 'item-highlight' : mood.filler }" class="item-thumbnail-left">
+            <ion-item collection-repeat="mood in moods" id="id{{$index}}" on-hold="moodHoldActions(mood, $index)" ng-class="{ 'item-highlight' : mood.filler }" class="item-thumbnail-left mood-item">
 				<div class="mood-name">Happy</div>
 				<div class="mood-level">3 | A bit</div>
 				<div class="mood-additional">Trigger</div>

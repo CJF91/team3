@@ -9734,7 +9734,7 @@ $dark:                            #444 !default;
 .splash {
   color: #fff; }
 
-.item {
+.mood-item {
   max-height: 100px; }
 
 .item-highlight {
