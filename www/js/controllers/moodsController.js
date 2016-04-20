@@ -64,6 +64,10 @@ app.controller('moodsController', function($scope, $location, $ionicActionSheet,
                         onTap: function() {
                             // Delete (mood) from datastore
                             $scope.moods.splice(index, 1);
+							$ionicScrollDelegate.resize();
+							while ($scope.moods[$scope.moods.length - 1].filler) {
+								$scope.moods.splice($scope.moods.length - 1, 1);
+							}
                         }
                     }]
                 });
