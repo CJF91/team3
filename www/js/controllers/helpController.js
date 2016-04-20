@@ -27,14 +27,14 @@ app.controller('helpController', function($scope, datastore, $state) {
 		datastore.save('Strategy', {
 			'moods': ['Happy', 'Scared'],
 			'title': 'Deep Breathing',
-			'content': 'Sometimes breathing deeply and focusing on what\'s important can help you calm down. Try to stop what your doing and focus on your breathing. Breath deeply three or more times to calm down.',
+			'content': 'Sometimes breathing deeply and focusing on what\'s important can help you calm down. Try to stop what your doing and focus on your breathing. Breath deeply three or more times and try to relax.',
 			'effect': 0,
 		});
 
 		datastore.save('Strategy', {
 			'moods': ['Excited', 'Happy'],
 			'title': 'Something Interesting',
-			'content': "You might feel like nothing excites you. Like you don't have anything. But I'm sure there is something in this wide world of possibilities that is more interesting than other things. You don't have to be wildly in love – just moderately curious. Start there.",
+			'content': "You might feel like nothing excites you. Like you don't have anything. But I'm sure there is something in this wide world of possibilities that is more interesting than other things. You don't have to be wildly in love – just moderately curious. Start there by doing something interesting.",
 			'effect': 6,
 		});
 

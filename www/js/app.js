@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ionic', 'ngCordova'])
+var app = angular.module('app', ['ionic', 'ngCordova', 'chart.js'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
