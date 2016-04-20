@@ -5,10 +5,7 @@ app.controller('strategyController', function($scope, $stateParams, $timeout) {
 	$scope.effectLevel = 'circle1';
 	$scope.effectFeeling = feelings[0];
 
-	$scope.directions = $stateParams.directions;
 	$scope.strategy = $stateParams.strategy;
-
-	console.log($stateParams);
 
 	$scope.changeEffect = function() {
 		var level = parseInt($scope.effectLevel.replace("circle", "")) + 1;
