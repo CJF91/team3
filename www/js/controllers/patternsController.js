@@ -60,6 +60,9 @@ app.controller('patternsController', function($scope) {
 			  			}
 			  			$scope.total++;
 			  		});
+			  		console.log($scope.entries);
+			  		console.log($scope.total); 
+			  		console.log($scope.entries/$scope.total);
 			  		$scope.pieData.push($scope.entries/$scope.total);	
 			  	});
 			  	break;
@@ -241,7 +244,7 @@ app.controller('patternsController', function($scope) {
 	  		$scope.makeBarData();
 	  	}
 	  	else if($scope.pieChart){
-	  		$scope.makePieData();
+	  		$scope.makePieData($scope.select.which);
 	  	}
 	  }
 
@@ -258,7 +261,7 @@ app.controller('patternsController', function($scope) {
 	  		$scope.makeBarData();
 	  	}
 	  	else if($scope.pieChart){
-	  		$scope.makePieData();
+	  		$scope.makePieData($scope.select.which);
 	  	}
 	  }
 
