@@ -1,18 +1,4 @@
 app.controller('newMoodsController', function($scope, datastore, $location) {
-<<<<<<< HEAD
-	// TODO: fix this stupid add mood date thing
-	$scope.addMood = function(mood) {
-		var temp = {
-			mood: 1,
-			level: 1,
-			trigger: 1,
-			behavior: 1,
-			belief: 1,
-			filler: false,
-			date: new Date()
-		};
-		datastore.upsert("MoodEvent", temp, "date");
-=======
 
 	var newLog = {
 		mood: 1,
@@ -80,7 +66,6 @@ app.controller('newMoodsController', function($scope, datastore, $location) {
 	$scope.addLog = function() {
 		newLog.level = $scope.doc.level;
 		datastore.upsert("MoodEvent", newLog, "date");
->>>>>>> 3ac3dd2410bc3edf5cce67dbea0b2db83230394a
 		$location.path("/tab/moods");
 	};
 });
