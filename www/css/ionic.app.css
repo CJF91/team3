@@ -9804,7 +9804,8 @@ $dark:                            #444 !default;
   color: #ADADAD;
   padding: 20px;
   font-weight: 200;
-  text-align: center; }
+  text-align: center;
+  height: 160px; }
 
 .effectivness {
   width: 100%;

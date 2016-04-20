@@ -59,7 +59,7 @@ var app = angular.module('app', ['ionic', 'ngCordova'])
         controller: 'strategyController'
       }
     },
-    params: {mood: null}
+    params: {mood: null, strategy: null, directions: null}
   })
 
   .state('tab.progress', {
