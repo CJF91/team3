@@ -7,6 +7,7 @@ app.controller('newMoodsController', function($scope, datastore, $location) {
 			trigger: 1,
 			behavior: 1,
 			belief: 1,
+			filler: false,
 			date: new Date()
 		};
 		datastore.upsert("MoodEvent", temp, "date");

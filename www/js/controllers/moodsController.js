@@ -1,5 +1,5 @@
 app.controller('moodsController', function($scope, $location, $ionicActionSheet, $ionicPopup, $ionicScrollDelegate, $ionicPosition, datastore) {
-    $scope.go = function(path) {
+	$scope.go = function(path) {
       $location.path(path);
     }
 
@@ -18,8 +18,7 @@ app.controller('moodsController', function($scope, $location, $ionicActionSheet,
       datastore.removeDocument("MoodEvent", index);
       $scope.moods = datastore.getAll("MoodEvent");
     }
-
-    // TODO: Fix when user holds and item and scrolls when the ActionSheet shows up moves the item to unexpected place
+    // TODO: Fix when user holds an item and scrolls when the ActionSheet shows up moves the item to unexpected place
     $scope.selectedIndex = -1;
     $scope.keepSelected = false;
     $scope.moodHoldActions = function(mood, index) {
@@ -31,18 +30,18 @@ app.controller('moodsController', function($scope, $location, $ionicActionSheet,
         while ($scope.moods.length < index + listHeight / itemHeight) {
             $scope.moods.push({
                 mood: '',
-                time: -1
+                filler: true
             });
             $scope.filledCount += 1;
         }
-        $ionicScrollDelegate.$getByHandle('content').scrollTo(0, scrollPosition.top, true);
+        $ionicScrollDelegate.scrollTo(0, scrollPosition.top, true);
         var $hideActions = $ionicActionSheet.show({
             buttons: [{
                 text: 'Edit'
             }],
             buttonClicked: function(index) {
                 // Edit (mood)
-                mood.time += 1;
+                mood.level += 1;
                 $scope.selectedIndex = -1;
                 $hideActions();
             },
@@ -73,7 +72,7 @@ app.controller('moodsController', function($scope, $location, $ionicActionSheet,
             cancel: function() {
                 if ($scope.keepSelected == false) {
                     $scope.selectedIndex = -1;
-                    while ($scope.moods[$scope.moods.length - 1].time == -1) {
+                    while ($scope.moods[$scope.moods.length - 1].filler) {
                         $scope.moods.splice($scope.moods.length - 1, 1);
                     }
                     $ionicScrollDelegate.resize();

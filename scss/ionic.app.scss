@@ -28,8 +28,38 @@ $g2: #67E08B;
 	color: #fff;
 }
 
+.item {
+	max-height: 100px;
+}
+
 .item-highlight {
+	display: none;
 	background-color: darkgray;
+}
+
+.mood-container {
+	margin: 0px;
+	padding: 0px;
+}
+
+.mood-name {
+	font-weight: bolder;
+	text-align: left;
+	display: inline-block;
+	width: 50%;
+}
+
+.mood-level {
+	text-align: right;
+	display: inline-block;
+	width: 50%;
+}
+
+.mood-additional {
+	font-style: italic;
+	font-size: 0.7em;
+	height: 1.5em;
+	margin-left: 1em;
 }
 
 .item-rounded-top {
@@ -54,6 +84,12 @@ $g2: #67E08B;
 .switch-text {
 	float: left;
 	margin-top: 6px;
+}
+
+.platform-android {
+	.action-sheet-option, .action-sheet-destructive {
+		text-align: center;
+	}
 }
 
 .fab {

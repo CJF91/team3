@@ -6,9 +6,14 @@
     </ion-header-bar>
     <ion-content id="list">
         <ion-list show-delete="options.showDelete" can-swipe="options.canSwipe">
-            <ion-item collection-repeat="mood in moods" class="item-thumbnail-left">
-                {{ mood.mood }} | {{ mood.date | date }}
-                <ion-delete-button class="ion-minus-circled" ng-click="deleteMood(mood.id)"></ion-delete-button>
+            <ion-item collection-repeat="mood in moods" id="id{{$index}}" on-hold="moodHoldActions(mood, $index)" ng-class="{ 'item-highlight' : mood.filler }" class="item-thumbnail-left">
+				<div class="mood-name">Happy</div>
+				<div class="mood-level">3 | A bit</div>
+				<div class="mood-additional">Trigger</div>
+				<div class="mood-additional">Belief</div>
+				<div class="mood-additional">Behavior</div>
+				<div class="mood-additional">{{mood.date}}</div>  
+				<ion-delete-button class="ion-minus-circled" ng-click="deleteMood(mood.id)"></ion-delete-button>
                 <ion-option-button class="button-positive" ng-click="editMood(mood)">Edit</ion-option-button>
             </ion-item>
         </ion-list>

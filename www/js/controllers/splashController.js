@@ -1,7 +1,7 @@
-app.controller('splashController', function($scope, datastore,$rootScope) {
+app.controller('splashController', function($scope, $ionicHistory, datastore,$rootScope) {
 	//TODO: Fix this up and make it actually use the users pin
 	//1234 is the dummy pin for now
-
+	
 	if (datastore.isEncrypted()) {
 		datastore.initalizeAccess("1234");
 	} else {
@@ -15,6 +15,7 @@ app.controller('splashController', function($scope, datastore,$rootScope) {
 	      'trigger' : datastore.types.Number,
 	      'behavior' : datastore.types.Number,
 	      'belief' : datastore.types.Number,
+		  'filler' : datastore.types.Boolean,
 	      'date' : datastore.types.Date,
 	    });
 
