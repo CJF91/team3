@@ -5,10 +5,10 @@
     		<span class="input-label">Mood</span>
     		<input type="text" ng-model="doc.mood">
 				<ion-list ng-if="doc.mood!=''">
-					<ion-item ng-repeat="previousMood in previousMoods | filter:doc.mood" ng-click="chooseMood(previousMood)">
+					<ion-item ng-repeat="previousMood in previousMoods | filter:doc.mood" on-tap="chooseMood(previousMood)">
 						{{ previousMood.name }}
 					</ion-item>
-					<ion-item ng-click="newMood()">
+					<ion-item on-tap="newMood()">
 						Create New Mood
 					</ion-item>
 				</ion-list>
@@ -23,10 +23,10 @@
     		<span class="input-label" >Trigger</span>
     		<input type="text" ng-model="doc.trigger">
 				<ion-list ng-if="doc.trigger!=''">
-					<ion-item ng-repeat="previousTriger in previousTrigers | filter:doc.trigger" ng-click="chooseTrigger(previousTrigger)">
+					<ion-item ng-repeat="previousTriger in previousTrigers | filter:doc.trigger" on-tap="chooseTrigger(previousTrigger)">
 						{{ previousTrigger.name }}
 					</ion-item>
-					<ion-item ng-click="newTrigger()">
+					<ion-item on-tap="newTrigger()">
 						Create New Trigger
 					</ion-item>
 				</ion-list>
@@ -36,10 +36,10 @@
     		<span class="input-label">Behavior</span>
     		<input type="text" ng-model="doc.behavior">
 				<ion-list ng-if="doc.behavior!=''">
-					<ion-item ng-repeat="previousBehavior in previousBehaviors | filter:doc.behavior" ng-click="chooseBehavior(previousBehavior)">
+					<ion-item ng-repeat="previousBehavior in previousBehaviors | filter:doc.behavior" on-tap="chooseBehavior(previousBehavior)">
 						{{ previousBehavior.name }}
 					</ion-item>
-					<ion-item ng-click="newBehavior()">
+					<ion-item on-tap="newBehavior()">
 						Create New Behavior
 					</ion-item>
 				</ion-list>
@@ -49,10 +49,10 @@
     		<span class="input-label">Belief</span>
     		<input type="text" ng-model="doc.belief">
 				<ion-list ng-if="doc.belief!=''">
-					<ion-item ng-repeat="previousBelief in previousBeliefs | filter:doc.belief" ng-click="chooseBelief(previousBelief)">
+					<ion-item ng-repeat="previousBelief in previousBeliefs | filter:doc.belief" on-tap="chooseBelief(previousBelief)">
 						{{ previousBelief.name }}
 					</ion-item>
-					<ion-item ng-click="newBelief()">
+					<ion-item on-tap="newBelief()">
 						Create New Belief
 					</ion-item>
 				</ion-list>
