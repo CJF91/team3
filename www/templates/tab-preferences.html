@@ -1,10 +1,30 @@
 <ion-view view-title="Preferences">
   <ion-content class="padding">
     <ul class="list">
+<<<<<<< HEAD
         <li class="item item-rounded-top" ng-click="changeText(this)">
           Name <i class="ion-chevron-right right"></i>
         </li>
         <li class="item">
+=======
+
+        <li class="item item-rounded-top">
+          <span class="switch-text">Name</span>
+
+          <label class="toggle right" on-tap="changePref('nameChange')">
+             <input type="checkbox" ng-model="formData.nameChange">
+             <div class="track">
+               <div class="handle"></div>
+             </div>
+          </label>
+        </li>
+
+        <li class="item item-input" ng-show="formData.nameChange">
+          <input type="text" placeholder="name" ng-model="formData.name">
+        </li>
+
+        <li class="item item-rounded-top">
+>>>>>>> master
           <span class="switch-text">Pin</span>
 
           <label class="toggle right" on-tap="changePref('pinEnabled')">
@@ -24,5 +44,6 @@
         </li>
         <li class
     </ul>
+    </canvas>
   </ion-content>
 </ion-view>
