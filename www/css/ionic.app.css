@@ -9799,6 +9799,16 @@ $dark:                            #444 !default;
     position: relative;
     top: 45%;
     transform: translateY(-45%); }
+  .gradient-container .container-mssg-sub {
+    color: #fff;
+    font-size: 12px;
+    font-weight: 300;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    top: 45%;
+    transform: translateY(-45%);
+    margin-top: 10px; }
 
 .text-block {
   color: #ADADAD;
