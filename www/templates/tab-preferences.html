@@ -1,10 +1,9 @@
 <ion-view view-title="Preferences">
   <ion-content class="padding">
     <ul class="list">
-        <li class="item item-rounded-top" on-tap="changePref('nameChange')">
+        <li class="item item-rounded-top" ng-click="changeText(this)">
           Name <i class="ion-chevron-right right"></i>
         </li>
-
         <li class="item">
           <span class="switch-text">Pin</span>
 
@@ -23,6 +22,7 @@
         <li class="item item-rounded-bottom" on-tap="changePref('splash')">
         	Splash Image <i class="ion-chevron-right right"></i>
         </li>
+        <li class
     </ul>
   </ion-content>
 </ion-view>
