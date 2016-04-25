@@ -20,6 +20,11 @@ app.controller('strategyController', function($scope, $stateParams, $timeout, da
 
 	$scope.percentHelps = parseInt((helped / events.length) * 100, 10);
 
+	console.log($scope.percentHelps);
+	if (isNaN($scope.percentHelps)) {
+		$scope.percentHelps = 0;
+	}
+
 	$scope.changeEffect = function() {
 		var level = parseInt($scope.effectLevel.replace("circle", "")) + 1;
 		if (level > 10) level = 1;
