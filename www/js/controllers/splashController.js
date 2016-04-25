@@ -14,10 +14,11 @@ app.controller('splashController', function($scope, datastore,$rootScope,$window
 	    delete window.localStorage.CopingStrategy
 	    delete window.localStorage.accessKey
 	    delete window.localStorage.Preferences
-	 */   
+	 */  
 
 	if (datastore.isEncrypted()) {
 		datastore.initalizeAccess("1234");
+		// console.log(datastore.setAccessKey("1234"));
 	} else {
 		datastore.setAccessKey("1234");
 		 // The General Model for Moods, Beliefs Triggers and Behaviors. Can be changed and is only here for consistentcy.
