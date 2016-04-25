@@ -1,0 +1,20 @@
+<ion-view view-title="{{mood}}">
+	<ion-content>
+		<div class="gradient-container">
+			<div class="container-mssg">{{ strategy.title }}</div>
+			<div class="container-mssg-sub">Helps {{ percentHelps }}% of the time</div>
+		</div>
+
+		<div class="text-block">
+			{{ strategy.content }}
+		</div>
+
+		<div class="effectivness">
+			<div class="circle" ng-class="effectLevel" on-tap="changeEffect()">
+				<div class="rating">
+					{{ effectFeeling }}
+				</div>
+			</div>
+		</div>
+  	</ion-content>
+</ion-view>
