@@ -305,7 +305,7 @@ app.controller('patternsController', function($scope, datastore, $rootScope, $wi
 	  			$scope.drop('1');
 	  			if($scope.firstTime){
 		  			angular.copy($scope.moods, $scope.series);
-		  			angular.copy($scope.days, $scope.labels);
+		  			// angular.copy($scope.days, $scope.labels);
 		  			angular.copy($scope.moodData, $scope.data);
 		  		}
 		  		$scope.makeBarData();
@@ -317,7 +317,7 @@ app.controller('patternsController', function($scope, datastore, $rootScope, $wi
 	  			$scope.drop('1');
 	  			if($scope.firstTime){
 		  			angular.copy($scope.moods, $scope.series);
-		  			angular.copy($scope.days, $scope.labels);
+		  			// angular.copy($scope.days, $scope.labels);
 		  			angular.copy($scope.moodData, $scope.data);
 		  		}
 	  			$scope.makePieData($scope.select.which);
