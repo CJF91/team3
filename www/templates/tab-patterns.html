@@ -27,7 +27,7 @@
 	    	<label><input type="checkbox" ng-click="addMood(mood)">&nbsp;&nbsp;&nbsp;&nbsp;{{mood}}</label>
 	    </span>
 	    <span class="dropC" ng-repeat="mood in moods" ng-hide="!lineGraph">
-	    	<label ng-click="addMood(mood)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{mood}}</label>
+	    	<label ng-click="addLineMood(mood)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{mood}}</label>
 	    </span>		
 	  </div>
 	</span>
@@ -43,8 +43,8 @@
 			<h class="graphTitle">Mood Intensities From the Past {{numDays.num}} Days</h>
 			<br>
 			<br>
-			<canvas id="line" class="chart chart-line" chart-data="data"
-		  	 chart-labels="labels" chart-legend="true" chart-series="series"
+			<canvas id="line" class="chart chart-line" chart-data="lineData"
+		  	 chart-labels="labels" chart-legend="true" chart-series="lineMood"
 		     chart-click="onClick">
 			</canvas>
 		</div>
@@ -84,7 +84,7 @@
 			<br><br>
 
 			<div><b>Pattern Detected</b></div>
-			<div>You have been {{moodDetected}} most often for the past {{numDays.num}} days with <span ng-show="select.which == 'i'">an average intensity of {{moodDetectedLevel}}</span></div>
+			<div>You have been {{moodDetected}} most often for the past {{numDays.num}} days with an average intensity of {{moodDetectedLevel}}</div>
 		</div>
 
 	</div>

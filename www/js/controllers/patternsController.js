@@ -1,16 +1,20 @@
-app.controller('patternsController', function($scope, datastore, $rootScope, $window, $parse) {
+app.controller('patternsController', function($scope, datastore) {
 
+		$scope.lineMood = [];
+		$scope.lineData = [];
 
-		$scope.moods1 = datastore.getAll('Moods');
+		var moods1 = datastore.getAll('Moods');
 		$scope.moods = [];
 		$scope.series = [];
 
-		angular.forEach($scope.moods1, function(value, index){
+		angular.forEach(moods1, function(value, index){
 			$scope.moods.push(value.name);
 			$scope.series.push(value.name);
 		});
 
-		$scope.datastoreMoodData = datastore.getAll('MoodEvent');
+		$scope.lineMood.push($scope.moods[0]);
+
+		var datastoreMoodData = datastore.getAll('MoodEvent');
 		$scope.moodData = [];
 
 		angular.forEach($scope.moods, function(value, index){ //adding arrays to $scope.moodData for each mood
@@ -18,14 +22,8 @@ app.controller('patternsController', function($scope, datastore, $rootScope, $wi
 			$scope.moodData.push($scope.newArr);
 		});
 		
-
-		// angular.forEach($scope.moods1, function(value1, index){
-		// 		var the_string = 'value.name';
-		// 		var model = $parse(the_string);
-		// 		model.assign($scope, []);	
-		// });
 		$scope.days = [];
-		angular.forEach($scope.datastoreMoodData, function(value, index){
+		angular.forEach(datastoreMoodData, function(value, index){
 			// $scope.moodData[value.mood].push(value.level);
 			if(!$scope.days.includes(value.date.slice(5,10))){
 				$scope.days.push(value.date.slice(5, 10));
@@ -36,7 +34,7 @@ app.controller('patternsController', function($scope, datastore, $rootScope, $wi
 			}
 		});
 
-		angular.forEach($scope.datastoreMoodData, function(value, index){
+		angular.forEach(datastoreMoodData, function(value, index){
 			$scope.currArr = $scope.moodData[value.mood];
 			$scope.index = $scope.days.indexOf(value.date.slice(5,10));
 			if($scope.currArr[$scope.index] == -1 ){
@@ -56,7 +54,7 @@ app.controller('patternsController', function($scope, datastore, $rootScope, $wi
 				}
 			});
 		});
-
+		$scope.lineData.push($scope.moodData[0]);
 		console.log($scope.moodData);
 
 		
@@ -294,8 +292,8 @@ app.controller('patternsController', function($scope, datastore, $rootScope, $wi
 	  			$scope.lineGraph = true;
 	  			$scope.barGraph = false;
 	  			$scope.pieChart = false;
-	  			$scope.series = [$scope.moods[0]];
-	  			$scope.data = [$scope.moodData[0]];
+	  			$scope.lineMood = [$scope.moods[0]];
+	  			$scope.lineData = [$scope.moodData[0]];
 	  			$scope.drop('1');
 	  			break;
 	  		case 'bar': //bar graph selected
@@ -303,11 +301,11 @@ app.controller('patternsController', function($scope, datastore, $rootScope, $wi
 	  			$scope.lineGraph = false;
 	  			$scope.pieChart = false;
 	  			$scope.drop('1');
-	  			if($scope.firstTime){
-		  			angular.copy($scope.moods, $scope.series);
-		  			angular.copy($scope.days, $scope.labels);
-		  			angular.copy($scope.moodData, $scope.data);
-		  		}
+	  			// if($scope.firstTime){
+		  			// angular.copy($scope.moods, $scope.series);
+		  			// angular.copy($scope.days, $scope.labels);
+		  			// angular.copy($scope.moodData, $scope.data);
+		  		// }
 		  		$scope.makeBarData();
 	  			break;
 	  		case 'pie': //pie chart selected
@@ -315,11 +313,11 @@ app.controller('patternsController', function($scope, datastore, $rootScope, $wi
 	  			$scope.barGraph = false;
 	  			$scope.lineGraph = false;
 	  			$scope.drop('1');
-	  			if($scope.firstTime){
-		  			angular.copy($scope.moods, $scope.series);
-		  			angular.copy($scope.days, $scope.labels);
-		  			angular.copy($scope.moodData, $scope.data);
-		  		}
+	  			// if($scope.firstTime){
+		  			// angular.copy($scope.moods, $scope.series);
+		  			// angular.copy($scope.days, $scope.labels);
+		  			// angular.copy($scope.moodData, $scope.data);
+		  		// }
 	  			$scope.makePieData($scope.select.which);
 	  			break;
 	  		default:
@@ -335,11 +333,6 @@ app.controller('patternsController', function($scope, datastore, $rootScope, $wi
 	  		$scope.data = [];
 	  		$scope.series = [];
 	  		$scope.firstTime = false;
-	  	}
-
-	  	if($scope.lineGraph){
-	  		$scope.data = [];
-	  		$scope.series = [];
 	  	}
 	  	
 	  	if($scope.series.indexOf(mood) == -1){
@@ -364,17 +357,22 @@ app.controller('patternsController', function($scope, datastore, $rootScope, $wi
 		  
 	  }
 
+	  $scope.addLineMood = function(mood){
+	  	$scope.lineMood[0] = mood;
+	  	$scope.lineData[0] = $scope.moodData[$scope.moods.indexOf(mood)];
+	  }
+
 	  $scope.numDays = {
 	  		num: 5
 	  };
 
-	  $scope.first = true;
 
 	  $scope.changeDays = function(){
 	  	angular.copy($scope.days, $scope.labels);
 	  	// $scope.labels.splice(0, $scope.labels.length - pastDays);
 	  	$scope.labels.splice(0, $scope.labels.length - $scope.numDays.num);
 	  	// $scope.numDays = pastDays;
+	  	angular.copy($scope.moodData, $scope.data);
 	  	if($scope.barGraph){
 	  		$scope.makeBarData();
 	  	}
@@ -382,17 +380,9 @@ app.controller('patternsController', function($scope, datastore, $rootScope, $wi
 	  		$scope.makePieData($scope.select.which);
 	  	}
 	  	else{
-	  		if(!$scope.first){
-		  		angular.copy($scope.moodData, $scope.data);
-		  		angular.forEach($scope.data, function(value, index){
-		  			value.splice(0, value.length - $scope.numDays.num);
-		  		});
-		  	}
-	  		else{
-	  			$scope.series = [$scope.moods[0]];
-	  			$scope.data = [$scope.moodData[0]];
-	  			$scope.first = false;
-	  		}
+	  		angular.forEach($scope.data, function(value, index){
+	  			value.splice(0, value.length - $scope.numDays.num);
+	  		});  
 	  	}
 	  }
 
