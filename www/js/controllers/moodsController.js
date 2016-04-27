@@ -1,8 +1,22 @@
-app.controller('moodsController', function($scope, $location, $ionicActionSheet, $ionicPopup, $ionicScrollDelegate, $ionicPosition, datastore) {
+app.controller('moodsController', function($rootScope, $scope, $location, $ionicActionSheet, $ionicPopup, $ionicScrollDelegate, $ionicPosition, datastore) {
 	$scope.go = function(path) {
       $location.path(path);
     }
 
+	$scope.datastore = datastore;
+	
+	// For debugging
+	datastore.upsert("Mood", {name: "Happy", type: 1}, "name");
+	datastore.upsert("Mood", {name: "Sad", type: 2}, "name");
+	datastore.upsert("Mood", {name: "Angry", type: 3}, "name");
+	datastore.upsert("Mood", {name: "Calm", type: 4}, "name");
+	datastore.upsert("Trigger", {name: ""}, "name");
+	datastore.upsert("Belief", {name: ""}, "name");
+	datastore.upsert("Behavior", {name: ""}, "name");
+	datastore.upsert("Trigger", {name: "T"}, "name");
+	datastore.upsert("Belief", {name: "B"}, "name");
+	datastore.upsert("Behavior", {name: ""}, "name");
+	// End debugging
     $scope.moods = datastore.getAll("MoodEvent");
 
     $scope.options = {
@@ -18,9 +32,18 @@ app.controller('moodsController', function($scope, $location, $ionicActionSheet,
       datastore.removeDocument("MoodEvent", index);
       $scope.moods = datastore.getAll("MoodEvent");
     }
+			
+	$scope.clearFillers = function() {
+		while ($scope.moods[$scope.moods.length - 1].filler) {
+			$scope.moods.splice($scope.moods.length - 1, 1);
+		}
+		$ionicScrollDelegate.resize();
+	};
+	
     // TODO: Fix when user holds an item and scrolls when the ActionSheet shows up moves the item to unexpected place
     $scope.selectedIndex = -1;
     $scope.keepSelected = false;
+	$rootScope.editMood = null;
     $scope.moodHoldActions = function(mood, index) {
         $scope.keepSelected = false;
         $scope.selectedIndex = index;
@@ -41,9 +64,10 @@ app.controller('moodsController', function($scope, $location, $ionicActionSheet,
             }],
             buttonClicked: function(index) {
                 // Edit (mood)
-                mood.level += 1;
-                $scope.selectedIndex = -1;
+				$scope.keepSelected = true;
+				$rootScope.editMood = mood;
                 $hideActions();
+				$scope.go('/tab/editMood');
             },
             destructiveText: 'Delete',
             destructiveButtonClicked: function() {
@@ -64,10 +88,7 @@ app.controller('moodsController', function($scope, $location, $ionicActionSheet,
                         onTap: function() {
                             // Delete (mood) from datastore
                             $scope.moods.splice(index, 1);
-							$ionicScrollDelegate.resize();
-							while ($scope.moods[$scope.moods.length - 1].filler) {
-								$scope.moods.splice($scope.moods.length - 1, 1);
-							}
+							$scope.clearFillers();
                         }
                     }]
                 });
@@ -76,10 +97,7 @@ app.controller('moodsController', function($scope, $location, $ionicActionSheet,
             cancel: function() {
                 if ($scope.keepSelected == false) {
                     $scope.selectedIndex = -1;
-                    while ($scope.moods[$scope.moods.length - 1].filler) {
-                        $scope.moods.splice($scope.moods.length - 1, 1);
-                    }
-                    $ionicScrollDelegate.resize();
+					$scope.clearFillers();
                 }
             }
         });

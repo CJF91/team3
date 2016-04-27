@@ -3,9 +3,9 @@ app.controller('newMoodsController', function($scope, datastore, $location) {
 	var newLog = {
 		mood: 1,
 		level: 0,
-		trigger: 1,
-		behavior: 1,
-		belief: 1,
+		trigger: 0,
+		behavior: 0,
+		belief: 0,
 		date: new Date()
 	};
 

@@ -41,6 +41,16 @@ var app = angular.module('app', ['ionic', 'ngCordova'])
     }
   })
 
+  .state('tab.editMood', {
+    url: '/editMood',
+    views: {
+      'tab-moods': {
+        templateUrl: 'templates/tab-moods-edit.html',
+        controller: 'editMoodsController'
+      }
+    }
+  })
+
   .state('tab.patterns', {
     url: '/patterns',
     views: {

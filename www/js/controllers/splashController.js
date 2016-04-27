@@ -15,7 +15,6 @@ app.controller('splashController', function($scope, $ionicHistory, datastore,$ro
 	      'trigger' : datastore.types.Number,
 	      'behavior' : datastore.types.Number,
 	      'belief' : datastore.types.Number,
-		  'filler' : datastore.types.Boolean,
 	      'date' : datastore.types.Date,
 	    });
 
