@@ -57,7 +57,7 @@ app.controller('moodsController', function($rootScope, $scope, $location, $ionic
             });
             $scope.filledCount += 1;
         }
-        $ionicScrollDelegate.scrollTo(0, scrollPosition.top, true);
+        $ionicScrollDelegate.scrollTo(0, scrollPosition.top + 1, true);
         var $hideActions = $ionicActionSheet.show({
             buttons: [{
                 text: 'Edit'
@@ -102,4 +102,21 @@ app.controller('moodsController', function($rootScope, $scope, $location, $ionic
             }
         });
     };
+	
+	$scope.toDateString = function(date) {
+		var monthNames = [
+		  "January", "February", "March",
+		  "April", "May", "June", "July",
+		  "August", "September", "October",
+		  "November", "December"
+		];
+		date = new Date(date);
+		var day = date.getDate();
+		var monthIndex = date.getMonth();
+		var year = date.getFullYear();
+		var hour = date.getHours() > 12 ? date.getHours() - 12 : (date.getHours() == 0 ? 12 : date.getHours());
+		var min = date.getMinutes();
+		var ampm = date.getHours() > 11 ? "PM" : "AM";
+		return monthNames[monthIndex] + " " + day + ", " + year + " " + hour + ":" + min + " " + ampm;
+	}
 });
