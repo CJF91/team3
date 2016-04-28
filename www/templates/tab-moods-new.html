@@ -1,62 +1,30 @@
 <ion-view view-title="New Mood" cache-view="false">
 	<ion-content class="padding">
-		<div class="list">
-  		<label class="item item-input item-stacked-label">
-    		<span class="input-label">Mood</span>
-    		<input type="text" ng-model="doc.mood">
-				<ion-list ng-if="doc.mood!=''">
-					<ion-item ng-repeat="previousMood in previousMoods | filter:doc.mood" on-tap="chooseMood(previousMood)">
-						{{ previousMood.name }}
-					</ion-item>
-					<ion-item on-tap="newMood()">
-						Create New Mood
-					</ion-item>
-				</ion-list>
-  		</label>
+		<div class="list list-inset">
+  		<div class="item" on-tap="openModal(1)">
+				Mood: {{ doc.mood }}
+			</div>
 
-  		<label class="item item-input">
-    		<span class="input-label">Level</span>
-    		<input type="number" ng-model="doc.level">
-  		</label>
+			<div class="item">
+				Level: {{ doc.level }}
+			</div>
+			<div class="item range">
+				<i class="icon ion-sad-outline"></i>
+				<input type="range" min="0" max="10" ng-model="doc.level">
+				<i class="icon ion-happy-outline"></i>
+			</div>
 
-			<label class="item item-input item-stacked-label">
-    		<span class="input-label" >Trigger</span>
-    		<input type="text" ng-model="doc.trigger">
-				<ion-list ng-if="doc.trigger!=''">
-					<ion-item ng-repeat="previousTriger in previousTrigers | filter:doc.trigger" on-tap="chooseTrigger(previousTrigger)">
-						{{ previousTrigger.name }}
-					</ion-item>
-					<ion-item on-tap="newTrigger()">
-						Create New Trigger
-					</ion-item>
-				</ion-list>
-  		</label>
+			<div class="item" on-tap="openModal(2)">
+				Trigger: {{ doc.trigger }}
+			</div>
 
-			<label class="item item-input item-stacked-label">
-    		<span class="input-label">Behavior</span>
-    		<input type="text" ng-model="doc.behavior">
-				<ion-list ng-if="doc.behavior!=''">
-					<ion-item ng-repeat="previousBehavior in previousBehaviors | filter:doc.behavior" on-tap="chooseBehavior(previousBehavior)">
-						{{ previousBehavior.name }}
-					</ion-item>
-					<ion-item on-tap="newBehavior()">
-						Create New Behavior
-					</ion-item>
-				</ion-list>
-  		</label>
+			<div class="item" on-tap="openModal(3)">
+				Behavior: {{ doc.behavior }}
+			</div>
 
-			<label class="item item-input item-stacked-label">
-    		<span class="input-label">Belief</span>
-    		<input type="text" ng-model="doc.belief">
-				<ion-list ng-if="doc.belief!=''">
-					<ion-item ng-repeat="previousBelief in previousBeliefs | filter:doc.belief" on-tap="chooseBelief(previousBelief)">
-						{{ previousBelief.name }}
-					</ion-item>
-					<ion-item on-tap="newBelief()">
-						Create New Belief
-					</ion-item>
-				</ion-list>
-  		</label>
+			<div class="item" on-tap="openModal(4)">
+				Belief: {{ doc.belief }}
+			</div>
 
 			<label class="item item-input item-stacked-label">
     		<span class="input-label">Date</span>

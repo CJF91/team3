@@ -1,0 +1,30 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <div class="bad bar-header">
+      <button class="button button-clear" on-tap="closeModal()">
+        Cancel
+      </button>
+      <h1 class="title">
+        {{ modalData.header }}
+      </h1>
+      <button class="button button-clear">
+        New
+      </button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list list-inset">
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="Search" ng-model="search">
+      </label>
+    </div>
+
+    <ion-list class="list list-inset">
+      <ion-item collection-repeat="item in modalData.items | filter:search" item-height="50px" item-width="100%"
+      on-tap="itemSelected(item)" class="item">
+        {{ item.name }}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-modal-view>
