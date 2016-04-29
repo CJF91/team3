@@ -16,19 +16,6 @@ app.controller('moodsController', function($rootScope, $scope, $location, $ionic
         mood.mood += 1;
     };
 
-    $scope.deleteMood = function(index) {
-      datastore.removeDocument("MoodEvent", index);
-      $scope.moods = datastore.getAll("MoodEvent");
-    }
-			
-	$scope.clearFillers = function() {
-		while ($scope.moods[$scope.moods.length - 1].filler) {
-			$scope.moods.splice($scope.moods.length - 1, 1);
-		}
-		$ionicScrollDelegate.resize();
-	};
-	
-    // TODO: Fix when user holds an item and scrolls when the ActionSheet shows up moves the item to unexpected place
     $scope.selectedIndex = -1;
     $scope.keepSelected = false;
 	$rootScope.editMood = null;
@@ -51,7 +38,6 @@ app.controller('moodsController', function($rootScope, $scope, $location, $ionic
                 text: 'Edit'
             }],
             buttonClicked: function(index) {
-                // Edit (mood)
 				$scope.keepSelected = true;
 				$rootScope.editMood = mood;
                 $hideActions();
@@ -74,9 +60,8 @@ app.controller('moodsController', function($rootScope, $scope, $location, $ionic
                         text: '<b>Confirm</b>',
                         type: 'button-positive',
                         onTap: function() {
-                            // Delete (mood) from datastore
-                            $scope.moods.splice(index, 1);
-							$scope.clearFillers();
+							datastore.removeDocument("MoodEvent", $scope.moods[index].id);
+							$scope.moods = datastore.getAll("MoodEvent");
                         }
                     }]
                 });
@@ -85,7 +70,7 @@ app.controller('moodsController', function($rootScope, $scope, $location, $ionic
             cancel: function() {
                 if ($scope.keepSelected == false) {
                     $scope.selectedIndex = -1;
-					$scope.clearFillers();
+					$scope.moods = datastore.getAll("MoodEvent");
                 }
             }
         });
@@ -103,7 +88,7 @@ app.controller('moodsController', function($rootScope, $scope, $location, $ionic
 		var monthIndex = date.getMonth();
 		var year = date.getFullYear();
 		var hour = date.getHours() > 12 ? date.getHours() - 12 : (date.getHours() == 0 ? 12 : date.getHours());
-		var min = date.getMinutes();
+		var min = date.getMinutes() > 9 ? date.getMinutes() : date.getMinutes() + "0";
 		var ampm = date.getHours() > 11 ? "PM" : "AM";
 		return monthNames[monthIndex] + " " + day + ", " + year + " " + hour + ":" + min + " " + ampm;
 	}
