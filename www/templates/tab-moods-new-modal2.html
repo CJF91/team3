@@ -21,7 +21,11 @@
     </div>
     <div class="list" ng-if="modalData2.isMood">
       <ion-radio ng-model="modalData2.type" ng-value="0">Happy</ion-radio>
-      <ion-radio ng-model="modalData2.type" ng-value="1">Sad</ion-radio>
+      <ion-radio ng-model="modalData2.type" ng-value="1">Excited</ion-radio>
+      <ion-radio ng-model="modalData2.type" ng-value="2">Tender</ion-radio>
+      <ion-radio ng-model="modalData2.type" ng-value="3">Scared</ion-radio>
+      <ion-radio ng-model="modalData2.type" ng-value="4">Angry</ion-radio>
+      <ion-radio ng-model="modalData2.type" ng-value="5">Sad</ion-radio>
     </div>
     <button class="button button-block button-positive" on-tap="save()">Save</button>
   </ion-content>

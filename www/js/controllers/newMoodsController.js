@@ -164,24 +164,30 @@ app.controller('newMoodsController', function($scope, datastore, $location, $ion
             case 1:
                 datastore.upsert("Mood", {name: $scope.modalData2.name, type: parseInt($scope.modalData2.type)}, "name");
                 $scope.modalData.items = datastore.getAll("Mood");
+                $scope.modalData2.name = "";
+                $scope.modalData2.type = "";
                 $scope.modal2.hide();
                 break;
             case 2:
                 datastore.upsert("Trigger", {name: $scope.modalData2.name}, "name")
                 $scope.modalData.items = datastore.getAll("Trigger");
+                $scope.modalData2.name = "";
                 $scope.modal2.hide();
                 break;
             case 3:
                 datastore.upsert("Behavior", {name: $scope.modalData2.name}, "name")
                 $scope.modalData.items = datastore.getAll("Behavior");
+                $scope.modalData2.name = "";
                 $scope.modal2.hide();
                 break;
             case 4:
                 datastore.upsert("Belief", {name: $scope.modalData2.name}, "name")
                 $scope.modalData.items = datastore.getAll("Belief");
+                $scope.modalData2.name = "";
                 $scope.modal2.hide();
                 break;
             default:
+                $scope.modalData2.name = "";
                 $scope.modal2.hide();
         };
     }
