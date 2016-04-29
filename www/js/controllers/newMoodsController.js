@@ -1,9 +1,9 @@
-app.controller('newMoodsController', function($scope, datastore, $location, $ionicModal) {
+app.controller('newMoodsController', function($scope, datastore, $location, $ionicModal, $ionicPopup) {
 
     var newLog = {
-        mood: 0,
+        mood: -1,
         level: 0,
-        trigger: 0,
+        trigger: -1,
         behavior: 0,
         belief: 0,
         date: new Date()
@@ -162,26 +162,35 @@ app.controller('newMoodsController', function($scope, datastore, $location, $ion
     $scope.save = function() {
         switch ($scope.modalData.id) {
             case 1:
-                datastore.upsert("Mood", {name: $scope.modalData2.name, type: parseInt($scope.modalData2.type)}, "name");
+                datastore.upsert("Mood", {
+                    name: $scope.modalData2.name,
+                    type: parseInt($scope.modalData2.type)
+                }, "name");
                 $scope.modalData.items = datastore.getAll("Mood");
                 $scope.modalData2.name = "";
                 $scope.modalData2.type = "";
                 $scope.modal2.hide();
                 break;
             case 2:
-                datastore.upsert("Trigger", {name: $scope.modalData2.name}, "name")
+                datastore.upsert("Trigger", {
+                    name: $scope.modalData2.name
+                }, "name")
                 $scope.modalData.items = datastore.getAll("Trigger");
                 $scope.modalData2.name = "";
                 $scope.modal2.hide();
                 break;
             case 3:
-                datastore.upsert("Behavior", {name: $scope.modalData2.name}, "name")
+                datastore.upsert("Behavior", {
+                    name: $scope.modalData2.name
+                }, "name")
                 $scope.modalData.items = datastore.getAll("Behavior");
                 $scope.modalData2.name = "";
                 $scope.modal2.hide();
                 break;
             case 4:
-                datastore.upsert("Belief", {name: $scope.modalData2.name}, "name")
+                datastore.upsert("Belief", {
+                    name: $scope.modalData2.name
+                }, "name")
                 $scope.modalData.items = datastore.getAll("Belief");
                 $scope.modalData2.name = "";
                 $scope.modal2.hide();
@@ -221,6 +230,20 @@ app.controller('newMoodsController', function($scope, datastore, $location, $ion
     };
 
     $scope.addLog = function() {
+        if(newLog.mood == -1) {
+            var alertPopup = $ionicPopup.alert({
+                title: 'Mood is empty!',
+                template: 'You must choose a mood!'
+            });
+            return;
+        }
+        if(newLog.trigger == -1) {
+          var alertPopup = $ionicPopup.alert({
+              title: 'Trigger is empty!',
+              template: 'You must choose a trigger!'
+          });
+          return;
+        }
         newLog.level = parseInt($scope.doc.level);
         datastore.upsert("MoodEvent", newLog, "date");
         $location.path("/tab/moods");
