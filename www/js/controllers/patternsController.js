@@ -4,6 +4,7 @@ app.controller('patternsController', function($scope, datastore) {
 		$scope.lineData = [];
 
 		var moods1 = datastore.getAll('Moods');
+		$scope.moods1 = datastore.getAll('Mood');
 		$scope.moods = [];
 		$scope.series = [];
 

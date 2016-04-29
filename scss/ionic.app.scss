@@ -28,6 +28,41 @@ $g3: #66d3cf;
 	color: #fff;
 }
 
+.mood-item {
+	max-height: 75px;
+	min-height: 75px;
+}
+
+.item-highlight {
+	display: none;
+	background-color: darkgray;
+}
+
+.mood-container {
+	margin: 0px;
+	padding: 0px;
+}
+
+.mood-name {
+	font-weight: bolder;
+	text-align: left;
+	display: inline-block;
+	width: 50%;
+}
+
+.mood-level {
+	text-align: right;
+	display: inline-block;
+	width: 50%;
+}
+
+.mood-additional {
+	font-style: italic;
+	font-size: 0.7em;
+	height: 1.5em;
+	margin-left: 1em;
+}
+
 .item-rounded-top {
 	border-top-left-radius: $item-round;
 	border-top-right-radius: $item-round;
@@ -50,6 +85,12 @@ $g3: #66d3cf;
 .switch-text {
 	float: left;
 	margin-top: 6px;
+}
+
+.platform-android {
+	.action-sheet-option, .action-sheet-destructive {
+		text-align: center;
+	}
 }
 
 .fab {
@@ -301,7 +342,3 @@ select {
     appearance: none;
     text-align: center;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 6f842c673153c7785a54e7c2f6ad134bd79539f3
