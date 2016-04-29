@@ -137,7 +137,7 @@ app.controller('newMoodsController', function($scope, datastore, $location, $ion
     };
 
     $scope.addLog = function() {
-        newLog.level = $scope.doc.level;
+        newLog.level = parseInt($scope.doc.level);
         datastore.upsert("MoodEvent", newLog, "date");
         $location.path("/tab/moods");
     };
