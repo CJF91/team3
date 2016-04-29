@@ -55,7 +55,7 @@ app.controller('splashController', function($scope, datastore, $rootScope, $stat
     			$scope.correct = datastore.initalizeAccess("" + $scope.input[0] + $scope.input[1] + $scope.input[2] + $scope.input[3]);
     		}
     		
-    		if ($scope.correct){
+    		if ($scope.correct) {
     			$scope.pinNeeded = false;
     		} else {
     			$scope.input = [];
@@ -81,10 +81,17 @@ app.directive('hideTabs', function($rootScope) {
         link: function(scope, element, attributes) {
             scope.$watch(attributes.hideTabs, function(value){
                 $rootScope.hideTabs = value;
+
+                if (value) {
+                	$('.tab-nav').hide();
+                } else {
+                	$('.tab-nav').show();
+                }
             });
 
             scope.$on('$destroy', function() {
                 $rootScope.hideTabs = false;
+                $('.tab-nav').show();
             });
         }
 	};

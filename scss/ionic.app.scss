@@ -24,13 +24,37 @@ $item-round: 5px;
 $g1: #64CAFD;
 $g2: #67E08B;
 
+#splashTapMssg {
+	position: absolute;
+	bottom: 50px;
+	text-align: center;
+	width: 100%;
+	font-size: 20px;
+	font-weight: 200;
+
+	animation: float 2s infinite ease-in-out;
+}
+
+@-webkit-keyframes float {
+    from {transform:translate(0, 0px);}
+    65% {transform:translate(0, 15px);}
+    to {transform: translate(0, -0px);}    
+}
+
+@keyframes float {
+    from {transform:translate(0, 0px);}
+    65% {transform:translate(0, 15px);}
+    to {transform: translate(0, -0px);}    
+}
+
 .splash {
 	color: #fff;
-	background-color: rgba(100,100,100, .5);
+	background-image: url('http://images6.fanpop.com/image/photos/36200000/Nature-image-nature-36241657-2560-1600.jpg');
+	background-size: cover;
 	opacity: 1;
 }
 
-.pinInput{
+.pinInput {
 	-webkit-text-security: disc;
 	width: 100%;
 	text-align: center;
@@ -100,16 +124,16 @@ $g2: #67E08B;
 	clear: both;
 }
 
-#inputPin{
-	font-size: 25px;
+#inputPin {
+	height: 40px;
+	font-size: 40px;
 	margin-top: 15%;
 	width: 375px;
-	height: 50px;
 	margin-left: -10px;
 	background-color: rgba(255, 255, 255, 0.65);
-	color: black;
+	color: #fff;
 	text-align:center;
-	padding-top: 13px;
+	padding: 10px;
 }
 
 #currPin{
@@ -138,9 +162,10 @@ $g2: #67E08B;
 
 #splashTitle{
 	text-align: center;
-    font-size: 25px;
-    font-weight: bold;
+    font-size: 40px;
+    font-weight: 100;
     margin-top: 10%;
+    text-shadow: 1px 6px 5px rgba(1,1,1,1);
 }
 
 .fab {
@@ -186,6 +211,7 @@ $g2: #67E08B;
 
 #latestMoodTitle{
 	font-size: 50px;
+	font-weight: 100;
 }
 
 .latestMoodInfo{
