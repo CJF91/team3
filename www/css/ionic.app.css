@@ -9753,6 +9753,18 @@ $dark:                            #444 !default;
   float: left;
   margin-top: 6px; }
 
+.bottom-position {
+  position: absolute;
+  bottom: 0px; }
+
+.textalign {
+  text-align: center; }
+
+.hrstyle {
+  border: none;
+  height: 1px;
+  background-image: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.9), transparent); }
+
 .fab {
   width: 75px;
   height: 75px;

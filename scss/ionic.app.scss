@@ -52,6 +52,21 @@ $g2: #67E08B;
 	margin-top: 6px;
 }
 
+.bottom-position{
+	position: absolute;
+	bottom: 0px;
+}
+
+.textalign{
+	text-align: center;
+}
+
+.hrstyle{
+	border: none;
+	height: 1px;
+	background-image: linear-gradient(to right,rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.9),rgba(0, 0, 0, 0));
+}
+
 .fab {
 	width: 75px;
 	height: 75px;
