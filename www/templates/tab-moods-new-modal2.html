@@ -1,0 +1,28 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <div class="bad bar-header">
+      <button class="button button-clear" on-tap="closeModal2()">
+        Cancel
+      </button>
+      <h1 class="title">
+        {{ modalData2.header }}
+      </h1>
+      <button class="button button-clear" on-tap="save()">
+        Save
+      </button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list">
+      <div class="item item-input">
+        <span class="input-label">{{ modalData2.input }}</span>
+        <input type="text" ng-model="modalData2.name">
+      </div>
+    </div>
+    <div class="list" ng-if="modalData2.isMood">
+      <ion-radio ng-model="modalData2.type" ng-value="0">Happy</ion-radio>
+      <ion-radio ng-model="modalData2.type" ng-value="1">Sad</ion-radio>
+    </div>
+    <button class="button button-block button-positive" on-tap="save()">Save</button>
+  </ion-content>
+</ion-modal-view>
