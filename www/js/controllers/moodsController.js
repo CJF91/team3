@@ -5,18 +5,6 @@ app.controller('moodsController', function($rootScope, $scope, $location, $ionic
 
 	$scope.datastore = datastore;
 	
-	// For debugging
-	datastore.upsert("Mood", {name: "Happy", type: 1}, "name");
-	datastore.upsert("Mood", {name: "Sad", type: 2}, "name");
-	datastore.upsert("Mood", {name: "Angry", type: 3}, "name");
-	datastore.upsert("Mood", {name: "Calm", type: 4}, "name");
-	datastore.upsert("Trigger", {name: ""}, "name");
-	datastore.upsert("Belief", {name: ""}, "name");
-	datastore.upsert("Behavior", {name: ""}, "name");
-	datastore.upsert("Trigger", {name: "T"}, "name");
-	datastore.upsert("Belief", {name: "B"}, "name");
-	datastore.upsert("Behavior", {name: ""}, "name");
-	// End debugging
     $scope.moods = datastore.getAll("MoodEvent");
 
     $scope.options = {

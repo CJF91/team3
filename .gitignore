@@ -5,4 +5,8 @@ node_modules/
 platforms/
 plugins/
 www/lib
+<<<<<<< HEAD
 www/css
+=======
+www/css/ionic.app.css
+>>>>>>> master

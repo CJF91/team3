@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ionic', 'ngCordova'])
+var app = angular.module('app', ['ionic', 'ngCordova', 'chart.js'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -69,6 +69,17 @@ var app = angular.module('app', ['ionic', 'ngCordova'])
         controller: 'helpController'
       }
     }
+  })
+
+  .state('tab.help-strategy', {
+    url: '/help/strategy',
+    views: {
+      'tab-help': {
+        templateUrl: 'templates/tab-help-strategy.html',
+        controller: 'strategyController'
+      }
+    },
+    params: {mood: null, strategy: null}
   })
 
   .state('tab.progress', {
