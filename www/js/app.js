@@ -31,6 +31,26 @@ var app = angular.module('app', ['ionic', 'ngCordova', 'chart.js'])
     }
   })
 
+  .state('tab.newMood', {
+    url: '/newMood',
+    views: {
+      'tab-moods': {
+        templateUrl: 'templates/tab-moods-new.html',
+        controller: 'newMoodsController'
+      }
+    }
+  })
+
+  .state('tab.editMood', {
+    url: '/editMood',
+    views: {
+      'tab-moods': {
+        templateUrl: 'templates/tab-moods-edit.html',
+        controller: 'editMoodsController'
+      }
+    }
+  })
+
   .state('tab.patterns', {
     url: '/patterns',
     views: {
@@ -49,6 +69,17 @@ var app = angular.module('app', ['ionic', 'ngCordova', 'chart.js'])
         controller: 'helpController'
       }
     }
+  })
+
+  .state('tab.help-strategy', {
+    url: '/help/strategy',
+    views: {
+      'tab-help': {
+        templateUrl: 'templates/tab-help-strategy.html',
+        controller: 'strategyController'
+      }
+    },
+    params: {mood: null, strategy: null}
   })
 
   .state('tab.progress', {

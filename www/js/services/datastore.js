@@ -8,6 +8,7 @@ app.service('datastore', function($window) {
 		Number: 'number',
 		Boolean: 'boolean',
 		Date: 'object',
+		Array: 'object',
 		Any: 'any'
 	}
 
