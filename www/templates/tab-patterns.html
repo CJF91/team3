@@ -1,5 +1,93 @@
-<ion-view view-title="Find Patterns" hide-tabs='false'>
-  <ion-content class="padding">
-    <h2>Patterns View</h2>
+<ion-view view-title="Find Patterns">
+  <ion-content class="padding" ng-init="changeDays()">
+
+	<span class="dropdown">
+	  <button ng-click="drop('1')" class="dropbtn">Graph Style&nbsp;&nbsp;<span ng-hide="open1" class="icon ion-chevron-down"></span><span ng-hide="!open1" class="icon ion-chevron-up"></span></button>
+	  <div id="dropdown1" class="dropdown-content">
+	    <a class="dropC" ng-click="changeGraph('line')">Moods Over Time</a>
+	    <a class="dropC" ng-click="changeGraph('bar')">Avg Mood Intensity</a>
+	    <a class="dropC" ng-click="changeGraph('pie')">Frequency of Moods</a>
+	  </div>
+	</span>
+
+	<!-- <span class="dropdown">
+	  <button ng-click="drop('2')" class="dropbtn">Time Period&nbsp;&nbsp;<span ng-hide="open2" class="icon ion-chevron-down"></span><span ng-hide="!open2" class="icon ion-chevron-up"></span></button>
+	  <div id="dropdown2" class="dropdown-content">
+	    <a class="dropC" ng-click="changeGraph('20')">Last 3 Days</a>
+	    <a class="dropC" ng-click="changeGraph('21')">Last 5 Days</a>
+	    <a class="dropC" ng-click="changeGraph('22')">Last Week</a>
+	  </div>
+	</span> -->
+
+	<span class="dropdown">
+	  <button ng-click="drop('3')" class="dropbtn" ng-hide="!lineGraph">Choose Mood&nbsp;&nbsp;<span ng-hide="open3" class="icon ion-chevron-down"></span><span ng-hide="!open3" class="icon ion-chevron-up"></span></button>
+	  <button ng-click="drop('3')" class="dropbtn" ng-hide="lineGraph">Filter By Mood(s)&nbsp;&nbsp;<span ng-hide="open3" class="icon ion-chevron-down"></span><span ng-hide="!open3" class="icon ion-chevron-up"></span></button>
+	  <div id="dropdown3" class="dropdown-content dropDownMoods">
+	    <span class="dropC" ng-repeat="mood in moods" ng-hide="lineGraph">
+	    	<label><input type="checkbox" ng-click="addMood(mood)">&nbsp;&nbsp;&nbsp;&nbsp;{{mood}}</label>
+	    </span>
+	    <span class="dropC" ng-repeat="mood in moods" ng-hide="!lineGraph">
+	    	<label ng-click="addLineMood(mood)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{mood}}</label>
+	    </span>		
+	  </div>
+	</span>
+
+	<br><br>
+
+	<div id="numInput"> Show moods from the past <input id="numI" type="text" pattern="[0-9]*" ng-model="numDays.num" ng-change="changeDays()" placeholder="{{numDays.num}}"></input> days </div>
+
+	<div id="patternBody" ng-click="drop()">
+
+		<div ng-show = "lineGraph" class="graphDiv">
+			<br>
+			<h class="graphTitle">Mood Intensities From the Past {{numDays.num}} Days</h>
+			<br>
+			<br>
+			<canvas id="line" class="chart chart-line" chart-data="lineData"
+		  	 chart-labels="labels" chart-legend="true" chart-series="lineMood"
+		     chart-click="onClick">
+			</canvas>
+		</div>
+
+		<div ng-show = "pieChart" class="graphDiv">
+			<br>
+			<h class="graphTitle">Frequency of Moods for the past {{numDays.num}} days</h>
+			<br>
+			<br>
+			<canvas id="pie" class="chart chart-pie"
+  				chart-data="pieData" chart-labels="series">
+			</canvas> 
+			<br>
+			<!-- <label><input type="checkbox" checked="freqEntry" ng-click="changeFreq('E');">&nbsp;&nbsp;Based on number of entries</label>
+			<label><input type="checkbox" checked="freqInt" ng-click="changeFreq('I');">&nbsp;&nbsp;Based on intensities of entries</label> -->
+			<div>Based On:</div>
+			<select ng-model="select.which" ng-change="makePieData(select.which)">
+			  <option value="e">Number of entries<span class="icon ion-chevron-down"></span></option>
+			  <option value="i">Intensities of entries<span class="icon ion-chevron-down"></span></option>
+			</select>
+
+			<br><br>
+
+			<div><b>Pattern Detected</b></div>
+			<div>You have been {{moodDetected}} most often for the past {{numDays.num}} days with <span ng-show="select.which == 'e'">{{moodDetectedEntries}} entries</span><span ng-show="select.which == 'i'">an average intensity of {{moodDetectedLevel}}</span></div>
+		</div>
+
+		<div ng-show = "barGraph" class="graphDiv">
+			<br>
+			<h class="graphTitle">Avgerage Intensity for the past {{numDays.num}} days</h>
+			<br>
+			<br>
+			<canvas id="bar" class="chart chart-bar"
+  				chart-data="barData" chart-labels="series" chart-series="barSeries" chart-legend="true">
+			</canvas>
+
+			<br><br>
+
+			<div><b>Pattern Detected</b></div>
+			<div>You have been {{moodDetected}} most often for the past {{numDays.num}} days with an average intensity of {{moodDetectedLevel}}</div>
+		</div>
+
+	</div>
+
   </ion-content>
 </ion-view>

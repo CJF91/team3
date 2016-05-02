@@ -5,14 +5,22 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
 
+    <!-- <link href="css/ionic.app.css" rel="stylesheet"> -->
+
+
+    <!-- compiled css output -->
     <link href="css/ionic.app.css" rel="stylesheet">
 
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above -->
+
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- angular-chart.js -->
+    <script src="lib/Chart.js/Chart.min.js"></script>
+    <script src="lib/angular-chart.js/dist/angular-chart.min.js"></script>
+    <link rel="stylesheet" href="lib/angular-chart.js/dist/angular-chart.min.css">
 
     <!-- aes-js -->
     <script src="lib/aes-js/index.js"></script>
@@ -36,11 +44,14 @@
 
     <!-- Controllers -->
     <script src="js/controllers/moodsController.js"></script>
+    <script src="js/controllers/editMoodsController.js"></script>
+    <script src="js/controllers/newMoodsController.js"></script>
     <script src="js/controllers/patternsController.js"></script>
     <script src="js/controllers/helpController.js"></script>
     <script src="js/controllers/preferencesController.js"></script>
     <script src="js/controllers/progressController.js"></script>
     <script src="js/controllers/splashController.js"></script>
+    <script src="js/controllers/help/strategyController.js"></script>
     <script src="js/controllers/OOBEController.js"></script>
   </head>
   <body ng-app="app">
@@ -48,7 +59,7 @@
       <ion-nav-back-button>
       </ion-nav-back-button>
     </ion-nav-bar>
-    
+
     <ion-nav-view></ion-nav-view>
   </body>
 </html>

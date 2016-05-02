@@ -1,6 +1,5 @@
 app.controller('preferencesController', function($scope, $cordovaImagePicker, datastore) {
-	$scope.formData = {pinEnabled: false, pin: ""};
-	
+	$scope.formData = {pinEnabled: false, pin: "", nameChange: false, name: "Team3"};
 	datastore.addContainer('Preferences', {
 		prefName: datastore.types.String,
 		prefValue: datastore.types.Any
@@ -30,7 +29,10 @@ app.controller('preferencesController', function($scope, $cordovaImagePicker, da
 			      // error getting photos
 			    });
 		} else if (pref == 'pinEnabled') {
-			datastore.upsert('Preferences', {prefName: 'pinEnabled', prefValue: $scope.formData.pinEnabled}, 'prefName');
+			console.log($scope.formData.pin);
+			
+		} else if (pref == 'nameChange') {
+			console.log("name preference")
 		}
 	}
 });

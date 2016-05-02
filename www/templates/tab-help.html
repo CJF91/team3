@@ -1,4 +1,10 @@
 <ion-view view-title="Get Help">
-  <ion-content class="padding">
+  <ion-content class="list-padding">
+  	<ion-list can-swipe="listCanSwipe">
+      <ion-item on-tap="showStrategy(k)" ng-repeat="(k,v) in feelings">
+        <div class="list-primary-label">{{ k }}</div>
+        <div class="list-secondary-label">Helped {{ v }} times</div>
+      </ion-item>
+  	</ion-list>
   </ion-content>
 </ion-view>
