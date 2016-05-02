@@ -1,23 +1,21 @@
-<ion-view view-title="Track Moods" hide-tabs='false'>
-  <ion-header-bar align-title="left" class="bar bar-subheader">
-    <div class="buttons">
-      <button class="button" ng-click="options.showDelete = !options.showDelete">Delete</button>
+<ion-view view-title="Track Moods" cache-view="false">
+    <ion-content id="list">
+        <ion-list show-delete="false" can-swipe="false">
+          <ion-item collection-repeat="mood in moods" id="id{{$index}}" on-tap="moodHoldActions(mood, $index)" ng-class="{ 'item-highlight' : mood.filler }" class="item-thumbnail-left mood-item">
+				      <div class="mood-name">{{mood.filler ? "" : datastore.get("Mood", mood.mood).name}}</div>
+				      <div class="mood-level">Level: {{mood.filler ? "" : mood.level}}</div>
+				      <div class="mood-additional">Trigger: {{mood.filler ? "" : datastore.get("Trigger", mood.trigger).name}}</div>
+				<!--
+              <div class="mood-additional">Belief: {{mood.filler ? "" : datastore.get("Belief", mood.belief).name}}</div>
+				      <div class="mood-additional">Behavior: {{mood.filler ? "" : datastore.get("Behavior", mood.behavior).name}}</div>
+				-->
+              <div class="mood-additional">{{mood.filler ? "" : toDateString(mood.date)}}</div>
+				  </ion-item>
+        </ion-list>
+    </ion-content>
+    <div class="float-button">
+      <span class="height-fix">
+        <fab on-tap="go('/tab/newMood')"></fab>
+      </span>
     </div>
-    <h1 class="title">Moods</h1>
-    <div class="buttons">
-    <button class="button" ng-click="addMood()">New Mood</button>
-  </div>
-  </ion-header-bar>
-  <ion-content class="padding">
-    <ion-list show-delete="options.showDelete" can-swipe="options.canSwipe">
-      <ion-item ng-repeat="mood in moods" class="item-thumbnail-left">
-        {{ mood.mood }} | {{ mood.time }}
-        <ion-option-button class="button-assertive" ng-click="editMood(mood)">
-          Edit
-        </ion-option-button>
-        <ion-delete-button class="ion-minus-circled" ng-click="moods.splice($index, 1)">
-        </ion-delete-button>
-      </ion-item>
-    </ion-list>
-  </ion-content>
 </ion-view>
