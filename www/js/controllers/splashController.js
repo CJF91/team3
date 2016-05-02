@@ -1,6 +1,5 @@
-app.controller('splashController', function($scope, $ionicHistory, datastore,$rootScope,  $state, $timeout) {
+app.controller('splashController', function($scope, datastore, $ionicHistory, $rootScope, $window, $state, $timeout) {
 	$scope.latestMood = ["Angry", "5", "trigger", "behavior", "belief", "4/9/2016 9:15am"];
-
 	//TODO: Fix this up and make it actually use the users pin
 	//1234 is the dummy pin for now
 
@@ -16,12 +15,12 @@ app.controller('splashController', function($scope, $ionicHistory, datastore,$ro
 	    delete window.localStorage.CopingStrategy
 	    delete window.localStorage.accessKey
 	    delete window.localStorage.Preferences
+<<<<<<< HEAD
 	 */  
 	if (datastore.isEncrypted()) {
 		datastore.initalizeAccess("default_password");
-		// console.log(datastore.setAccessKey("1234"));
 	} else {
-		datastore.setAccessKey("default_password");
+		datastore.initalizeAccess("default_password");
 		 // The General Model for Moods, Beliefs Triggers and Behaviors. Can be changed and is only here for consistentcy.
 
 	    // The user logging the Mood.
@@ -35,20 +34,20 @@ app.controller('splashController', function($scope, $ionicHistory, datastore,$ro
 	    });
 
 	    // The List of Moods (including Custom)
-	    datastore.addContainer('Mood', {
+	    datastore.addContainer('Moods', {
 	      'name' : datastore.types.String,
 	      'type' : datastore.types.Number, // Get From Mood Type List
 	    });
 
-	    datastore.addContainer('Trigger', {
+	    datastore.addContainer('Triggers', {
 	      'name' : datastore.types.String,
 	    });
 
-	    datastore.addContainer('Behavior', {
+	    datastore.addContainer('Behaviors', {
 	      'name' : datastore.types.String,
 	    });
 
-	    datastore.addContainer('Belief', {
+	    datastore.addContainer('Beliefs', {
 	      'name' : datastore.types.String,
 	    });
 
@@ -88,7 +87,35 @@ app.controller('splashController', function($scope, $ionicHistory, datastore,$ro
 	    	'name' : 'excentric',
 	    	'type' : 2
 	    });
-	    var vampire = datastore.save('Mood', {
+	    var happy = datastore.save('Moods', {
+	    	'name' : 'Happy',
+	    	'type' : 0
+	    });
+	    var excited = datastore.save('Moods', {
+	    	'name' : 'Excited',
+	    	'type' : 1
+	    });
+	    var tender = datastore.save('Moods', {
+	    	'name' : 'Tender',
+	    	'type' : 2
+	    });
+	    var scared = datastore.save('Moods', {
+	    	'name' : 'Scared',
+	    	'type' : 3
+	    });
+	    var angry = datastore.save('Moods', {
+	    	'name' : 'Angry',
+	    	'type' : 4
+	    });
+	    var sad = datastore.save('Moods', {
+	    	'name' : 'Sad',
+	    	'type' : 5
+	    });
+	    var excentric = datastore.save('Moods', {
+	    	'name' : 'excentric',
+	    	'type' : 2
+	    });
+	    var vampire = datastore.save('Moods', {
 	    	'name' : 'vampire',
 	    	'type' : 2
 	    });	
@@ -101,11 +128,18 @@ app.controller('splashController', function($scope, $ionicHistory, datastore,$ro
 	    var pain = datastore.save('Trigger',{
 	    	'name' : 'I was hurt today'
 	    });
-	    var fired = datastore.save('Trigger',{
+	    var test = datastore.save('Triggers',{
+	    	'name' : 'I have a test'
+	    });
+	    var pain = datastore.save('Triggers',{
+	    	'name' : 'I was hurt today'
+	    });
+	    var fired = datastore.save('Triggers',{
 	    	'name' : 'Fired from Job'
 	    });
 
 	    var testTriggerArray = [test,pain,fired];
+
 
 	    var bandAid = datastore.save('Behavior', {
 	    	'name' : 'I got over it and put a bandaid on it'
@@ -113,7 +147,14 @@ app.controller('splashController', function($scope, $ionicHistory, datastore,$ro
 	    var wimpyBandAid = datastore.save('Behavior', {
 	    	'name' : 'I cried in a corner over my minor injury'
 	    });
-	    var emotionalDamage = datastore.save('Behavior',{
+
+	    var bandAid = datastore.save('Behaviors', {
+	    	'name' : 'I got over it and put a bandaid on it'
+	    });
+	    var wimpyBandAid = datastore.save('Behaviors', {
+	    	'name' : 'I cried in a corner over my minor injury'
+	    });
+	    var emotionalDamage = datastore.save('Behaviors',{
 	    	'name' : 'I was emotionally damaged and won\'t be able to live with this problem'
 	    });
 
@@ -131,7 +172,19 @@ app.controller('splashController', function($scope, $ionicHistory, datastore,$ro
 	    var money = datastore.save('Belief',{
 	    	'name' : 'Damn I will be broke'
 	    });
-	    var america = datastore.save('Belief',{
+	    var drunk = datastore.save('Beliefs',{
+	    	'name' : 'I will be drunk :)'
+	    });
+	    var hurt = datastore.save('Beliefs',{
+	    	'name' : 'That Hurt'
+	    });
+	    var fail = datastore.save('Beliefs',{
+	    	'name' : 'I will fail my test'
+	    });
+	    var money = datastore.save('Beliefs',{
+	    	'name' : 'Damn I will be broke'
+	    });
+	    var america = datastore.save('Beliefs',{
 	    	'name' : "I'll make America great again"
 	    });
 

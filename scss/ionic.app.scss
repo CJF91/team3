@@ -183,18 +183,6 @@ $g3: #66d3cf;
 	font: 17.5px Arial, sans-serif;
 }
 
-.tabs {
-  -webkit-transition: all linear 0.2s;
-  transition: all linear 0.2s;
-}
-
-.tabs-item-hide > .tabs{
-  -webkit-transition: all linear 0.2s;
-  transition: all linear 0.2s;
-  bottom: -$tabs-height;
-  display: flex;
-}
-
 #splashTitle{
 	text-align: center;
     font-size: 40px;
