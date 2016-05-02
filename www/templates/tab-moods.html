@@ -1,4 +1,5 @@
-<ion-view view-title="Track Moods" cache-view="false">
+<ion-view view-title="Track Moods" hide-tabs='false' cache-view="false">
+  <!-- DO NOT DELETE THE HIDE TABS DIRECTIVE -->
     <ion-content id="list">
         <ion-list show-delete="false" can-swipe="false">
           <ion-item collection-repeat="mood in moods" id="id{{$index}}" on-tap="moodHoldActions(mood, $index)" ng-class="{ 'item-highlight' : mood.filler }" class="item-thumbnail-left mood-item">

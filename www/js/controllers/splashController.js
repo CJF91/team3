@@ -1,4 +1,6 @@
-app.controller('splashController', function($scope, $ionicHistory, datastore,$rootScope) {
+
+app.controller('splashController', function($scope, datastore, $ionicHistory, $rootScope, $window, $state, $timeout) {
+	$scope.latestMood = ["Angry", "5", "trigger", "behavior", "belief", "4/9/2016 9:15am"];
 	//TODO: Fix this up and make it actually use the users pin
 	//1234 is the dummy pin for now
 
@@ -14,12 +16,15 @@ app.controller('splashController', function($scope, $ionicHistory, datastore,$ro
 	    delete window.localStorage.CopingStrategy
 	    delete window.localStorage.accessKey
 	    delete window.localStorage.Preferences
-	 */  
+<<<<<<< HEAD
+<<<<<<< HEAD
+	 */   
+	 $scope.latestMood = ["Angry", "5", "trigger", "behavior", "belief", "4/9/2016 9:15am"];
+
 	if (datastore.isEncrypted()) {
-		datastore.initalizeAccess("1234");
-		// console.log(datastore.setAccessKey("1234"));
+		datastore.initalizeAccess("default_password");
 	} else {
-		datastore.setAccessKey("1234");
+		datastore.initalizeAccess("default_password");
 		 // The General Model for Moods, Beliefs Triggers and Behaviors. Can be changed and is only here for consistentcy.
 
 	    // The user logging the Mood.
@@ -86,6 +91,34 @@ app.controller('splashController', function($scope, $ionicHistory, datastore,$ro
 	    	'name' : 'excentric',
 	    	'type' : 2
 	    });
+	    var happy = datastore.save('Moods', {
+	    	'name' : 'Happy',
+	    	'type' : 0
+	    });
+	    var excited = datastore.save('Mood', {
+	    	'name' : 'Excited',
+	    	'type' : 1
+	    });
+	    var tender = datastore.save('Mood', {
+	    	'name' : 'Tender',
+	    	'type' : 2
+	    });
+	    var scared = datastore.save('Mood', {
+	    	'name' : 'Scared',
+	    	'type' : 3
+	    });
+	    var angry = datastore.save('Mood', {
+	    	'name' : 'Angry',
+	    	'type' : 4
+	    });
+	    var sad = datastore.save('Mood', {
+	    	'name' : 'Sad',
+	    	'type' : 5
+	    });
+	    var excentric = datastore.save('Mood', {
+	    	'name' : 'excentric',
+	    	'type' : 2
+	    });
 	    var vampire = datastore.save('Mood', {
 	    	'name' : 'vampire',
 	    	'type' : 2
@@ -94,6 +127,12 @@ app.controller('splashController', function($scope, $ionicHistory, datastore,$ro
 	    var testMoodArray = [happy,excited,tender,scared,angry,sad,excentric,vampire];
 
 	    var test = datastore.save('Trigger',{
+	    	'name' : 'I have a test'
+	    });
+	    var pain = datastore.save('Trigger',{
+	    	'name' : 'I was hurt today'
+	    });
+	    var test = datastore.save('Triggers',{
 	    	'name' : 'I have a test'
 	    });
 	    var pain = datastore.save('Trigger',{
@@ -111,6 +150,13 @@ app.controller('splashController', function($scope, $ionicHistory, datastore,$ro
 	    var wimpyBandAid = datastore.save('Behavior', {
 	    	'name' : 'I cried in a corner over my minor injury'
 	    });
+
+	    var bandAid = datastore.save('Behaviors', {
+	    	'name' : 'I got over it and put a bandaid on it'
+	    });
+	    var wimpyBandAid = datastore.save('Behavior', {
+	    	'name' : 'I cried in a corner over my minor injury'
+	    });
 	    var emotionalDamage = datastore.save('Behavior',{
 	    	'name' : 'I was emotionally damaged and won\'t be able to live with this problem'
 	    });
@@ -118,6 +164,19 @@ app.controller('splashController', function($scope, $ionicHistory, datastore,$ro
 	    var testBehaviorArray = [bandAid,wimpyBandAid,emotionalDamage];
 
 	    var drunk = datastore.save('Belief',{
+	    	'name' : 'I will be drunk :)'
+	    });
+	    var hurt = datastore.save('Belief',{
+	    	'name' : 'That Hurt'
+	    });
+	    var fail = datastore.save('Belief',{
+	    	'name' : 'I will fail my test'
+	    });
+	    var money = datastore.save('Belief',{
+	    	'name' : 'Damn I will be broke'
+	    });
+	    var drunk = datastore.save('Beliefs',{
+
 	    	'name' : 'I will be drunk :)'
 	    });
 	    var hurt = datastore.save('Belief',{
@@ -148,4 +207,60 @@ app.controller('splashController', function($scope, $ionicHistory, datastore,$ro
 	    	adjustableDate.setTime(adjustableDate.getTime() + 6*60*60*1000)
 	    }	 
 	}
+
+	$scope.pinNeeded = true;
+
+	$scope.numbers = [1,2,3,4,5,6,7,8,9];
+	$scope.input = [];
+
+    $scope.add = function(n){
+    	$scope.input.push(n);
+
+    	if ($scope.input.length == 4) {
+    		if (datastore.initalizeAccess("default_password")) {
+    			$scope.correct = true;
+    		} else {
+    			$scope.correct = datastore.initalizeAccess("" + $scope.input[0] + $scope.input[1] + $scope.input[2] + $scope.input[3]);
+    		}
+    		
+    		if ($scope.correct) {
+    			$scope.pinNeeded = false;
+    		} else {
+    			$scope.input = [];
+    		}
+    	}
+    }
+
+    $scope.delete = function(){
+    	$scope.input.pop();
+    }
+
+
+    $scope.go = function(){
+    	if(!$scope.pinNeeded){
+    		$state.go("tab.moods");
+    	}
+    }
+});
+
+app.directive('hideTabs', function($rootScope) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attributes) {
+            scope.$watch(attributes.hideTabs, function(value){
+                $rootScope.hideTabs = value;
+
+                if (value) {
+                	$('.tab-nav').hide();
+                } else {
+                	$('.tab-nav').show();
+                }
+            });
+
+            scope.$on('$destroy', function() {
+                $rootScope.hideTabs = false;
+                $('.tab-nav').show();
+            });
+        }
+	};
 });
