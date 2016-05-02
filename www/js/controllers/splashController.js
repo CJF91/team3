@@ -1,13 +1,12 @@
-app.controller('splashController', function($scope, datastore,$rootScope) {
+app.controller('splashController', function($state, $scope, datastore,$rootScope) {
 	//TODO: Fix this up and make it actually use the users pin
 	//1234 is the dummy pin for now
-
+	
 	if (datastore.isEncrypted()) {
 		datastore.initalizeAccess("1234");
 	} else {
 		datastore.setAccessKey("1234");
 		 // The General Model for Moods, Beliefs Triggers and Behaviors. Can be changed and is only here for consistentcy.
-
 	    // The user logging the Mood.
 	    datastore.addContainer('MoodEvent', {
 	      'mood' : datastore.types.Number,
