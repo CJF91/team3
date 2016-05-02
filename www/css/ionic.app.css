@@ -9962,3 +9962,20 @@ select {
   -moz-appearance: none;
   appearance: none;
   text-align: center; }
+
+.platform-android .float-button {
+  padding: 30px;
+  position: fixed;
+  bottom: 50px;
+  left: -20px;
+  z-index: 9999; }
+
+.platform-ios .float-button {
+  padding: 30px;
+  position: fixed;
+  bottom: 100px;
+  left: -20px;
+  z-index: 9999; }
+
+.float-button .height_fix {
+  margin-top: 100%; }
