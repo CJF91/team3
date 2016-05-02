@@ -9734,12 +9734,38 @@ $dark:                            #444 !default;
 .splash {
   color: #fff; }
 
+.item-thumbnail-left > img:first-child, .item-thumbnail-left .item-image, .item-thumbnail-left .item-content > img:first-child, .item-thumbnail-left .item-content .item-image {
+  top: 5px;
+  left: 15px;
+  height: 85%;
+  width: auto; }
+
+.mood-happy {
+  color: green; }
+
+.mood-excited {
+  color: darkorange; }
+
+.mood-tender {
+  color: deeppink; }
+
+.mood-scared {
+  color: gold; }
+
+.mood-angry {
+  color: firebrick; }
+
+.mood-sad {
+  color: blue; }
+
 .mood-item {
   max-height: 75px;
   min-height: 75px; }
 
+.item-filler {
+  display: none; }
+
 .item-highlight {
-  display: none;
   background-color: darkgray; }
 
 .mood-container {
@@ -9781,9 +9807,6 @@ $dark:                            #444 !default;
 .switch-text {
   float: left;
   margin-top: 6px; }
-
-.platform-android .action-sheet-option, .platform-android .action-sheet-destructive {
-  text-align: center; }
 
 .fab {
   width: 75px;
