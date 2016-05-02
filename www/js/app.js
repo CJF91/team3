@@ -81,11 +81,11 @@ var app = angular.module('app', ['ionic', 'ngCordova'])
     }
   })
 
-  .state('OOBE', {
-    url: '/OOBE',
+  .state('tab.oobe', {
+    url: '/oobe',
     views: {
-      'OOBE' : {
-        templateUrl : 'templates/oobe.html',
+      'tab-oobe' : {
+        templateUrl : 'templates/tab-oobe.html',
         controller : 'OOBEController'
       }
     }
