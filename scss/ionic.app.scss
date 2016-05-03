@@ -61,13 +61,47 @@ $g3: #66d3cf;
 	margin-bottom: 5%;
 }
 
+.item-thumbnail-left > img:first-child, .item-thumbnail-left .item-image, .item-thumbnail-left .item-content > img:first-child, .item-thumbnail-left .item-content .item-image {
+	top: 5px;
+	left: 15px;
+	height: 85%;
+	width: auto;
+}
+
+.mood-happy {
+	color: green;
+}
+
+.mood-excited {
+	color: darkorange;
+}
+
+.mood-tender {
+	color: deeppink;
+}
+
+.mood-scared {
+	color: gold;
+}
+
+.mood-angry {
+	color: firebrick;
+}
+
+.mood-sad {
+	color: blue;
+}
+
 .mood-item {
 	max-height: 75px;
 	min-height: 75px;
 }
 
-.item-highlight {
+.item-filler {
 	display: none;
+}
+
+.item-highlight {
 	background-color: darkgray;
 }
 
@@ -119,7 +153,6 @@ $g3: #66d3cf;
 	float: left;
 	margin-top: 6px;
 }
-
 .pinNumber{
     border-radius: 50%;
     

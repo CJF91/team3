@@ -2,14 +2,11 @@
   <!-- DO NOT DELETE THE HIDE TABS DIRECTIVE -->
     <ion-content id="list">
         <ion-list show-delete="false" can-swipe="false">
-          <ion-item collection-repeat="mood in moods" id="id{{$index}}" on-tap="moodHoldActions(mood, $index)" ng-class="{ 'item-highlight' : mood.filler }" class="item-thumbnail-left mood-item">
-				      <div class="mood-name">{{mood.filler ? "" : datastore.get("Mood", mood.mood).name}}</div>
+          <ion-item collection-repeat="mood in moods" id="id{{$index}}" on-tap="moodHoldActions(mood, $index)" ng-class="{ 'item-filler' : mood.filler, 'item-highlight' : $index == selectedIndex, 'mood-happy' : mood.mood > -1 && datastore.get('Mood', mood.mood).type == 0 , 'mood-excited' : mood.mood > -1 && datastore.get('Mood', mood.mood).type == 1, 'mood-tender' : mood.mood > -1 && datastore.get('Mood', mood.mood).type == 2, 'mood-scared' : mood.mood > -1 && datastore.get('Mood', mood.mood).type == 3, 'mood-angry' : mood.mood > -1 && datastore.get('Mood', mood.mood).type == 4, 'mood-sad' : mood.mood > -1 && datastore.get('Mood', mood.mood).type == 5 }" class="item-thumbnail-left mood-item">
+				      <img ng-src="img/{{ getSrc(mood) }}">
+					  <div class="mood-name">{{mood.filler ? "" : datastore.get("Mood", mood.mood).name}}</div>
 				      <div class="mood-level">Level: {{mood.filler ? "" : mood.level}}</div>
 				      <div class="mood-additional">Trigger: {{mood.filler ? "" : datastore.get("Trigger", mood.trigger).name}}</div>
-				<!--
-              <div class="mood-additional">Belief: {{mood.filler ? "" : datastore.get("Belief", mood.belief).name}}</div>
-				      <div class="mood-additional">Behavior: {{mood.filler ? "" : datastore.get("Behavior", mood.behavior).name}}</div>
-				-->
               <div class="mood-additional">{{mood.filler ? "" : toDateString(mood.date)}}</div>
 				  </ion-item>
         </ion-list>
