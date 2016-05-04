@@ -3,7 +3,6 @@ app.controller('OOBEController', function ($scope, datastore, $state) {
   if (check !== null){
     $state.go('tab.splash');
   }
-  if(datastore.get(setup))
   $scope.start = function(name,key) {
     datastore.setAccessKey(key);
     datastore.addContainer('setup', {
