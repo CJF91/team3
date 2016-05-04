@@ -6,6 +6,10 @@ app.controller('OOBEController', function ($scope, datastore, $state) {
   $scope.start = function(name,key) {
     datastore.setAccessKey(key);
     datastore.addContainer('setup', {
+      username: datastore.types.String,
+      key: datastore.types.Number
+    });
+    datastore.save('setup',{
       username: name,
       key: key
     })
