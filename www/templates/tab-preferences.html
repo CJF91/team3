@@ -3,24 +3,14 @@
     <ul class="list">
 
         <li class="item item-rounded-top">
-          <span class="switch-text">Name</span>
-
-          <label class="toggle right" on-tap="changePref('nameChange')">
-             <input type="checkbox" ng-model="formData.nameChange">
-             <div class="track">
-               <div class="handle"></div>
-             </div>
-          </label>
+          <input type="text" placeholder="Name" ng-model="formData.name">
         </li>
 
-        <li class="item item-input" ng-show="formData.nameChange">
-          <input type="text" placeholder="name" ng-model="formData.name">
-        </li>
 
-        <li class="item item-rounded-top">
+        <li class="item">
           <span class="switch-text">Pin</span>
 
-          <label class="toggle right" on-tap="changePref('pinEnabled')">
+          <label class="toggle right" on-tap="changePref('pinEnabled')" style="width: 55px">
              <input type="checkbox" ng-model="formData.pinEnabled">
              <div class="track">
                <div class="handle"></div>
@@ -30,6 +20,10 @@
 
         <li class="item item-input" ng-show="formData.pinEnabled">
           <input type="password" placeholder="Pin" ng-model="formData.pin" class="pin-input">
+        </li>
+
+         <li class="item item-input" ng-show="formData.pinEnabled">
+          <input type="password" placeholder="Verify Pin" ng-model="formData.pin" class="pin-input">
         </li>
 
         <li class="item item-rounded-bottom" on-tap="changePref('splash')">

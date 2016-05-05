@@ -1,5 +1,5 @@
 app.controller('preferencesController', function($scope, $cordovaImagePicker, datastore) {
-	$scope.formData = {pinEnabled: false, pin: "", nameChange: false, name: "Team3"};
+	$scope.formData = {pinEnabled: false, pin: "", verifyPin: "", name: "Johnny Appleseed"};
 	datastore.addContainer('Preferences', {
 		prefName: datastore.types.String,
 		prefValue: datastore.types.Any
@@ -10,6 +10,20 @@ app.controller('preferencesController', function($scope, $cordovaImagePicker, da
 	for (var i = 0; i < savedPrefs.length; i++) {
 		$scope.formData[savedPrefs[i].prefName] = savedPrefs[i].prefValue;
 	}
+
+	$scope.$watch('formData', function() {
+		datastore.upsert('Preferences', {prefName: 'name', prefValue: $scope.formData.name}, 'prefName');
+
+		if ($scope.pin == $scope.verifyPin) {
+			console.log('updaing key')
+			datastore.setAccessKey($scope.formData.pin);
+		}
+
+		if (!$scope.pinEnabled) {
+			datastore.setAccessKey('default_password');
+		}
+
+	}, true);
 
 	$scope.changePref = function(pref) {
 		if (pref == 'splash') {
@@ -29,7 +43,7 @@ app.controller('preferencesController', function($scope, $cordovaImagePicker, da
 			      // error getting photos
 			    });
 		} else if (pref == 'pinEnabled') {
-			console.log($scope.formData.pin);
+			datastore.upsert('Preferences', {prefName: 'pinEnabled', prefValue: $scope.formData.pinEnabled}, 'prefName');
 			
 		} else if (pref == 'nameChange') {
 			console.log("name preference")
