@@ -91,5 +91,5 @@ var app = angular.module('app', ['ionic', 'ngCordova'])
     }
   });
 
-  $urlRouterProvider.otherwise('/tab/splash');
+  $urlRouterProvider.otherwise('/tab/oobe');
 });

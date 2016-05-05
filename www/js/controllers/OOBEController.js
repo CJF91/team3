@@ -1,18 +1,22 @@
 app.controller('OOBEController', function ($scope, datastore, $state) {
-  var check = datastore.get(setup);
-  if (check !== null){
+  datastore.addContainer('setup', {
+    username: datastore.types.String,
+    newkey: datastore.types.Number
+  });
+
+  if (datastore.getAll('setup').length != 0){
     $state.go('tab.splash');
   }
-  $scope.start = function(name,key) {
-    datastore.setAccessKey(key);
-    datastore.addContainer('setup', {
-      username: datastore.types.String,
-      key: datastore.types.Number
-    });
-    datastore.save('setup',{
-      username: name,
-      key: key
-    })
-		$state.go('tab.splash');
+
+  $scope.start = function() {
+    if($scope.NewPin === $scope.ConPin){
+      datastore.setAccessKey($scope.NewPin);
+      datastore.save('setup',{
+        username: $scope.UserName,
+        newkey: $scope.NewPin
+      });
+		  $state.go('tab.splash');
+    }
 	};
+
 });

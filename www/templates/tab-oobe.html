@@ -1,28 +1,16 @@
-<ion-view view-title="OOBE">
+<ion-view view-title="SETUP">
   <ion-content class="padding textalign">
     <h1>Moodalyer</h1>
     <hr class="hrstyle">
     <b>Set up:</b>
-    <div class="list">
-      <label class="item item-input item-rounded-top">
-        <input type="text" placeholder="User Name" ng-model="UserName">
-      </label>
-      <label class="item item-input">
-        <input type="text" placeholder="New PIN" ng-model="NewPin">
-      </label>
-      <label class="item item-input item-rounded-bottom">
-        <input type="text" placeholder="Confirm New PIN">
-      </label>
-    </div>
-    <b>Change splash screen:</b>
-    <div class="list">
-      <a class="item item-thumbnail-left item-rounded-top item-rounded-bottom" href="#">
-        <img src="./resources/splash.png">
-        <button type="button" class="button button-block button-positive button-small">Local Picture</button>
-        <button type="button" class="button button-block button-positive button-small">Take Photo</button>
-      </a>
-    </div>
-
-    <a class="button button-positive button-full button-small" ng-click="start(UserName,NewPin)">Accept</a>
+    <form class="list item-rounded-top item-rounded-botton">
+      <input type="text" placeholder="User Name" ng-model="UserName">
+      <hr>
+      <input type="number" placeholder="New PIN" ng-model="NewPin">
+      <hr>
+      <input type="number" placeholder="Confirm New PIN" ng-model="ConPin">
+      <hr>
+    </form>
+    <a class="button button-positive button-full button-small" ng-click="start()">Accept</a>
   </ion-content>
 </ion-view>
