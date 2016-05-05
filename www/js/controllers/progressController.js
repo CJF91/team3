@@ -15,58 +15,28 @@ $scope.dropMoods = [];
 $scope.dropTriggers = [];
 $scope.dropBeliefs = [];
 $scope.dropBehaviors = [];
-$scope.labels = [];
-$scope.series = [];
-$scope.lMood = [];
-$scope.lData = [];
-$scope.data = [[]];
+
+var sortedMoods = [];
+var sortedBeliefs = [];
+var sortedBehaviors = [];
+var sortedTriggers = [];
+
 
 angular.forEach(moods, function(value, index){
-	$scope.dropMoods.push(value.name);
-	$scope.series.push(value.name);
+	$scope.dropMoods.push(value);
 });
 
 angular.forEach(trigger, function(value, index){
-	$scope.dropTriggers.push(value.name);
+	$scope.dropTriggers.push(value);
 });
 
 angular.forEach(beliefs, function(value, index){
-	$scope.dropBeliefs.push(value.name);
+	$scope.dropBeliefs.push(value);
 });
 
 angular.forEach(behavior, function(value, index){
-	$scope.dropBehaviors.push(value.name);
+	$scope.dropBehaviors.push(value);
 });
-
-angular.forEach(AllMoods, function(value, index) {
-	if(!$scope.labels.includes(value.date.slice(5,10))) {
-		$scope.labels.push(value.date.slice(5,10));
-		angular.forEach($scope.moodData, function(value, index) {
-			$scope.data[index].push(-1);
-		});
-	}
-});
-
-angular.forEach(AllMoods, function(value, index){
-	$scope.currArr = $scope.data[value.mood];
-	$scope.index = $scope.labels.indexOf(value.date.slice(5,10));
-	if($scope.currArr[$scope.index] == -1 ){
-		$scope.currArr[$scope.index] = value.level;
-	}
-	else{
-		$scope.currArr[$scope.index] = ($scope.currArr[$scope.index] + value.level)/2;
-	}
-});
-
-angular.forEach(AllMoods, function(value, index){
-	angular.forEach(value, function(value2, index2){
-		if(value2 == -1){
-			$scope.moodData[index][index2] = 0;
-		}
-	});
-});
-
-$scope.lMood.push($scope.dropMoods[0]);
 
 $scope.searchMoods = function (mood,belief,behavior,trigger,beforeDate,afterDate) {
 	if (!mood && !belief && !behavior && !trigger && !beforeDate && !afterDate){
@@ -204,12 +174,64 @@ $scope.drp = function(i) {
 			break;
 	}
 }
+$scope.refreshGraph = function () {
+	var data = [];
+	var mood = $scope.dropMoods;
+	if(moods.length == 0){
+		console.log("I happend")
+		mood = moods
+	}
+	mood.forEach(function (currentVal) {
+		console.log([currentVal],$scope.dropBeliefs,$scope.dropBehaviors,$scope.dropTriggers)
+		var cur = $scope.searchMoods([currentVal],$scope.dropBeliefs,$scope.dropBehaviors,$scope.dropTriggers);
+		console.log(cur);
+	})
+}
 
+$scope.addMoods = function(mood){
+	if(mood.val){
+		sortedMoods.push(mood.id);
+	}else{
+		var index = sortedMoods.indexOf(mood.id);
+		sortedMoods.splice(index,1);
+	}
+}
+$scope.addTrigger = function(trigger){
+	if(trigger.val){
+		sortedTriggers.push(trigger.id);
+	}else{
+		var index = sortedTriggers.indexOf(trigger.id);
+		sortedTriggers.splice(index,1);
+	}
+}
+$scope.addBehavior = function(behavior){
+	if(behavior.val){
+		sortedBehaviors.push(behavior.id);
+	}else{
+		var index = sortedBehaviors.indexOf(behavior.id);
+		sortedBehaviors.splice(index,1);
+	}
+}
+$scope.addBelief = function(beliefs){
+	if(beliefs.val){
+		sortedBeliefs.push(beliefs.id);
+	}else{
+		var index = sortedBeliefs.indexOf(beliefs.id);
+		sortedBeliefs.splice(index,1);
+	}
+}
 console.log(moods);
 console.log(moods[0]);
 console.log($scope.searchMoods([1,2], [2],[2],[0]))
 
 console.log(moment(moods[0].date));
+console.log($scope.refreshGraph());
+  $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+  $scope.series = ['Series A', 'Series B'];
+  $scope.data = [
+    [65, 59, 80, 81, 56, 55, 40],
+    [28, 48, 40, 19, 86, 27, 90]
+  ];
   $scope.onClick = function (points, evt) {
     console.log(points, evt);
   };
