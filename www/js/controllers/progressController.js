@@ -15,6 +15,12 @@ $scope.dropMoods = [];
 $scope.dropTriggers = [];
 $scope.dropBeliefs = [];
 $scope.dropBehaviors = [];
+  $scope.labels = [];
+  $scope.series = [];
+  $scope.data = [];
+    $scope.onClick = function (points, evt) {
+    console.log(points, evt);
+  };
 
 var checkedMoods = [];
 var checkedBeliefs = [];
@@ -39,6 +45,10 @@ angular.forEach(beliefs, function(value, index){
 angular.forEach(behavior, function(value, index){
 	$scope.dropBehaviors.push(value);
 });
+
+		console.log(AllMoods);
+		console.log(moods);
+
 
 $scope.searchMoods = function (mood,belief,behavior,trigger,beforeDate,afterDate) {
 	if (!mood && !belief && !behavior && !trigger && !beforeDate && !afterDate){
@@ -180,7 +190,7 @@ $scope.drp = function(i) {
 $scope.refreshGraph = function () {
 	var data = [];
 	var series = [];
-	var maxlength = 0;
+	var maxlength = 10000;
 	var mood = JSON.parse((JSON.stringify(checkedMoods)));
 	console.log(checkedMoods.length);
 	if(checkedMoods.length == 0){
@@ -197,7 +207,7 @@ $scope.refreshGraph = function () {
 		curMood.forEach(function(currentVal){
 			curData.push(currentVal.level);
 		})
-		if(curData.length > maxlength){
+		if(curData.length < maxlength){
 			maxlength = curData.length;
 		}
 		data.push(curData);
@@ -206,10 +216,11 @@ $scope.refreshGraph = function () {
 	for(var i = 0; i < maxlength;i++){
 		labels.push("");
 	}
+	console.log(data);
+	
 	$scope.data = data;
 	$scope.series = series;
 	$scope.labels = labels; 
-	$scope.$apply();
 }
 
 $scope.addMoods = function(mood){
@@ -251,8 +262,5 @@ $scope.addBelief = function(beliefs){
 }
 $scope.refreshGraph()
 
-  $scope.onClick = function (points, evt) {
-    console.log(points, evt);
-  };
 
 });

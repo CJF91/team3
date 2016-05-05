@@ -111,34 +111,6 @@ app.controller('splashController', function($scope, datastore, $ionicHistory, $r
         	'type' : 5
         });
         var excentric = datastore.save('Mood', {
-        	'name' : 'Excentric',
-        	'type' : 2
-        });
-        var happy = datastore.save('Mood', {
-        	'name' : 'Happy',
-        	'type' : 0
-        });
-        var excited = datastore.save('Mood', {
-        	'name' : 'Excited',
-        	'type' : 1
-        });
-        var tender = datastore.save('Mood', {
-        	'name' : 'Tender',
-        	'type' : 2
-        });
-        var scared = datastore.save('Mood', {
-        	'name' : 'Scared',
-        	'type' : 3
-        });
-        var angry = datastore.save('Mood', {
-        	'name' : 'Angry',
-        	'type' : 4
-        });
-        var sad = datastore.save('Mood', {
-        	'name' : 'Sad',
-        	'type' : 5
-        });
-        var excentric = datastore.save('Mood', {
         	'name' : 'excentric',
         	'type' : 2
         });
