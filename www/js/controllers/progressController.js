@@ -31,9 +31,10 @@ var checkedTriggers = [];
 angular.forEach(moods, function(value, index){
 	$scope.dropMoods.push(value);
 });
-$scope.dropMoods[0].val = true;
-checkedMoods.push(0);
-
+if($scope.dropMoods.length >= 1){
+	$scope.dropMoods[0].val = true;
+	checkedMoods.push(0);
+}
 angular.forEach(trigger, function(value, index){
 	$scope.dropTriggers.push(value);
 });
@@ -217,7 +218,7 @@ $scope.refreshGraph = function () {
 		labels.push("");
 	}
 	console.log(data);
-	
+
 	$scope.data = data;
 	$scope.series = series;
 	$scope.labels = labels; 
