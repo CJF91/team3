@@ -43,22 +43,22 @@ $scope.searchMoods = function (mood,belief,behavior,trigger,beforeDate,afterDate
 		return AllMoods;
 	}
 	var sorted = JSON.parse((JSON.stringify(AllMoods))); // Deep Copy
-	if (mood){
+	if (typeof mood != "undefined" && mood != null && mood.length > 0){
 		sorted = sorted.filter(function (elem) {
 			return mood.indexOf(elem.mood) != -1;
 		})
 	}
-	if (belief){
+	if (typeof belief != "undefined" && belief != null && belief.length > 0){
 		sorted = sorted.filter(function (elem) {
 			return belief.indexOf(elem.belief) != -1;
 		})
 	}
-	if (behavior){
+	if (typeof behavior != "undefined" && behavior != null && behavior.length > 0){
 		sorted = sorted.filter(function (elem) {
 			return behavior.indexOf(elem.behavior) != -1;
 		})
 	}
-	if (trigger){
+	if (typeof trigger != "undefined" && trigger != null && trigger.length > 0){
 		sorted = sorted.filter(function (elem) {
 			return trigger.indexOf(elem.trigger) != -1;
 		})
@@ -76,6 +76,7 @@ $scope.searchMoods = function (mood,belief,behavior,trigger,beforeDate,afterDate
 			return moment(elem.date).isSameOrAfter(afterDate);
 		})
 	}
+	console.log(sorted)
 	return sorted;
 
 }
@@ -176,25 +177,38 @@ $scope.drp = function(i) {
 }
 $scope.refreshGraph = function () {
 	var data = [];
-	var mood = $scope.dropMoods;
-	if(moods.length == 0){
-		console.log("I happend")
-		mood = moods
+	var mood = JSON.parse((JSON.stringify(checkedMoods)));
+	console.log(checkedMoods.length);
+	if(checkedMoods.length == 0){
+		console.log("I happend");
+		moods.forEach(function (currentVal){
+			mood.push(currentVal.id)
+		})
 	}
+	console.log(moods);
+	console.log(mood);
 	mood.forEach(function (currentVal) {
-		console.log([currentVal],$scope.dropBeliefs,$scope.dropBehaviors,$scope.dropTriggers)
-		var cur = $scope.searchMoods([currentVal],$scope.dropBeliefs,$scope.dropBehaviors,$scope.dropTriggers);
-		console.log(cur);
+		var curMood = $scope.searchMoods([currentVal],checkedBeliefs,checkedBehaviors,checkedTriggers);
+		console.log([currentVal])
+		var curData = [];
+		curMood.forEach(function(currentVal){
+			curData.push(currentVal.level);
+		})
+		data.push(curData);
 	})
+	$scope.data = data;
+	$scope.$apply();
 }
 
 $scope.addMoods = function(mood){
 	if(mood.val){
 		checkedMoods.push(mood.id);
+		console.log(checkedMoods);
 	}else{
 		var index = checkedMoods.indexOf(mood.id);
 		checkedMoods.splice(index,1);
 	}
+	$scope.refreshGraph();
 }
 $scope.addTrigger = function(trigger){
 	if(trigger.val){
@@ -203,6 +217,7 @@ $scope.addTrigger = function(trigger){
 		var index = checkedTriggers.indexOf(trigger.id);
 		checkedTriggers.splice(index,1);
 	}
+	$scope.refreshGraph();
 }
 $scope.addBehavior = function(behavior){
 	if(behavior.val){
@@ -211,6 +226,7 @@ $scope.addBehavior = function(behavior){
 		var index = checkedBehaviors.indexOf(behavior.id);
 		checkedBehaviors.splice(index,1);
 	}
+	$scope.refreshGraph();
 }
 $scope.addBelief = function(beliefs){
 	if(beliefs.val){
@@ -219,19 +235,16 @@ $scope.addBelief = function(beliefs){
 		var index = checkedBeliefs.indexOf(beliefs.id);
 		checkedBeliefs.splice(index,1);
 	}
+	$scope.refreshGraph();
 }
 console.log(moods);
 console.log(moods[0]);
-console.log($scope.searchMoods([1,2], [2],[2],[0]))
+console.log($scope.searchMoods([1,2],[],[],[]))
 
 console.log(moment(moods[0].date));
 console.log($scope.refreshGraph());
   $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
   $scope.series = ['Series A', 'Series B'];
-  $scope.data = [
-    [65, 59, 80, 81, 56, 55, 40],
-    [28, 48, 40, 19, 86, 27, 90]
-  ];
   $scope.onClick = function (points, evt) {
     console.log(points, evt);
   };
