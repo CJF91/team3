@@ -16,10 +16,10 @@ $scope.dropTriggers = [];
 $scope.dropBeliefs = [];
 $scope.dropBehaviors = [];
 
-var sortedMoods = [];
-var sortedBeliefs = [];
-var sortedBehaviors = [];
-var sortedTriggers = [];
+var checkedMoods = [];
+var checkedBeliefs = [];
+var checkedBehaviors = [];
+var checkedTriggers = [];
 
 
 angular.forEach(moods, function(value, index){
@@ -190,34 +190,34 @@ $scope.refreshGraph = function () {
 
 $scope.addMoods = function(mood){
 	if(mood.val){
-		sortedMoods.push(mood.id);
+		checkedMoods.push(mood.id);
 	}else{
-		var index = sortedMoods.indexOf(mood.id);
-		sortedMoods.splice(index,1);
+		var index = checkedMoods.indexOf(mood.id);
+		checkedMoods.splice(index,1);
 	}
 }
 $scope.addTrigger = function(trigger){
 	if(trigger.val){
-		sortedTriggers.push(trigger.id);
+		checkedTriggers.push(trigger.id);
 	}else{
-		var index = sortedTriggers.indexOf(trigger.id);
-		sortedTriggers.splice(index,1);
+		var index = checkedTriggers.indexOf(trigger.id);
+		checkedTriggers.splice(index,1);
 	}
 }
 $scope.addBehavior = function(behavior){
 	if(behavior.val){
-		sortedBehaviors.push(behavior.id);
+		checkedBehaviors.push(behavior.id);
 	}else{
-		var index = sortedBehaviors.indexOf(behavior.id);
-		sortedBehaviors.splice(index,1);
+		var index = checkedBehaviors.indexOf(behavior.id);
+		checkedBehaviors.splice(index,1);
 	}
 }
 $scope.addBelief = function(beliefs){
 	if(beliefs.val){
-		sortedBeliefs.push(beliefs.id);
+		checkedBeliefs.push(beliefs.id);
 	}else{
-		var index = sortedBeliefs.indexOf(beliefs.id);
-		sortedBeliefs.splice(index,1);
+		var index = checkedBeliefs.indexOf(beliefs.id);
+		checkedBeliefs.splice(index,1);
 	}
 }
 console.log(moods);
