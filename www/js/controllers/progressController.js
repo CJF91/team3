@@ -177,6 +177,8 @@ $scope.drp = function(i) {
 }
 $scope.refreshGraph = function () {
 	var data = [];
+	var series = [];
+	var maxlength = 0;
 	var mood = JSON.parse((JSON.stringify(checkedMoods)));
 	console.log(checkedMoods.length);
 	if(checkedMoods.length == 0){
@@ -185,18 +187,26 @@ $scope.refreshGraph = function () {
 			mood.push(currentVal.id)
 		})
 	}
-	console.log(moods);
-	console.log(mood);
 	mood.forEach(function (currentVal) {
 		var curMood = $scope.searchMoods([currentVal],checkedBeliefs,checkedBehaviors,checkedTriggers);
 		console.log([currentVal])
 		var curData = [];
+		series.push((datastore.get('Mood',currentVal)).name);
 		curMood.forEach(function(currentVal){
 			curData.push(currentVal.level);
 		})
+		if(curData.length > maxlength){
+			maxlength = curData.length;
+		}
 		data.push(curData);
 	})
+	var labels = [];
+	for(var i = 0; i < maxlength;i++){
+		labels.push("");
+	}
 	$scope.data = data;
+	$scope.series = series;
+	$scope.labels = labels; 
 	$scope.$apply();
 }
 
@@ -243,8 +253,6 @@ console.log($scope.searchMoods([1,2],[],[],[]))
 
 console.log(moment(moods[0].date));
 console.log($scope.refreshGraph());
-  $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-  $scope.series = ['Series A', 'Series B'];
   $scope.onClick = function (points, evt) {
     console.log(points, evt);
   };

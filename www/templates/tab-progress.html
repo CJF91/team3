@@ -1,8 +1,46 @@
 <ion-view view-title="Track Progress">
   <ion-content class="padding">
-
     <div class="getProgressContainer">
-    	<div class="getProgressGraphContatiner">
+      <div class="progressButtonContainer">
+        <span class="dropdown">
+        <button ng-click="drp('1')" class="dropbtn">Mood&nbsp;&nbsp;<span ng-hide="o1" class="icon ion-chevron-down"></span><span ng-hide="!o1" class="icon ion-chevron-up"></span></button>
+        <div id="drp1" class="dropdown-content dropDownMoods">
+          <span class="dropC" ng-repeat="mood in dropMoods">
+            <label><input type="checkbox" ng-model="mood.val" ng-click="addMoods(mood)">&nbsp;&nbsp;&nbsp;&nbsp;{{mood.name}}</label>
+          </span>
+        </div>
+      </span>
+
+      <span class="dropdown">
+        <button ng-click="drp('2')" class="dropbtn">Trigger&nbsp;&nbsp;<span ng-hide="o2" class="icon ion-chevron-down"></span><span ng-hide="!o2" class="icon ion-chevron-up"></span></button>
+        <div id="drp2" class="dropdown-content dropDownMoods">
+          <span class="dropC" ng-repeat="trigger in dropTriggers">
+            <label><input type="checkbox" ng-model="trigger.val" ng-click="addTrigger(trigger)">&nbsp;&nbsp;&nbsp;&nbsp;{{trigger.name}}</label>
+          </span>
+        </div>
+      </span>
+
+      <br><br>
+
+      <span class="dropdown">
+        <button ng-click="drp('3')" class="dropbtn">Belief&nbsp;&nbsp;<span ng-hide="o3" class="icon ion-chevron-down"></span><span ng-hide="!o3" class="icon ion-chevron-up"></span></button>
+        <div id="drp3" class="dropdown-content dropDownMoods">
+          <span class="dropC" ng-repeat="belief in dropBeliefs">
+            <label><input type="checkbox" ng-model="belief.val" ng-click="addBelief(belief)">&nbsp;&nbsp;&nbsp;&nbsp;{{belief.name}}</label>
+          </span>
+        </div>
+      </span>
+
+      <span class="dropdown">
+        <button ng-click="drp('4')" class="dropbtn">Behavior&nbsp;&nbsp;<span ng-hide="o4" class="icon ion-chevron-down"></span><span ng-hide="!o4" class="icon ion-chevron-up"></span></button>
+        <div id="drp4" class="dropdown-content dropDownMoods">
+          <span class="dropC" ng-repeat="behavior in dropBehaviors">
+            <label><input type="checkbox" ng-model="behavior.val" ng-click="addBehavior(behavior)">&nbsp;&nbsp;&nbsp;&nbsp;{{behavior.name}}</label>
+          </span>
+        </div>
+      </span>
+    </div>
+    <div class="getProgressGraphContatiner">
 			<canvas id="line" class="chart chart-line" height="100" width="100" chart-data="data"
 		  		chart-labels="labels" chart-legend="true" chart-series="series"
 		  		chart-click="onClick">
@@ -11,44 +49,5 @@
 		<div class="getProgressButtonContatiner" style="background-color: blue;">
 		</div>
 	</div>
-
-  <span class="dropdown">
-    <button ng-click="drp('1')" class="dropbtn">Mood&nbsp;&nbsp;<span ng-hide="o1" class="icon ion-chevron-down"></span><span ng-hide="!o1" class="icon ion-chevron-up"></span></button>
-    <div id="drp1" class="dropdown-content dropDownMoods">
-      <span class="dropC" ng-repeat="mood in dropMoods">
-	    	<label><input type="checkbox" ng-model="mood.val" ng-click="addMoods(mood)">&nbsp;&nbsp;&nbsp;&nbsp;{{mood.name}}</label>
-      </span>
-    </div>
-  </span>
-
-  <span class="dropdown">
-    <button ng-click="drp('2')" class="dropbtn">Trigger&nbsp;&nbsp;<span ng-hide="o2" class="icon ion-chevron-down"></span><span ng-hide="!o2" class="icon ion-chevron-up"></span></button>
-    <div id="drp2" class="dropdown-content dropDownMoods">
-      <span class="dropC" ng-repeat="trigger in dropTriggers">
-	    	<label><input type="checkbox" ng-model="trigger.val" ng-click="addTrigger(trigger)">&nbsp;&nbsp;&nbsp;&nbsp;{{trigger.name}}</label>
-      </span>
-    </div>
-  </span>
-
-  <br><br>
-
-  <span class="dropdown">
-    <button ng-click="drp('3')" class="dropbtn">Belief&nbsp;&nbsp;<span ng-hide="o3" class="icon ion-chevron-down"></span><span ng-hide="!o3" class="icon ion-chevron-up"></span></button>
-    <div id="drp3" class="dropdown-content dropDownMoods">
-      <span class="dropC" ng-repeat="belief in dropBeliefs">
-	    	<label><input type="checkbox" ng-model="belief.val" ng-click="addBelief(belief)">&nbsp;&nbsp;&nbsp;&nbsp;{{belief.name}}</label>
-      </span>
-    </div>
-  </span>
-
-  <span class="dropdown">
-    <button ng-click="drp('4')" class="dropbtn">Behavior&nbsp;&nbsp;<span ng-hide="o4" class="icon ion-chevron-down"></span><span ng-hide="!o4" class="icon ion-chevron-up"></span></button>
-    <div id="drp4" class="dropdown-content dropDownMoods">
-      <span class="dropC" ng-repeat="behavior in dropBehaviors">
-	    	<label><input type="checkbox" ng-model="behavior.val" ng-click="addBehavior(behavior)">&nbsp;&nbsp;&nbsp;&nbsp;{{behavior.name}}</label>
-      </span>
-    </div>
-  </span>
-
   </ion-content>
 </ion-view>
