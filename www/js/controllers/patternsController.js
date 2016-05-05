@@ -22,7 +22,7 @@ app.controller('patternsController', function($scope, datastore) {
 			$scope.newArr = [];
 			$scope.moodData.push($scope.newArr);
 		});
-		
+
 		$scope.days = [];
 		angular.forEach(datastoreMoodData, function(value, index){
 			// $scope.moodData[value.mood].push(value.level);
@@ -58,12 +58,12 @@ app.controller('patternsController', function($scope, datastore) {
 		$scope.lineData.push($scope.moodData[0]);
 		console.log($scope.moodData);
 
-		
+
 
 	  // $scope.moods = ['Angry', 'Happy','Tired', 'Sad', 'Upset', 'Drumpf', 'Thirsty'];
 
 	  // $scope.series = ['Angry', 'Happy','Tired', 'Sad', 'Upset', 'Drumpf', 'Thirsty'];
-	  
+
 	  //assuming today is Saturday
 	  // $scope.days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 	  // $scope.labels = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -107,7 +107,7 @@ app.controller('patternsController', function($scope, datastore) {
 	  $scope.moodDetectedEntries = 0;
 	  $scope.moodDetectedLevel = 0;
 
-	  $scope.makePieData = function(i){ 
+	  $scope.makePieData = function(i){
 	  	switch(i){ //if  based on number of entries
 	  		case('e'):
 			  	$scope.pieData = [];
@@ -121,7 +121,7 @@ app.controller('patternsController', function($scope, datastore) {
 			  				$scope.entries += 1;
 			  			}
 			  		});
-			  		$scope.pieData.push($scope.entries);	
+			  		$scope.pieData.push($scope.entries);
 			  		if($scope.entries > $scope.max){
 			  			$scope.max = $scope.entries;
 			  			$scope.index1 = $scope.pieData.length - 1;
@@ -148,7 +148,7 @@ app.controller('patternsController', function($scope, datastore) {
 			  		if($scope.entries/$scope.total > $scope.max){
 			  			$scope.max = $scope.entries/$scope.total;
 			  			$scope.index1 = $scope.pieData.length - 1;
-			  		}	
+			  		}
 			  	});
 			  	$scope.moodDetected = $scope.series[$scope.index1];
 			  	$scope.moodDetectedLevel = $scope.max;
@@ -177,7 +177,7 @@ app.controller('patternsController', function($scope, datastore) {
 	  				$scope.tot++;
 	  				$scope.sum = $scope.sum + value2;
 	  			}
-	  		});	
+	  		});
 	  		$scope.sum = $scope.sum/$scope.tot;
 	  		if($scope.sum > $scope.max){
 	  			$scope.max = $scope.sum;
@@ -195,7 +195,7 @@ app.controller('patternsController', function($scope, datastore) {
 	  // 	if( ((Math.floor(Math.random() * 2))) == 1 ){
 	  // 		$scope.series.push($scope.moods[i]);
 	  // 		$scope.data.push($scope.moodData[i]);
-	  // 	} 
+	  // 	}
 	  // }
 
 	  $scope.moodData2 = [ //data reorganized to fit the radius chart, each array has the moods that are filled for the day
@@ -283,7 +283,7 @@ app.controller('patternsController', function($scope, datastore) {
 	  $scope.open2 = false;
 	  $scope.open3 = false;
 
-	  $scope.lineGraph = true; //line graph is defaultly shown 
+	  $scope.lineGraph = true; //line graph is defaultly shown
 	  $scope.barGraph = false;
 	  $scope.pieChart = false
 
@@ -335,7 +335,7 @@ app.controller('patternsController', function($scope, datastore) {
 	  		$scope.series = [];
 	  		$scope.firstTime = false;
 	  	}
-	  	
+
 	  	if($scope.series.indexOf(mood) == -1){
 	  		$scope.series.push(mood);
 	  		$scope.position = $scope.moods.indexOf(mood);
@@ -355,7 +355,7 @@ app.controller('patternsController', function($scope, datastore) {
 	  	else if($scope.pieChart){
 	  		$scope.makePieData($scope.select.which);
 	  	}
-		  
+
 	  }
 
 	  $scope.addLineMood = function(mood){
@@ -383,7 +383,7 @@ app.controller('patternsController', function($scope, datastore) {
 	  	else{
 	  		angular.forEach($scope.data, function(value, index){
 	  			value.splice(0, value.length - $scope.numDays.num);
-	  		});  
+	  		});
 	  	}
 	  }
 
