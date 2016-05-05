@@ -85,7 +85,7 @@ app.controller('splashController', function($scope, datastore, $ionicHistory, $r
         $rootScope.MoodTypeList = ["Happy","Excited","Tender","Scared","Angry","Sad"];
 
         // Test Data
-
+        /*
         var happy = datastore.save('Mood', {
         	'name' : 'Happy',
         	'type' : 0
@@ -175,7 +175,8 @@ app.controller('splashController', function($scope, datastore, $ionicHistory, $r
         		'date' : adjustableDate
         	});
         	adjustableDate.setTime(adjustableDate.getTime() + 6*60*60*1000)
-        }	 
+        }	
+        */ 
     }
 });
 
