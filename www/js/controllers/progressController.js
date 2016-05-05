@@ -249,12 +249,8 @@ $scope.addBelief = function(beliefs){
 	}
 	$scope.refreshGraph();
 }
-console.log(moods);
-console.log(moods[0]);
-console.log($scope.searchMoods([1,2],[],[],[]))
+$scope.refreshGraph()
 
-console.log(moment(moods[0].date));
-console.log($scope.refreshGraph());
   $scope.onClick = function (points, evt) {
     console.log(points, evt);
   };

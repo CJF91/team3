@@ -6,6 +6,7 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+// var autoprefixer = require('gulp-autoprefixer');
 
 var paths = {
   sass: ['./scss/**/*.scss']
@@ -22,6 +23,7 @@ gulp.task('sass', function(done) {
       keepSpecialComments: 0
     }))
     .pipe(rename({ extname: '.min.css' }))
+    // .pipe(autoprefixer)
     .pipe(gulp.dest('./www/css/'))
     .on('end', done);
 });
