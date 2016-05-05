@@ -142,19 +142,13 @@ app.controller('splashController', function($scope, datastore, $ionicHistory, $r
         	'name' : 'excentric',
         	'type' : 2
         });
-        var vampire = datastore.save('Mood', {
-        	'name' : 'vampire',
-        	'type' : 2
+        var suprised = datastore.save('Mood', {
+        	'name' : 'suprised',
+        	'type' : 1
         });	
 
-        var testMoodArray = [happy,excited,tender,scared,angry,sad,excentric,vampire];
+        var testMoodArray = [happy,excited,tender,scared,angry,sad,excentric,suprised];
 
-        var test = datastore.save('Trigger',{
-        	'name' : 'I have a test'
-        });
-        var pain = datastore.save('Trigger',{
-        	'name' : 'I was hurt today'
-        });
         var test = datastore.save('Trigger',{
         	'name' : 'I have a test'
         });
@@ -168,26 +162,20 @@ app.controller('splashController', function($scope, datastore, $ionicHistory, $r
         var testTriggerArray = [test,pain,fired];
 
         var bandAid = datastore.save('Behavior', {
-        	'name' : 'I got over it and put a bandaid on it'
+        	'name' : 'I put a bandaid on it'
         });
         var wimpyBandAid = datastore.save('Behavior', {
-        	'name' : 'I cried in a corner over my minor injury'
+        	'name' : 'I got very sad'
         });
 
-        var bandAid = datastore.save('Behavior', {
-        	'name' : 'I got over it and put a bandaid on it'
-        });
-        var wimpyBandAid = datastore.save('Behavior', {
-        	'name' : 'I cried in a corner over my minor injury'
-        });
-        var emotionalDamage = datastore.save('Behavior',{
-        	'name' : 'I was emotionally damaged and won\'t be able to live with this problem'
+        var iceCream = datastore.save('Behavior',{
+        	'name' : 'I ate Ice Cream'
         });
 
-        var testBehaviorArray = [bandAid,wimpyBandAid,emotionalDamage];
+        var testBehaviorArray = [bandAid,wimpyBandAid,iceCream];
 
         var drunk = datastore.save('Belief',{
-        	'name' : 'I will be drunk :)'
+        	'name' : 'I will not see them again'
         });
         var hurt = datastore.save('Belief',{
         	'name' : 'That Hurt'
@@ -196,19 +184,7 @@ app.controller('splashController', function($scope, datastore, $ionicHistory, $r
         	'name' : 'I will fail my test'
         });
         var money = datastore.save('Belief',{
-        	'name' : 'Damn I will be broke'
-        });
-        var drunk = datastore.save('Belief',{
-        	'name' : 'I will be drunk :)'
-        });
-        var hurt = datastore.save('Belief',{
-        	'name' : 'That Hurt'
-        });
-        var fail = datastore.save('Belief',{
-        	'name' : 'I will fail my test'
-        });
-        var money = datastore.save('Belief',{
-        	'name' : 'Damn I will be broke'
+        	'name' : 'I will be broke'
         });
         var america = datastore.save('Belief',{
         	'name' : "I'll make America great again"
