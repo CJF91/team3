@@ -25,6 +25,8 @@ var checkedTriggers = [];
 angular.forEach(moods, function(value, index){
 	$scope.dropMoods.push(value);
 });
+$scope.dropMoods[0].val = true;
+checkedMoods.push(0);
 
 angular.forEach(trigger, function(value, index){
 	$scope.dropTriggers.push(value);
